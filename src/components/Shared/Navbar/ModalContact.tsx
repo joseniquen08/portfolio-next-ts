@@ -1,5 +1,7 @@
 import emailjs from '@emailjs/browser';
 import { Dialog, Tab, Transition } from '@headlessui/react';
+import en from '@public/locales/en/modal_contact';
+import es from '@public/locales/es/modal_contact';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, Fragment, useRef, useState } from 'react';
@@ -12,8 +14,6 @@ import {
   SiWhatsapp,
 } from 'react-icons/si';
 import { useTimeoutFn } from 'react-use';
-import en from '../../../../public/locales/en/modal_contact';
-import es from '../../../../public/locales/es/modal_contact';
 import { ButtonLoading } from './ButtonLoading';
 
 interface Props {

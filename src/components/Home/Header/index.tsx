@@ -1,10 +1,10 @@
+import perfil from '@public/images/perfil.png';
 import en from '@public/locales/en/header';
 import es from '@public/locales/es/header';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { SiGithub, SiInstagram, SiLinkedin } from 'react-icons/si';
-import perfil from '../../../../public/images/perfil.png';
 import { LinkSocialNetwork } from './LinkSocialNetwork';
 import { NowPlaying } from './NowPlaying';
 

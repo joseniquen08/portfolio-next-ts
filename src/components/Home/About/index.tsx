@@ -1,8 +1,8 @@
 import { transitionScreenVariants } from '@/utils/variants';
+import en from '@public/locales/en/about';
+import es from '@public/locales/es/about';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import en from '../../../../public/locales/en/about';
-import es from '../../../../public/locales/es/about';
 
 export const About = () => {
   const { locale } = useRouter();

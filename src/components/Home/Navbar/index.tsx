@@ -3,15 +3,15 @@ import { MenuBurger } from '@/components/Shared/Navbar/MenuBurger';
 import { MenuLanguage } from '@/components/Shared/Navbar/MenuLanguage';
 import { MenuTheme } from '@/components/Shared/Navbar/MenuTheme';
 import { ModalContact } from '@/components/Shared/Navbar/ModalContact';
+import logo from '@public/images/logo.png';
+import logo_blanco from '@public/images/logo_blanco.png';
+import en from '@public/locales/en/navbar';
+import es from '@public/locales/es/navbar';
 import { AnimatePresence, motion, useCycle } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { animateScroll, Link as LinkReactScroll } from 'react-scroll';
-import logo from '../../../../public/images/logo.png';
-import logo_blanco from '../../../../public/images/logo_blanco.png';
-import en from '../../../../public/locales/en/navbar';
-import es from '../../../../public/locales/es/navbar';
 
 export const Navbar = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);

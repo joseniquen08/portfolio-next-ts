@@ -1,9 +1,9 @@
 import { skills } from '@/utils/constants';
+import { transitionScreenVariants } from '@/utils/variants';
+import en from '@public/locales/en/skills';
+import es from '@public/locales/es/skills';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import en from '../../../../public/locales/en/skills';
-import es from '../../../../public/locales/es/skills';
-import { transitionScreenVariants } from '../../../utils/variants';
 import { Skill } from './Skill';
 
 export const Skills = () => {

@@ -1,4 +1,6 @@
 import { Menu, RadioGroup, Transition } from '@headlessui/react';
+import en from '@public/locales/en/navbar';
+import es from '@public/locales/es/navbar';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react';
@@ -7,8 +9,6 @@ import {
   HiOutlineMoon,
   HiOutlineSun,
 } from 'react-icons/hi';
-import en from '../../../../public/locales/en/navbar';
-import es from '../../../../public/locales/es/navbar';
 
 interface Props {
   themeSelected: 'light' | 'dark' | undefined;

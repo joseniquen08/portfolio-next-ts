@@ -1,10 +1,10 @@
 import fetcher from '@/lib/fetcher';
 import { transitionScreenVariants } from '@/utils/variants';
+import en from '@public/locales/en/projects';
+import es from '@public/locales/es/projects';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import en from '../../../../public/locales/en/projects';
-import es from '../../../../public/locales/es/projects';
 import { CardProject } from './CardProject';
 
 export const Projects = () => {

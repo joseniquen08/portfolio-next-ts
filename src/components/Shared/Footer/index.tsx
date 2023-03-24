@@ -1,3 +1,5 @@
+import en from '@public/locales/en/footer';
+import es from '@public/locales/es/footer';
 import { useRouter } from 'next/router';
 import { HiOutlinePlusSm } from 'react-icons/hi';
 import {
@@ -7,8 +9,6 @@ import {
   SiNextdotjs,
   SiTailwindcss,
 } from 'react-icons/si';
-import en from '../../../../public/locales/en/footer';
-import es from '../../../../public/locales/es/footer';
 import { LinkSocialNetwork } from './LinkSocialNetwork';
 
 export const Footer = () => {
