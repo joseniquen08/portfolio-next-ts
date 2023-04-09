@@ -7,6 +7,10 @@ import { Footer } from '@/components/Shared/Footer';
 import { getStaticPropsTranslations } from '@/utils/i18n';
 import { Poppins } from 'next/font/google';
 import Head from 'next/head';
+import { useCallback } from 'react';
+import Particles from 'react-particles';
+import type { Engine } from 'tsparticles-engine';
+import { loadStarsPreset } from 'tsparticles-preset-stars';
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -15,6 +19,10 @@ const poppins = Poppins({
 });
 
 export default function Home() {
+  const particlesInit = useCallback(async (engine: Engine) => {
+    await loadStarsPreset(engine);
+  }, []);
+
   return (
     <>
       <Head>
@@ -24,11 +32,50 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${poppins.variable} font-poppins`}>
+        <Particles
+          id="tsparticles"
+          init={particlesInit}
+          className="z-0"
+          options={{
+            preset: 'stars',
+            background: {
+              color: 'white',
+              opacity: 0,
+            },
+            particles: {
+              color: { value: '#ffffff' },
+              move: {
+                direction: 'none',
+                enable: true,
+                outModes: 'none',
+                random: false,
+                speed: 0.1,
+                straight: false,
+              },
+              number: {
+                density: {
+                  enable: true,
+                  area: 800,
+                },
+                value: 80,
+              },
+              opacity: {
+                value: {
+                  min: 0.5,
+                  max: 0.5,
+                },
+              },
+              size: {
+                value: { min: 1, max: 2 },
+              },
+            },
+          }}
+        />
         <div className="h-6"></div>
         <Navbar />
         <Header />
-        <About />
         <Projects />
+        <About />
         <Skills />
         <Footer />
       </main>

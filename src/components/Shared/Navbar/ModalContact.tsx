@@ -3,6 +3,7 @@ import { Dialog, Tab, Transition } from '@headlessui/react';
 import en from '@public/locales/en/modal_contact';
 import es from '@public/locales/es/modal_contact';
 import { motion } from 'framer-motion';
+import { Poppins } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, Fragment, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -21,6 +22,12 @@ interface Props {
   contactModalIsOpen: boolean;
   closeContactModal: () => void;
 }
+
+const poppins = Poppins({
+  variable: '--font-poppins',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  preload: false,
+});
 
 export const ModalContact = ({
   theme,
@@ -102,7 +109,7 @@ export const ModalContact = ({
     <Transition appear show={contactModalIsOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-50 overflow-y-auto bg-slate-500/50 font-poppins"
+        className={`fixed inset-0 z-50 overflow-y-auto bg-slate-500/50 ${poppins.variable} font-poppins`}
         onClose={closeContactModal}
       >
         <div className="min-h-screen px-2.5 text-center">

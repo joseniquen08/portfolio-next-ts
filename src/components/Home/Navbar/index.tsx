@@ -11,7 +11,7 @@ import { AnimatePresence, motion, useCycle } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { animateScroll, Link as LinkReactScroll } from 'react-scroll';
+import { Link as LinkReactScroll, animateScroll } from 'react-scroll';
 
 export const Navbar = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
@@ -93,10 +93,10 @@ export const Navbar = () => {
   return (
     <>
       <nav
-        className={`dark:text-white text-gray-700 mt-1 z-40 sticky top-0 w-full bg-white bg-gradient-to-r from-gray-50 to-gray-50/95 dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-900/95 ${
+        className={`dark:text-white text-gray-700 mt-1 z-40 sticky top-0 w-full ${
           showBg
-            ? 'dark:border-b border-b-slate-700 shadow-lg shadow-gray-200/50 dark:shadow-slate-900/50'
-            : ''
+            ? 'dark:border-b border-b-slate-700 shadow-lg shadow-gray-200/50 dark:shadow-slate-900/50 backdrop-blur bg-white/75 dark:bg-slate-900/75'
+            : 'bg-gradient-to-r from-gray-50 to-gray-50/95 dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-900/95 bg-white'
         }`}
       >
         <div className="relative flex flex-row items-center justify-between max-w-5xl px-3 py-3 mx-auto lg:py-2 sm:px-4 lg:px-16 2xl:max-w-6xl">
@@ -132,22 +132,22 @@ export const Navbar = () => {
             <ul className="top-0 left-0 z-0 flex flex-row items-center justify-center w-full h-full text-xl font-medium md:space-x-2 lg:space-x-4 dark:font-normal">
               <motion.li whileTap={{ scale: 0.9 }}>
                 <LinkReactScroll
-                  to="about"
-                  smooth={true}
-                  duration={500}
-                  className="px-3 py-2 text-lg rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-white dark:hover:bg-opacity-5"
-                >
-                  {t.ul.about_me}
-                </LinkReactScroll>
-              </motion.li>
-              <motion.li whileTap={{ scale: 0.9 }}>
-                <LinkReactScroll
                   to="projects"
                   smooth={true}
                   duration={500}
                   className="px-3 py-2 text-lg rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-white dark:hover:bg-opacity-5"
                 >
                   {t.ul.projects}
+                </LinkReactScroll>
+              </motion.li>
+              <motion.li whileTap={{ scale: 0.9 }}>
+                <LinkReactScroll
+                  to="about"
+                  smooth={true}
+                  duration={500}
+                  className="px-3 py-2 text-lg rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-white dark:hover:bg-opacity-5"
+                >
+                  {t.ul.about_me}
                 </LinkReactScroll>
               </motion.li>
               <motion.li whileTap={{ scale: 0.9 }}>
@@ -190,21 +190,21 @@ export const Navbar = () => {
             <div className="px-2.5 sm:px-4 py-3 space-y-1.5">
               <LinkReactScroll
                 onClick={() => toggleOpen()}
-                to="about"
-                smooth={true}
-                duration={500}
-                className="block cursor-pointer rounded-xl focus:bg-gray-300 dark:focus:bg-slate-900 tracking-wide px-3 py-1.5"
-              >
-                {t.ul.about_me}
-              </LinkReactScroll>
-              <LinkReactScroll
-                onClick={() => toggleOpen()}
                 to="projects"
                 smooth={true}
                 duration={500}
                 className="block cursor-pointer rounded-xl focus:bg-gray-300 dark:focus:bg-slate-900 tracking-wide px-3 py-1.5"
               >
                 {t.ul.projects}
+              </LinkReactScroll>
+              <LinkReactScroll
+                onClick={() => toggleOpen()}
+                to="about"
+                smooth={true}
+                duration={500}
+                className="block cursor-pointer rounded-xl focus:bg-gray-300 dark:focus:bg-slate-900 tracking-wide px-3 py-1.5"
+              >
+                {t.ul.about_me}
               </LinkReactScroll>
               <LinkReactScroll
                 onClick={() => toggleOpen()}

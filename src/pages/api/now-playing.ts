@@ -25,6 +25,9 @@ export default async function handler(
   const album = song.item.album.name;
   const albumImageUrl = song.item.album.images[0].url;
   const songUrl = song.item.external_urls.spotify;
+  const songPreview = song.item.preview_url;
+
+  console.log(song);
 
   res.setHeader(
     'Cache-Control',
@@ -39,5 +42,6 @@ export default async function handler(
     isPlaying,
     songUrl,
     title,
+    songPreview,
   });
 }

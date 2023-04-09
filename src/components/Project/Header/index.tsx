@@ -1,4 +1,5 @@
 import { dataProjectType } from '@/types';
+import { Tooltip } from 'flowbite-react';
 import { useRouter } from 'next/router';
 import {
   HiArrowSmLeft,
@@ -13,8 +14,6 @@ interface Props {
 
 export const Header = ({ data }: Props) => {
   const router = useRouter();
-  // const { locale } = router;
-  // const t = locale === 'en' ? en : es;
 
   return (
     <div className="flex flex-col justify-center flex-none space-y-10">
@@ -31,20 +30,20 @@ export const Header = ({ data }: Props) => {
             <p className="text-2xl mt-1.5 lg:text-3xl font-semibold dark:text-white text-stone-700">
               {data.title}
             </p>
-            <div className="relative flex space-x-4">
+            <div className="flex space-x-4">
               <div className="flex space-x-4 dark:bg-white dark:bg-opacity-[0.15] bg-stone-900 bg-opacity-5 px-5 py-2.5 rounded-xl">
                 {data.icons.map((icon: string) => (
-                  <div
-                    key={icon}
-                    className="flex items-center justify-center text-center lg:space-y-1 w-7 h-7 group"
-                  >
-                    <div
-                      className="w-full h-full bg-center bg-cover"
-                      style={{ backgroundImage: `url(/images/${icon}.png)` }}
-                    ></div>
-                    <span className="absolute p-2 text-xs text-white transition-all scale-0 bg-gray-800 rounded top-10 group-hover:scale-100">
-                      {icon.toUpperCase()}
-                    </span>
+                  <div key={icon}>
+                    <Tooltip content={icon.toUpperCase()} placement="bottom">
+                      <div className="flex items-center justify-center text-center lg:space-y-1 w-7 h-7">
+                        <div
+                          className="w-full h-full bg-center bg-cover"
+                          style={{
+                            backgroundImage: `url(/images/${icon}.png)`,
+                          }}
+                        ></div>
+                      </div>
+                    </Tooltip>
                   </div>
                 ))}
               </div>

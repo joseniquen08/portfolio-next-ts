@@ -82,10 +82,10 @@ export const Navbar = () => {
   return (
     <>
       <nav
-        className={`dark:text-white text-gray-700 mt-1 z-40 sticky top-0 w-full bg-white bg-gradient-to-r from-gray-50 to-gray-50/95 dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-900/95 ${
+        className={`dark:text-white text-gray-700 mt-1 z-40 sticky top-0 w-full ${
           showBg
-            ? 'border-b shadow-lg shadow-gray-200/50 dark:shadow-slate-900/50'
-            : ''
+            ? 'dark:border-b border-b-slate-700 shadow-lg shadow-gray-200/50 dark:shadow-slate-900/50 backdrop-blur bg-white/75 dark:bg-slate-900/75'
+            : 'bg-gradient-to-r from-gray-50 to-gray-50/95 dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-900/95 bg-white'
         }`}
       >
         <div className="relative flex flex-row items-center justify-between px-3 py-3 lg:py-2 sm:px-4 lg:px-16">

@@ -6,27 +6,26 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { SiGithub, SiInstagram, SiLinkedin } from 'react-icons/si';
 import { LinkSocialNetwork } from './LinkSocialNetwork';
-import { NowPlaying } from './NowPlaying';
 
 export const Header = () => {
   const { locale } = useRouter();
   const t = locale === 'en' ? en : es;
 
   return (
-    <div className="flex flex-col-reverse w-full max-w-5xl px-2 pt-12 mx-auto space-y-4 space-y-reverse lg:space-y-0 lg:flex-row lg:px-16 lg:pt-28 lg:pb-16 2xl:max-w-6xl">
+    <div className="flex flex-col-reverse w-full max-w-5xl px-2 pt-12 mx-auto space-y-8 space-y-reverse lg:space-y-0 lg:flex-row lg:px-16 lg:pt-28 lg:pb-16 2xl:max-w-6xl">
       <div className="flex flex-col justify-center flex-none space-y-10">
         <div className="flex flex-col justify-center space-y-1 lg:space-y-2.5 text-center lg:text-left">
           <p className="text-3xl font-semibold lg:text-4xl dark:text-white text-stone-700">
             {t.hi}
           </p>
-          <p className="py-1 text-5xl font-bold tracking-tighter text-transparent break-words lg:text-6xl bg-clip-text bg-gradient-to-r from-blue-600 to-green-600">
+          <p className="py-1 text-5xl font-bold leading-tight tracking-tighter text-transparent break-words lg:text-6xl bg-clip-text bg-gradient-to-r from-blue-600 to-green-600">
             {t.name}
           </p>
           <p className="text-3xl font-semibold tracking-tight break-words lg:text-4xl text-stone-500 dark:text-white">
             {t.junior}
           </p>
         </div>
-        <div className="flex justify-center pl-1 space-x-5 text-lg lg:justify-start dark:text-white text-slate-900">
+        <div className="flex justify-center pl-1 space-x-5 text-lg lg:space-x-7 lg:justify-start dark:text-white text-slate-900">
           <LinkSocialNetwork href="https://github.com/joseniquen08">
             <SiGithub className="h-7 w-7" />
           </LinkSocialNetwork>
@@ -39,7 +38,7 @@ export const Header = () => {
         </div>
       </div>
       <div className="flex justify-center w-full lg:justify-end">
-        <div className="space-y-6 lg:space-y-0">
+        <div className="flex flex-col items-center space-y-6 lg:space-y-0">
           <div className="w-60 lg:w-72">
             <motion.div
               whileHover="hover"
@@ -63,11 +62,11 @@ export const Header = () => {
               ></motion.div>
             </motion.div>
           </div>
-          <div className="relative w-60 lg:w-72">
-            <div className="w-full lg:absolute lg:top-9">
+          {/* <div className="relative w-72">
+            <div className="w-full lg:absolute lg:top-6">
               <NowPlaying />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

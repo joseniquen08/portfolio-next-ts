@@ -17,6 +17,7 @@ export const LinkSocialNetwork = ({ href, children }: Props) => {
         variants={{
           hover: {
             rotate: 180,
+            scale: 1.15,
           },
         }}
       ></motion.div>

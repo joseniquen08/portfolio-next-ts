@@ -1,5 +1,3 @@
-import { transitionScreenVariants } from '@/utils/variants';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { HiOutlineEye, HiOutlineGlobeAlt } from 'react-icons/hi';
@@ -28,12 +26,8 @@ export const CardProject = ({
   locale,
 }: Props) => {
   return (
-    <motion.div
-      initial="offscreen"
-      whileInView="onscreen"
-      viewport={{ once: true, amount: 0.8 }}
-    >
-      <motion.div className="relative" variants={transitionScreenVariants()}>
+    <div>
+      <div className="relative">
         <div className="relative z-20 h-full overflow-hidden cursor-pointer card rounded-xl bg-slate-700">
           <div className="relative h-60 xs:h-80 md:h-52 lg:h-64 2xl:h-72">
             <Image
@@ -72,7 +66,7 @@ export const CardProject = ({
             </a>
           </Link>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
