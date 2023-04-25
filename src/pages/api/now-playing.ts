@@ -27,8 +27,6 @@ export default async function handler(
   const songUrl = song.item.external_urls.spotify;
   const songPreview = song.item.preview_url;
 
-  console.log(song);
-
   res.setHeader(
     'Cache-Control',
     'public, s-maxage=60, stale-while-revalidate=30'
