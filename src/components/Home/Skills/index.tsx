@@ -16,11 +16,11 @@ export const Skills = () => {
       <div className="space-y-6">
         <div className="space-y-1">
           <div className="flex justify-center md:justify-start">
-            <p className="py-1 pr-2 text-4xl italic font-bold tracking-tight text-center text-transparent md:text-5xl w-max md:text-left bg-clip-text bg-gradient-to-r from-blue-600 to-sky-600 dark:to-sky-500">
+            <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center text-transparent md:text-4xl w-max md:text-left bg-clip-text bg-gradient-to-r from-light-blue-400 to-light-blue-400 dark:to-light-blue-400">
               {t.title}
             </p>
           </div>
-          <div className="hidden md:block w-8 h-[1px] bg-stone-500 dark:bg-white"></div>
+          <div className="hidden md:block w-10 h-1 rounded-lg bg-stone-500 dark:bg-white"></div>
         </div>
         <div className="py-5 space-y-6">
           <div className="w-full">

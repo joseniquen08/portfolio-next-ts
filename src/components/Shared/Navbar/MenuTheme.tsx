@@ -41,7 +41,7 @@ export const MenuTheme = ({
         <Menu.Button className="flex items-center justify-center p-1.5 lg:p-2 text-4xl hover:bg-gray-100 dark:hover:bg-white dark:hover:bg-opacity-5 rounded-xl focus:outline-none">
           {themeInLocalStorage ? (
             themeSelected === 'dark' ? (
-              <HiOutlineMoon className="w-6 h-6 text-blue-500" />
+              <HiOutlineMoon className="w-6 h-6 text-custom-primary" />
             ) : (
               <HiOutlineSun className="w-6 h-6 text-yellow-500" />
             )
@@ -61,7 +61,7 @@ export const MenuTheme = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-40 mt-2 origin-top-right bg-white rounded-lg shadow-lg focus:outline-none dark:bg-slate-900">
+        <Menu.Items className="absolute right-0 z-40 mt-2 origin-top-right bg-white rounded-lg shadow-lg focus:outline-none dark:bg-custom-bg">
           <div className="bg-white border rounded-lg bg-opacity-10 dark:border-transparent">
             <div className="px-2.5 py-2">
               <Menu.Item as="div" className="focus:outline-none">
@@ -74,7 +74,7 @@ export const MenuTheme = ({
                           onClick={() => changeTheme('light')}
                           className={`${
                             checked
-                              ? 'bg-blue-600 text-white font-medium'
+                              ? 'bg-custom-primary text-white font-medium'
                               : 'hover:bg-gray-200/60 dark:hover:bg-white dark:hover:bg-opacity-10'
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
@@ -98,7 +98,7 @@ export const MenuTheme = ({
                           onClick={() => changeTheme('dark')}
                           className={`${
                             checked
-                              ? 'bg-blue-600 text-white font-medium'
+                              ? 'bg-custom-primary text-white font-medium'
                               : 'hover:bg-gray-200/60 dark:hover:bg-white dark:hover:bg-opacity-10'
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
@@ -122,7 +122,7 @@ export const MenuTheme = ({
                           onClick={() => changeTheme(undefined)}
                           className={`${
                             checked
-                              ? 'bg-blue-600 text-white font-medium'
+                              ? 'bg-custom-primary text-white font-medium'
                               : 'hover:bg-gray-200/60 dark:hover:bg-white dark:hover:bg-opacity-10'
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >

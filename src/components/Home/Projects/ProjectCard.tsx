@@ -16,7 +16,7 @@ interface Props {
   locale: string | undefined;
 }
 
-export const CardProject = ({
+export const ProjectCard = ({
   id,
   image,
   title,

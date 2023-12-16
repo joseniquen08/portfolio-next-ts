@@ -1,4 +1,4 @@
-export type dataProjectType = {
+export type DataProjectType = {
   title: string;
   github: string;
   web: string;

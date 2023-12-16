@@ -1,4 +1,4 @@
-import { dataProjectType } from '@/types';
+import { DataProjectType } from '@/types';
 import { Tooltip } from 'flowbite-react';
 import { useRouter } from 'next/router';
 import {
@@ -9,7 +9,7 @@ import {
 import { SiGithub } from 'react-icons/si';
 
 interface Props {
-  data: dataProjectType;
+  data: DataProjectType;
 }
 
 export const Header = ({ data }: Props) => {

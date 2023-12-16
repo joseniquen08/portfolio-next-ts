@@ -109,7 +109,7 @@ export const ModalContact = ({
     <Transition appear show={contactModalIsOpen} as={Fragment}>
       <Dialog
         as="div"
-        className={`fixed inset-0 z-50 overflow-y-auto bg-slate-500/50 ${poppins.variable} font-poppins`}
+        className={`fixed inset-0 z-50 overflow-y-auto bg-dark-blue-900/40 ${poppins.variable} font-poppins`}
         onClose={closeContactModal}
       >
         <div className="min-h-screen px-2.5 text-center">
@@ -140,7 +140,7 @@ export const ModalContact = ({
             leaveTo="opacity-0 scale-95"
           >
             <div className="relative inline-block w-full max-w-5xl overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-              <div className="px-6 pt-8 pb-6 space-y-3 bg-white md:grid md:grid-cols-2 md:space-y-0 md:gap-x-8 md:px-8 md:pt-10 md:pb-10 bg-gradient-to-r from-gray-50 to-gray-50/95 dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-900/95">
+              <div className="px-6 pt-8 pb-6 space-y-3 bg-white md:grid md:grid-cols-2 md:space-y-0 md:gap-x-8 md:px-8 md:pt-10 md:pb-10 bg-gradient-to-r from-gray-50 to-gray-50/95 dark:bg-gradient-to-r dark:from-dark-blue-900 dark:to-dark-blue-900/95">
                 <div className="space-y-4 md:col-span-1 md:space-y-5 md:px-3">
                   <Dialog.Title
                     as="h3"
@@ -335,7 +335,7 @@ export const ModalContact = ({
                           <motion.a
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.95 }}
-                            href="https://www.instagram.com/jose.niquen/"
+                            href="https://www.instagram.com/joseniquen_/"
                             target="_blank"
                             rel="noreferrer"
                             className="flex items-center justify-center py-2.5 space-x-2 w-full rounded-xl [background-color:#E4405F] shadow-lg shadow-[#E4405F]/50"

@@ -3,7 +3,7 @@ import en from '@public/locales/en/projects';
 import es from '@public/locales/es/projects';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import { CardProject } from './CardProject';
+import { ProjectRow } from './ProjectRow';
 
 export const Projects = () => {
   const { locale } = useRouter();
@@ -18,17 +18,32 @@ export const Projects = () => {
       <div className="space-y-6">
         <div className="space-y-1">
           <div className="flex justify-center md:justify-start">
-            <p className="py-1 pr-2 text-4xl italic font-bold tracking-tight text-center text-transparent md:text-5xl w-max md:text-left bg-clip-text bg-gradient-to-r from-blue-600 to-sky-600 dark:to-sky-500">
+            <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center text-transparent md:text-4xl w-max md:text-left bg-clip-text bg-gradient-to-r from-custom-accent to-custom-accent dark:to-custom-accent">
               {t.title}
             </p>
           </div>
-          <div className="hidden md:block w-8 h-[1px] bg-stone-500 dark:bg-white"></div>
+          <div className="hidden md:block w-10 h-1 rounded-lg bg-stone-500 dark:bg-white"></div>
         </div>
         {data ? (
           <div className="grid grid-cols-1 gap-8 py-4 md:grid-cols-2 md:gap-12">
             {data.projects.map(
+              ({ id, title, image, icons, web, description, github }: any) => (
+                <ProjectRow
+                  key={id}
+                  id={id}
+                  title={title}
+                  image={image}
+                  icons={icons}
+                  web={web}
+                  description={description}
+                  github={github}
+                  locale={locale}
+                />
+              )
+            )}
+            {/* {data.projects.map(
               ({ id, title, image, web, description, github }: any) => (
-                <CardProject
+                <ProjectCard
                   key={id}
                   id={id}
                   title={title}
@@ -39,7 +54,7 @@ export const Projects = () => {
                   locale={locale}
                 />
               )
-            )}
+            )} */}
           </div>
         ) : (
           <></>

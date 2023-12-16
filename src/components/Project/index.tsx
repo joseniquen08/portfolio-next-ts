@@ -1,9 +1,9 @@
-import { dataProjectType } from '@/types';
+import { DataProjectType } from '@/types';
 import { Content } from './Content';
 import { Header } from './Header';
 
 interface Props {
-  data: dataProjectType;
+  data: DataProjectType;
 }
 
 export const ProjectComponent = ({ data }: Props) => {

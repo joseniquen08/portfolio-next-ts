@@ -5,24 +5,9 @@ import { Projects } from '@/components/Home/Projects';
 import { Skills } from '@/components/Home/Skills';
 import { Footer } from '@/components/Shared/Footer';
 import { getStaticPropsTranslations } from '@/utils/i18n';
-import { Poppins } from 'next/font/google';
 import Head from 'next/head';
-import { useCallback } from 'react';
-import Particles from 'react-particles';
-import type { Engine } from 'tsparticles-engine';
-import { loadStarsPreset } from 'tsparticles-preset-stars';
-
-const poppins = Poppins({
-  variable: '--font-poppins',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  preload: false,
-});
 
 export default function Home() {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadStarsPreset(engine);
-  }, []);
-
   return (
     <>
       <Head>
@@ -31,46 +16,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${poppins.variable} font-poppins`}>
-        <Particles
-          id="tsparticles"
-          init={particlesInit}
-          className="z-0"
-          options={{
-            preset: 'stars',
-            background: {
-              color: 'white',
-              opacity: 0,
-            },
-            particles: {
-              color: { value: '#ffffff' },
-              move: {
-                direction: 'none',
-                enable: true,
-                outModes: 'none',
-                random: false,
-                speed: 0.1,
-                straight: false,
-              },
-              number: {
-                density: {
-                  enable: true,
-                  area: 800,
-                },
-                value: 80,
-              },
-              opacity: {
-                value: {
-                  min: 0.5,
-                  max: 0.5,
-                },
-              },
-              size: {
-                value: { min: 1, max: 2 },
-              },
-            },
-          }}
-        />
+      <>
         <div className="h-6"></div>
         <Navbar />
         <Header />
@@ -78,7 +24,7 @@ export default function Home() {
         <About />
         <Skills />
         <Footer />
-      </main>
+      </>
     </>
   );
 }

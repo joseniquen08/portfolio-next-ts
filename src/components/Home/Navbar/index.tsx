@@ -93,10 +93,10 @@ export const Navbar = () => {
   return (
     <>
       <nav
-        className={`dark:text-white text-gray-700 mt-1 z-40 sticky top-0 w-full ${
+        className={`dark:text-custom-text text-gray-700 mt-1 z-40 sticky top-0 w-full ${
           showBg
-            ? 'dark:border-b border-b-slate-700 shadow-lg shadow-gray-200/50 dark:shadow-slate-900/50 backdrop-blur bg-white/75 dark:bg-slate-900/75'
-            : 'bg-gradient-to-r from-gray-50 to-gray-50/95 dark:bg-gradient-to-r dark:from-slate-900 dark:to-slate-900/95 bg-white'
+            ? 'dark:border-b border-b-dark-blue-700 shadow-lg shadow-gray-200/50 dark:shadow-custom-bg/50 backdrop-blur bg-white/75 dark:bg-custom-bg/75'
+            : 'bg-gradient-to-r from-gray-50 to-gray-50/95 dark:bg-gradient-to-r dark:from-custom-bg dark:to-custom-bg/95 bg-white'
         }`}
       >
         <div className="relative flex flex-row items-center justify-between max-w-5xl px-3 py-3 mx-auto lg:py-2 sm:px-4 lg:px-16 2xl:max-w-6xl">
@@ -185,7 +185,7 @@ export const Navbar = () => {
               open: { opacity: 1, display: 'block' },
             }}
             exit={{ opacity: 0, display: 'none' }}
-            className="absolute w-full font-medium text-gray-800 bg-gray-200 shadow-xl md:hidden dark:text-white dark:bg-slate-800 shadow-gray-200/50 dark:shadow-slate-800/50"
+            className="absolute w-full font-medium text-gray-800 bg-gray-200 shadow-xl md:hidden dark:text-custom-text dark:bg-slate-800 shadow-gray-200/50 dark:shadow-slate-800/50"
           >
             <div className="px-2.5 sm:px-4 py-3 space-y-1.5">
               <LinkReactScroll

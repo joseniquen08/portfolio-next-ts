@@ -37,7 +37,7 @@ export const Footer = () => {
             <LinkSocialNetwork href="https://www.linkedin.com/in/jose-niquen">
               <SiLinkedin className="w-6 h-6" />
             </LinkSocialNetwork>
-            <LinkSocialNetwork href="https://www.instagram.com/jose.niquen">
+            <LinkSocialNetwork href="https://www.instagram.com/joseniquen_">
               <SiInstagram className="w-6 h-6" />
             </LinkSocialNetwork>
           </div>
