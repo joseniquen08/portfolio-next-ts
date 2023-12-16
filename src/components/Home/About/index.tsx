@@ -24,8 +24,8 @@ export const About = () => {
             <div className="hidden md:block w-10 h-1 rounded-lg bg-stone-500 dark:bg-white"></div>
           </div>
           <div className="space-y-6 text-lg font-normal leading-7 md:leading-8 md:text-lg">
-            <p className="text-center md:text-start" style={{ textWrap: "balance" }}>{t.about_me}</p>
-            <p className="text-center md:text-start" style={{ textWrap: "balance" }}>{t.hobbies}</p>
+            <p className="text-center md:text-start">{t.about_me}</p>
+            <p className="text-center md:text-start">{t.hobbies}</p>
           </div>
         </div>
         <div className="relative w-full max-w-xs lg:max-w-sm">
