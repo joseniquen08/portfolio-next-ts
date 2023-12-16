@@ -41,7 +41,7 @@ export const ProjectRow = ({
       </div>
       <div className="w-1/2 py-2 flex flex-col items-start space-y-2 justify-between">
         <div className="flex flex-col space-y-1">
-          <p className="text-3xl font-semibold" style={{ textWrap: "balance" }}>{title}</p>
+          <p className="text-3xl font-semibold">{title}</p>
           <p>{locale === 'en' ? description.en : description.es}</p>
           <div className="flex space-x-2">
             <a
