@@ -9,7 +9,7 @@ export const LinkSocialNetwork = ({ href, children }: Props) => {
   return (
     <motion.div whileHover="hover" className="relative w-14 h-14 group">
       <motion.div
-        className="w-14 h-14 bg-slate-900 bg-opacity-5 dark:bg-white dark:bg-opacity-5 rounded-xl group-hover:bg-opacity-10"
+        className="w-14 h-14 bg-custom-ligth-text bg-opacity-5 dark:bg-custom-dark-text dark:bg-opacity-5 rounded-xl group-hover:bg-opacity-10"
         transition={{
           ease: 'easeInOut',
           duration: 0.65,

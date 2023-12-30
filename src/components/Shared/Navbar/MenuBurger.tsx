@@ -13,7 +13,7 @@ export const MenuBurger = ({ toggle }: Props) => {
     <motion.button
       onClick={toggle}
       whileTap={{ scale: 0.85 }}
-      className="inline-flex items-center justify-center p-1.5 text-slate-700 dark:text-slate-300 rounded-md hover:bg-gray-200/50 dark:hover:bg-slate-700/50 focus:outline-none"
+      className="inline-flex items-center justify-center p-1.5 text-custom-ligth-text/80 dark:text-slate-300 rounded-md hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text/10 focus:outline-none"
     >
       <svg
         width="21"

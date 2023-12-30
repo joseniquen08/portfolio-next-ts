@@ -15,7 +15,7 @@ export const MenuLanguage = () => {
   return (
     <Menu as="section" className="relative">
       <motion.div whileTap={{ scale: 0.9 }}>
-        <Menu.Button className="flex items-center justify-center py-1.5 lg:py-2 px-2 sm:px-3 font-medium text-stone-700 dark:text-custom-text lg:text-lg space-x-1 lg:space-x-1.5 focus:outline-none hover:bg-gray-100 dark:hover:bg-custom-text dark:hover:bg-opacity-5 rounded-xl">
+        <Menu.Button className="flex items-center justify-center py-1.5 lg:py-2 px-2 sm:px-3 font-medium text-custom-ligth-text dark:text-custom-dark-text lg:text-lg space-x-1 lg:space-x-1.5 focus:outline-none hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5 rounded-xl">
           <HiOutlineTranslate className="w-5 h-5 lg:w-6 lg:h-6" />
           <p>{locale}</p>
         </Menu.Button>
@@ -29,8 +29,8 @@ export const MenuLanguage = () => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-2 origin-top-right bg-white rounded-lg shadow-lg focus:outline-none dark:bg-custom-bg">
-          <div className="bg-white border rounded-lg bg-opacity-10 dark:border-transparent">
+        <Menu.Items className="absolute right-0 mt-2 origin-top-right bg-custom-ligth-bg rounded-lg shadow-lg focus:outline-none dark:bg-custom-dark-bg">
+          <div className="bg-custom-ligth-bg border rounded-lg bg-opacity-10 dark:border-transparent">
             <div className="px-2.5 py-2">
               <Menu.Item as="div">
                 <RadioGroup value={locale} onChange={changeLng}>
@@ -41,14 +41,14 @@ export const MenuLanguage = () => {
                           type="button"
                           className={`${
                             checked
-                              ? 'bg-custom-primary text-white font-medium'
-                              : 'hover:bg-gray-200/60 dark:hover:bg-white dark:hover:bg-opacity-10'
+                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-dark-text dark:text-custom-dark-text font-medium'
+                              : 'hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10'
                           } px-3 py-1.5 lg:py-1 focus:outline-none rounded-lg flex items-center justify-center space-x-1`}
                         >
                           <p>en</p>
                           <div
                             className={`${
-                              checked ? 'text-white' : 'text-transparent'
+                              checked ? 'text-custom-dark-text' : 'text-transparent'
                             }`}
                           >
                             <HiCheckCircle className="w-5 h-5" />
@@ -62,14 +62,14 @@ export const MenuLanguage = () => {
                           type="button"
                           className={`${
                             checked
-                              ? 'bg-custom-primary text-white font-medium'
-                              : 'hover:bg-gray-200/60 dark:hover:bg-white dark:hover:bg-opacity-10'
+                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-dark-text dark:text-custom-dark-text font-medium'
+                              : 'hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10'
                           } px-3 py-1.5 lg:py-1 focus:outline-none rounded-lg flex items-center justify-center space-x-1`}
                         >
                           <p>es</p>
                           <div
                             className={`${
-                              checked ? 'text-white' : 'text-transparent'
+                              checked ? 'text-custom-dark-text' : 'text-transparent'
                             }`}
                           >
                             <HiCheckCircle className="w-5 h-5" />

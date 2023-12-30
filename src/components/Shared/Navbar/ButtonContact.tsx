@@ -17,12 +17,12 @@ export const ButtonContact = ({ openContactModal }: Props) => {
       whileTap={{ scale: 0.95 }}
       onClick={openContactModal}
       type="button"
-      className="bg-custom-primary shadow-lg text-sm md:text-base lg:text-lg shadow-custom-primary/50 text-custom-text hover:bg-opacity-90 dark:bg-opacity-100 font-normal focus:outline-none dark:hover:bg-opacity-90 py-1.5 w-24 lg:w-32 rounded-lg relative"
+      className="bg-custom-ligth-accent dark:bg-custom-dark-accent shadow-lg text-sm md:text-base lg:text-lg shadow-custom-ligth-accent/50 dark:shadow-custom-dark-accent/50 text-custom-dark-text hover:bg-opacity-90 dark:bg-opacity-100 font-normal focus:outline-none dark:hover:bg-opacity-90 py-1.5 w-24 lg:w-32 rounded-lg relative"
     >
       {t.button.contact}
       <span className="absolute flex w-3 h-3 -top-1 -right-1">
-        <span className="absolute inline-flex w-full h-full bg-custom-text rounded-full opacity-75 animate-ping"></span>
-        <span className="relative inline-flex w-3 h-3 bg-custom-text rounded-full"></span>
+        <span className="absolute inline-flex w-full h-full bg-custom-ligth-primary dark:bg-custom-dark-text rounded-full opacity-75 animate-ping"></span>
+        <span className="relative inline-flex w-3 h-3 bg-custom-ligth-primary dark:bg-custom-dark-text rounded-full"></span>
       </span>
     </motion.button>
   );

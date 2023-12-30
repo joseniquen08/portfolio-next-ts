@@ -16,7 +16,7 @@ export const Footer = () => {
   const t = locale === 'en' ? en : es;
 
   return (
-    <footer className="text-stone-900 dark:text-white">
+    <footer className="text-custom-ligth-text dark:text-custom-dark-text">
       <div className="max-w-6xl px-4 pt-6 pb-10 mx-auto sm:px-10 lg:px-16 md:py-6">
         <div className="relative flex flex-col items-center justify-between w-full space-y-8 md:flex-row md:space-y-0">
           <div className="flex flex-col z-20 md:flex-row space-y-3 md:space-y-0 space-x-0 md:space-x-2.5 items-center justify-center">

@@ -93,13 +93,13 @@ export const NowPlaying = () => {
   return (
     <div className="w-full mb-2 overflow-hidden">
       {!data?.songUrl ? (
-        <div className="flex items-center justify-center w-full px-3 py-4 space-x-2 cursor-default rounded-xl dark:bg-white dark:bg-opacity-5 bg-slate-900 bg-opacity-5">
+        <div className="flex items-center justify-center w-full px-3 py-4 space-x-2 cursor-default rounded-xl dark:bg-custom-dark-text dark:bg-opacity-10 bg-custom-ligth-text bg-opacity-5">
           <FaSpotify className="text-[#1ED760] h-7 w-7" />
-          <p className="text-lg font-medium text-gray-800 dark:text-gray-200">
+          <p className="text-lg font-medium text-custom-ligth-text dark:text-custom-dark-text">
             {t.now_playing.not_playing}
           </p>
           <span className="absolute flex w-4 h-4 -top-1 -right-1">
-            <span className="relative inline-flex w-4 h-4 bg-gray-300 rounded-full dark:bg-gray-600"></span>
+            <span className="relative inline-flex w-4 h-4 bg-custom-ligth-bg rounded-full dark:bg-custom-dark-primary"></span>
           </span>
         </div>
       ) : (

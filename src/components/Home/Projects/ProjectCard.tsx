@@ -33,7 +33,7 @@ export const ProjectCard = ({
             <Image
               src={image}
               alt="image_random"
-              layout="fill"
+              fill={true}
               priority
               className="z-0 object-cover object-center w-full img opacity-40 md:opacity-100"
             />

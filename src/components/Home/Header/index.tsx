@@ -15,17 +15,17 @@ export const Header = () => {
     <div className="flex flex-col-reverse w-full max-w-5xl px-2 pt-12 mx-auto space-y-8 space-y-reverse lg:space-y-0 lg:flex-row lg:px-16 lg:pt-28 lg:pb-16 2xl:max-w-6xl">
       <div className="flex flex-col justify-center flex-none space-y-10">
         <div className="flex flex-col justify-center space-y-1 lg:space-y-2.5 text-center lg:text-left">
-          <p className="text-3xl font-semibold lg:text-4xl dark:text-custom-text text-stone-800">
+          <p className="text-3xl font-semibold lg:text-4xl dark:text-custom-dark-text text-custom-ligth-text">
             {t.hi}
           </p>
-          <p className="py-1 text-5xl font-bold leading-tight tracking-tighter text-transparent break-words lg:text-6xl bg-clip-text bg-gradient-to-r from-custom-primary to-custom-accent">
+          <p className="py-1 text-5xl font-bold leading-tight tracking-tighter text-transparent break-words lg:text-6xl bg-clip-text bg-gradient-to-r from-custom-ligth-primary to-custom-ligth-accent dark:from-custom-dark-primary dark:to-custom-dark-accent">
             {t.name}
           </p>
-          <p className="text-3xl font-semibold tracking-tight break-words lg:text-4xl text-stone-600 dark:text-custom-text">
+          <p className="text-3xl font-semibold tracking-tight break-words lg:text-4xl text-custom-ligth-text dark:text-custom-dark-text">
             {t.junior}
           </p>
         </div>
-        <div className="flex justify-center pl-1 space-x-5 text-lg lg:space-x-7 lg:justify-start dark:text-white text-slate-900">
+        <div className="flex justify-center pl-1 space-x-5 text-lg lg:space-x-7 lg:justify-start dark:text-custom-dark-text text-custom-ligth-text">
           <LinkSocialNetwork href="https://github.com/joseniquen08">
             <SiGithub className="h-7 w-7" />
           </LinkSocialNetwork>
@@ -54,11 +54,6 @@ export const Header = () => {
                 animate={{ scale: 0.98 }}
                 variants={{ hover: { scale: 1.05 } }}
                 className="absolute z-10 hidden scale-90 border-2 border-custom-primary rounded-full w-60 h-60 lg:block lg:w-72 lg:h-72 -bottom-0 -right-0"
-              ></motion.div>
-              <motion.div
-                animate={{ scale: 0.98 }}
-                variants={{ hover: { scale: 1.1 } }}
-                className="absolute z-10 hidden scale-90 border-2 border-custom-accent rounded-full w-60 h-60 lg:block lg:w-72 lg:h-72 -bottom-0 -right-0"
               ></motion.div>
             </motion.div>
           </div>

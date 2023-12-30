@@ -15,7 +15,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        poppins: ['var(--font-poppins)'],
+        poppins: "Poppins, 'sans-serif'",
       },
       height: {
         104: '26rem',
@@ -50,11 +50,20 @@ module.exports = {
           900: '#012a4a',
         },
         custom: {
-          text: '#eef2f6',
-          bg: '#0c1217',
-          primary: '#6a8caf',
-          secondary: '#17212b',
-          accent: '#6387ab',
+          ligth: {
+            text: '#080420',
+            bg: '#fbfbfe',
+            primary: '#5347bd',
+            secondary: '#877cee',
+            accent: '#e75087',
+          },
+          dark: {
+            text: '#e3dffb',
+            bg: '#010104',
+            primary: '#4e42b8',
+            secondary: '#1c1183',
+            accent: '#af184f',
+          }
         },
       },
     },

@@ -93,10 +93,10 @@ export const Navbar = () => {
   return (
     <>
       <nav
-        className={`dark:text-custom-text text-gray-700 mt-1 z-40 sticky top-0 w-full ${
+        className={`dark:text-custom-dark-text text-custom-ligth-text mt-1 z-40 sticky top-0 w-full ${
           showBg
-            ? 'dark:border-b border-b-dark-blue-700 shadow-lg shadow-gray-200/50 dark:shadow-custom-bg/50 backdrop-blur bg-white/75 dark:bg-custom-bg/75'
-            : 'bg-gradient-to-r from-gray-50 to-gray-50/95 dark:bg-gradient-to-r dark:from-custom-bg dark:to-custom-bg/95 bg-white'
+            ? 'dark:border-b border-b-dark-blue-700 shadow-lg shadow-gray-200/50 dark:shadow-custom-dark-bg/50 backdrop-blur bg-custom-ligth-bg/75 dark:bg-custom-dark-bg/75'
+            : 'bg-gradient-to-r from-custom-ligth-bg to-custom-ligth-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95 bg-custom-ligth-bg'
         }`}
       >
         <div className="relative flex flex-row items-center justify-between max-w-5xl px-3 py-3 mx-auto lg:py-2 sm:px-4 lg:px-16 2xl:max-w-6xl">
@@ -135,7 +135,7 @@ export const Navbar = () => {
                   to="projects"
                   smooth={true}
                   duration={500}
-                  className="px-3 py-2 text-lg rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-white dark:hover:bg-opacity-5"
+                  className="px-3 py-2 text-lg rounded-lg cursor-pointer hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
                 >
                   {t.ul.projects}
                 </LinkReactScroll>
@@ -145,7 +145,7 @@ export const Navbar = () => {
                   to="about"
                   smooth={true}
                   duration={500}
-                  className="px-3 py-2 text-lg rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-white dark:hover:bg-opacity-5"
+                  className="px-3 py-2 text-lg rounded-lg cursor-pointer hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
                 >
                   {t.ul.about_me}
                 </LinkReactScroll>
@@ -155,7 +155,7 @@ export const Navbar = () => {
                   to="skills"
                   smooth={true}
                   duration={500}
-                  className="px-3 py-2 text-lg rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-white dark:hover:bg-opacity-5"
+                  className="px-3 py-2 text-lg rounded-lg cursor-pointer hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
                 >
                   {t.ul.skills}
                 </LinkReactScroll>
@@ -185,7 +185,7 @@ export const Navbar = () => {
               open: { opacity: 1, display: 'block' },
             }}
             exit={{ opacity: 0, display: 'none' }}
-            className="absolute w-full font-medium text-gray-800 bg-gray-200 shadow-xl md:hidden dark:text-custom-text dark:bg-slate-800 shadow-gray-200/50 dark:shadow-slate-800/50"
+            className="absolute w-full font-medium text-custom-ligth-text bg-custom-ligth-bg shadow-xl md:hidden dark:text-custom-dark-text dark:bg-custom-dark-bg shadow-gray-200/50 dark:shadow-custom-dark-bg/50"
           >
             <div className="px-2.5 sm:px-4 py-3 space-y-1.5">
               <LinkReactScroll
@@ -193,7 +193,7 @@ export const Navbar = () => {
                 to="projects"
                 smooth={true}
                 duration={500}
-                className="block cursor-pointer rounded-xl focus:bg-gray-300 dark:focus:bg-slate-900 tracking-wide px-3 py-1.5"
+                className="block cursor-pointer rounded-xl focus:bg-custom-ligth-bg dark:focus:bg-custom-dark-bg tracking-wide px-3 py-1.5"
               >
                 {t.ul.projects}
               </LinkReactScroll>
@@ -202,7 +202,7 @@ export const Navbar = () => {
                 to="about"
                 smooth={true}
                 duration={500}
-                className="block cursor-pointer rounded-xl focus:bg-gray-300 dark:focus:bg-slate-900 tracking-wide px-3 py-1.5"
+                className="block cursor-pointer rounded-xl focus:bg-custom-ligth-bg dark:focus:bg-custom-dark-bg tracking-wide px-3 py-1.5"
               >
                 {t.ul.about_me}
               </LinkReactScroll>
@@ -211,7 +211,7 @@ export const Navbar = () => {
                 to="skills"
                 smooth={true}
                 duration={500}
-                className="block cursor-pointer rounded-xl focus:bg-gray-300 dark:focus:bg-slate-900 tracking-wide px-3 py-1.5"
+                className="block cursor-pointer rounded-xl focus:bg-custom-ligth-bg dark:focus:bg-custom-dark-bg tracking-wide px-3 py-1.5"
               >
                 {t.ul.skills}
               </LinkReactScroll>

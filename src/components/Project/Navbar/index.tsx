@@ -112,7 +112,7 @@ export const Navbar = () => {
                         : 'logo.png'
                     }`}
                     alt="Perfil"
-                    layout="fill"
+                    fill={true}
                     className="z-20 object-scale-down"
                   />
                 </motion.a>
