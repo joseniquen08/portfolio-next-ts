@@ -17,7 +17,7 @@ const customTheme: CustomFlowbiteTheme['tooltip'] = {
     },
   },
   style: {
-    dark: "bg-gray-300 dark:bg-custom-dark-primary",
+    dark: "bg-gray-300 text-custom-ligth-text dark:bg-custom-dark-primary dark:text-custom-dark-text",
   },
 }
 
@@ -46,7 +46,7 @@ export const ProjectRow = ({
         <Timeline.Title>{title}</Timeline.Title>
         <Timeline.Body className="flex flex-col space-y-4">
           <p>{locale === 'en' ? description.en : description.es}</p>
-          <div className="flex space-x-3.5">
+          <div className="flex gap-3.5 flex-wrap">
             {icons.map(({ name, icon }, i) => (
               <Tooltip key={i} content={name} theme={customTheme} placement="bottom">
                 {icon}

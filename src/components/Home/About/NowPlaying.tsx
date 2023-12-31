@@ -98,9 +98,6 @@ export const NowPlaying = () => {
           <p className="text-lg font-medium text-custom-ligth-text dark:text-custom-dark-text">
             {t.now_playing.not_playing}
           </p>
-          <span className="absolute flex w-4 h-4 -top-1 -right-1">
-            <span className="relative inline-flex w-4 h-4 bg-custom-ligth-bg rounded-full dark:bg-custom-dark-primary"></span>
-          </span>
         </div>
       ) : (
         <div>

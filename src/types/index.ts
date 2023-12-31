@@ -35,4 +35,8 @@ export type ProjectType = {
 export type SkillType = {
   name: string;
   icon: ReactNode;
+  experience: {
+    en: string;
+    es: string;
+  }
 }

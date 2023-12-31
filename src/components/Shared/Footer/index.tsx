@@ -27,9 +27,12 @@ export const Footer = () => {
               <SiTailwindcss className="w-16 h-16 md:w-9 md:h-9" />
             </div>
           </div>
-          <p className="inset-0 z-10 flex items-center justify-center text-lg font-medium text-center md:absolute md:font-normal">
-            {t.author}
-          </p>
+          <div className="inset-0 z-10 md:absolute flex flex-col gap-0.5 items-center">
+            <p className="flex items-center justify-center text-lg font-medium text-center md:font-normal">
+              {t.author}
+            </p>
+            <p className="text-xs font-medium text-custom-ligth-text/90 dark:text-custom-dark-text/70">Agradecimiento de ❤️ a <i className="font-semibold text-custom-ligth-text dark:text-custom-dark-text">Rosse Villegas</i></p>
+          </div>
           <div className="z-20 flex justify-center space-x-4 text-lg md:space-x-2">
             <LinkSocialNetwork href="https://github.com/joseniquen08">
               <SiGithub className="w-6 h-6" />
