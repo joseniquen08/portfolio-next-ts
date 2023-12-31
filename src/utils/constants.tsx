@@ -1,13 +1,12 @@
+import { AxiosIcon, BootstrapIcon, ChakrauiIcon, CodeigniterIcon, Css3Icon, ExpressIcon, FirebaseIcon, FlutterIcon, GitIcon, GraphqlIcon, HerokuIcon, Html5Icon, JavaIcon, JavascriptIcon, JqueryIcon, JsonwebtokensIcon, MongodbIcon, MuiIcon, MysqlIcon, NextdotjsIcon, NodedotjsIcon, PhpIcon, PostgresqlIcon, PythonIcon, ReactIcon, ReduxIcon, SassIcon, SpringbootIcon, SupabaseIcon, TailwindcssIcon, TypescriptIcon } from "@/icons";
 import type { ProjectType, SkillType } from "@/types";
-import { SiAxios, SiBootstrap, SiChakraui, SiCodeigniter, SiCss3, SiExpress, SiFirebase, SiFlutter, SiGit, SiGraphql, SiHeroku, SiHtml5, SiJavascript, SiJquery, SiJsonwebtokens, SiMongodb, SiMui, SiMysql, SiNextdotjs, SiNodedotjs, SiPhp, SiPostgresql, SiPython, SiReact, SiRedux, SiSass, SiSpringboot, SiSupabase, SiTailwindcss, SiTypescript } from "@icons-pack/react-simple-icons";
-import { Java } from "@react-symbols/icons";
 
 const size = 36;
 
 export const skills: SkillType[] = [
   {
     name: "JavaScript",
-    icon: <SiJavascript size={size} color="#F7DF1E" />,
+    icon: <JavascriptIcon size={size} color="#F7DF1E" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -15,7 +14,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "TypeScript",
-    icon: <SiTypescript size={size} color="#3178C6" />,
+    icon: <TypescriptIcon size={size} color="#3178C6" />,
     experience: {
       en: "+1 year",
       es: "+1 año",
@@ -23,7 +22,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "HTML5",
-    icon: <SiHtml5 size={size} color="#E34F26" />,
+    icon: <Html5Icon size={size} color="#E34F26" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -31,7 +30,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "CSS3",
-    icon: <SiCss3 size={size} color="#1572B6" />,
+    icon: <Css3Icon size={size} color="#1572B6" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -39,7 +38,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "React",
-    icon: <SiReact size={size} color="#61DAFB" />,
+    icon: <ReactIcon size={size} color="#61DAFB" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -47,7 +46,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Next.js",
-    icon: <SiNextdotjs size={size} className="text-black dark:text-white" />,
+    icon: <NextdotjsIcon size={size} className="text-black dark:text-white" />,
     experience: {
       en: "+1 year",
       es: "+1 año",
@@ -55,7 +54,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Tailwind CSS",
-    icon: <SiTailwindcss size={size} color="#06B6D4" />,
+    icon: <TailwindcssIcon size={size} color="#06B6D4" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -63,7 +62,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Chakra UI",
-    icon: <SiChakraui size={size} color="#319795" />,
+    icon: <ChakrauiIcon size={size} color="#319795" />,
     experience: {
       en: "+1 year",
       es: "+1 año",
@@ -71,7 +70,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Node.js",
-    icon: <SiNodedotjs size={size} color="#339933" />,
+    icon: <NodedotjsIcon size={size} color="#339933" />,
     experience: {
       en: "+1 year",
       es: "+1 año",
@@ -79,7 +78,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Java",
-    icon: <Java width={size} height={size} />,
+    icon: <JavaIcon size={size} />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -87,7 +86,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Express",
-    icon: <SiExpress size={size} className="text-black dark:text-white" />,
+    icon: <ExpressIcon size={size} className="text-black dark:text-white" />,
     experience: {
       en: "+1 year",
       es: "+1 año",
@@ -95,7 +94,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Spring Boot",
-    icon: <SiSpringboot size={size} color="#6DB33F" />,
+    icon: <SpringbootIcon size={size} color="#6DB33F" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -103,7 +102,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "MySQL",
-    icon: <SiMysql size={size} color="#4479A1" />,
+    icon: <MysqlIcon size={size} color="#4479A1" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -111,7 +110,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Firebase",
-    icon: <SiFirebase size={size} color="#FFCA28" />,
+    icon: <FirebaseIcon size={size} color="#FFCA28" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -119,7 +118,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Supabase",
-    icon: <SiSupabase size={size} color="#3FCF8E" />,
+    icon: <SupabaseIcon size={size} color="#3FCF8E" />,
     experience: {
       en: "+6 months",
       es: "+6 meses",
@@ -127,7 +126,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "GraphQL",
-    icon: <SiGraphql size={size} color="#E10098" />,
+    icon: <GraphqlIcon size={size} color="#E10098" />,
     experience: {
       en: "+1 year",
       es: "+1 año",
@@ -135,7 +134,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Git",
-    icon: <SiGit size={size} color="#F05032" />,
+    icon: <GitIcon size={size} color="#F05032" />,
     experience: {
       en: "+3 years",
       es: "+3 años",
@@ -143,7 +142,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "PHP",
-    icon: <SiPhp size={size} color="#777BB4" />,
+    icon: <PhpIcon size={size} color="#777BB4" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -151,7 +150,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "CodeIgniter",
-    icon: <SiCodeigniter size={size} color="#EF4223" />,
+    icon: <CodeigniterIcon size={size} color="#EF4223" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -159,7 +158,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Sass",
-    icon: <SiSass size={size} color="#CC6699" />,
+    icon: <SassIcon size={size} color="#CC6699" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -167,7 +166,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Material UI",
-    icon: <SiMui size={size} color="#007FFF" />,
+    icon: <MuiIcon size={size} color="#007FFF" />,
     experience: {
       en: "+6 months",
       es: "+6 meses",
@@ -175,7 +174,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Redux",
-    icon: <SiRedux size={size} color="#764ABC" />,
+    icon: <ReduxIcon size={size} color="#764ABC" />,
     experience: {
       en: "+1 year",
       es: "+1 año",
@@ -183,7 +182,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Axios",
-    icon: <SiAxios size={size} color="#5A29E4" />,
+    icon: <AxiosIcon size={size} color="#5A29E4" />,
     experience: {
       en: "+1 year",
       es: "+1 año",
@@ -191,7 +190,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "jQuery",
-    icon: <SiJquery size={size} color="#0769AD" />,
+    icon: <JqueryIcon size={size} color="#0769AD" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -199,7 +198,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Python",
-    icon: <SiPython size={size} color="#3776AB" />,
+    icon: <PythonIcon size={size} color="#3776AB" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
@@ -207,7 +206,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "PostgreSQL",
-    icon: <SiPostgresql size={size} color="#4169E1" />,
+    icon: <PostgresqlIcon size={size} color="#4169E1" />,
     experience: {
       en: "+1 year",
       es: "+1 año",
@@ -215,7 +214,7 @@ export const skills: SkillType[] = [
   },
   {
     name: "Flutter",
-    icon: <SiFlutter size={size} color="#02569B" />,
+    icon: <FlutterIcon size={size} color="#02569B" />,
     experience: {
       en: "+6 months",
       es: "+6 meses",
@@ -247,23 +246,23 @@ export const workProjects: ProjectType[] = [
     icons: [
       {
         name: "PHP",
-        icon: <SiPhp size={projectSize} color="#777BB4" />,
+        icon: <PhpIcon size={projectSize} color="#777BB4" />,
       },
       {
         name: "CodeIgniter",
-        icon: <SiCodeigniter size={projectSize} color="#EF4223" />,
+        icon: <CodeigniterIcon size={projectSize} color="#EF4223" />,
       },
       {
         name: "jQuery",
-        icon: <SiJquery size={projectSize} color="#0769AD" />,
+        icon: <JqueryIcon size={projectSize} color="#0769AD" />,
       },
       {
         name: "Bootstrap",
-        icon: <SiBootstrap size={projectSize} color="#7952B3" />,
+        icon: <BootstrapIcon size={projectSize} color="#7952B3" />,
       },
       {
         name: "MySQL",
-        icon: <SiMysql size={projectSize} color="#4479A1" />,
+        icon: <MysqlIcon size={projectSize} color="#4479A1" />,
       },
     ]
   },
@@ -288,27 +287,27 @@ export const workProjects: ProjectType[] = [
     icons: [
       {
         name: "HTML5",
-        icon: <SiHtml5 size={projectSize} color="#E34F26" />,
+        icon: <Html5Icon size={projectSize} color="#E34F26" />,
       },
       {
         name: "Node.js",
-        icon: <SiNodedotjs size={projectSize} color="#339933" />,
+        icon: <NodedotjsIcon size={projectSize} color="#339933" />,
       },
       {
         name: "Express",
-        icon: <SiExpress size={projectSize} className="text-black dark:text-white" />,
+        icon: <ExpressIcon size={projectSize} className="text-black dark:text-white" />,
       },
       {
         name: "Tailwind CSS",
-        icon: <SiTailwindcss size={projectSize} color="#06B6D4" />,
+        icon: <TailwindcssIcon size={projectSize} color="#06B6D4" />,
       },
       {
         name: "Firebase",
-        icon: <SiFirebase size={projectSize} color="#FFCA28" />,
+        icon: <FirebaseIcon size={projectSize} color="#FFCA28" />,
       },
       {
         name: "Heroku",
-        icon: <SiHeroku size={projectSize} color="#430098" />,
+        icon: <HerokuIcon size={projectSize} color="#430098" />,
       },
     ]
   },
@@ -333,23 +332,23 @@ export const workProjects: ProjectType[] = [
     icons: [
       {
         name: "JavaScript",
-        icon: <SiJavascript size={projectSize} color="#F7DF1E" />,
+        icon: <JavascriptIcon size={projectSize} color="#F7DF1E" />,
       },
       {
         name: "Next.js",
-        icon: <SiNextdotjs size={projectSize} className="text-black dark:text-white" />,
+        icon: <NextdotjsIcon size={projectSize} className="text-black dark:text-white" />,
       },
       {
         name: "Material UI",
-        icon: <SiMui size={projectSize} color="#007FFF" />,
+        icon: <MuiIcon size={projectSize} color="#007FFF" />,
       },
       {
         name: "Tailwind CSS",
-        icon: <SiTailwindcss size={projectSize} color="#06B6D4" />,
+        icon: <TailwindcssIcon size={projectSize} color="#06B6D4" />,
       },
       {
         name: "Axios",
-        icon: <SiAxios size={projectSize} color="#5A29E4" />,
+        icon: <AxiosIcon size={projectSize} color="#5A29E4" />,
       },
     ]
   },
@@ -374,15 +373,15 @@ export const workProjects: ProjectType[] = [
     icons: [
       {
         name: "TypeScript",
-        icon: <SiTypescript size={projectSize} color="#3178C6" />,
+        icon: <TypescriptIcon size={projectSize} color="#3178C6" />,
       },
       {
         name: "Next.js",
-        icon: <SiNextdotjs size={projectSize} className="text-black dark:text-white" />,
+        icon: <NextdotjsIcon size={projectSize} className="text-black dark:text-white" />,
       },
       {
         name: "Tailwind CSS",
-        icon: <SiTailwindcss size={projectSize} color="#06B6D4" />,
+        icon: <TailwindcssIcon size={projectSize} color="#06B6D4" />,
       },
     ]
   },
@@ -410,19 +409,19 @@ export const personalProjects: ProjectType[] = [
     icons: [
       {
         name: "JavaScript",
-        icon: <SiJavascript size={projectSize} color="#F7DF1E" />,
+        icon: <JavascriptIcon size={projectSize} color="#F7DF1E" />,
       },
       {
         name: "React",
-        icon: <SiReact size={projectSize} color="#61DAFB" />,
+        icon: <ReactIcon size={projectSize} color="#61DAFB" />,
       },
       {
         name: "Tailwind CSS",
-        icon: <SiTailwindcss size={projectSize} color="#06B6D4" />,
+        icon: <TailwindcssIcon size={projectSize} color="#06B6D4" />,
       },
       {
         name: "Firebase",
-        icon: <SiFirebase size={projectSize} color="#FFCA28" />,
+        icon: <FirebaseIcon size={projectSize} color="#FFCA28" />,
       },
     ]
   },
@@ -447,15 +446,15 @@ export const personalProjects: ProjectType[] = [
     icons: [
       {
         name: "JavaScript",
-        icon: <SiJavascript size={projectSize} color="#F7DF1E" />,
+        icon: <JavascriptIcon size={projectSize} color="#F7DF1E" />,
       },
       {
         name: "React",
-        icon: <SiReact size={projectSize} color="#61DAFB" />,
+        icon: <ReactIcon size={projectSize} color="#61DAFB" />,
       },
       {
         name: "Tailwind CSS",
-        icon: <SiTailwindcss size={projectSize} color="#06B6D4" />,
+        icon: <TailwindcssIcon size={projectSize} color="#06B6D4" />,
       },
     ]
   },
@@ -480,23 +479,23 @@ export const personalProjects: ProjectType[] = [
     icons: [
       {
         name: "JavaScript",
-        icon: <SiJavascript size={projectSize} color="#F7DF1E" />,
+        icon: <JavascriptIcon size={projectSize} color="#F7DF1E" />,
       },
       {
         name: "React",
-        icon: <SiReact size={projectSize} color="#61DAFB" />,
+        icon: <ReactIcon size={projectSize} color="#61DAFB" />,
       },
       {
         name: "Chakra UI",
-        icon: <SiChakraui size={projectSize} color="#319795" />,
+        icon: <ChakrauiIcon size={projectSize} color="#319795" />,
       },
       {
         name: "Tailwind CSS",
-        icon: <SiTailwindcss size={projectSize} color="#06B6D4" />,
+        icon: <TailwindcssIcon size={projectSize} color="#06B6D4" />,
       },
       {
         name: "Axios",
-        icon: <SiAxios size={projectSize} color="#5A29E4" />,
+        icon: <AxiosIcon size={projectSize} color="#5A29E4" />,
       },
     ]
   },
@@ -521,35 +520,35 @@ export const personalProjects: ProjectType[] = [
     icons: [
       {
         name: "JavaScript",
-        icon: <SiJavascript size={projectSize} color="#F7DF1E" />,
+        icon: <JavascriptIcon size={projectSize} color="#F7DF1E" />,
       },
       {
         name: "React",
-        icon: <SiReact size={projectSize} color="#61DAFB" />,
+        icon: <ReactIcon size={projectSize} color="#61DAFB" />,
       },
       {
         name: "Node.js",
-        icon: <SiNodedotjs size={projectSize} color="#339933" />,
+        icon: <NodedotjsIcon size={projectSize} color="#339933" />,
       },
       {
         name: "Express",
-        icon: <SiExpress size={projectSize} className="text-black dark:text-white" />,
+        icon: <ExpressIcon size={projectSize} className="text-black dark:text-white" />,
       },
       {
         name: "Tailwind CSS",
-        icon: <SiTailwindcss size={projectSize} color="#06B6D4" />,
+        icon: <TailwindcssIcon size={projectSize} color="#06B6D4" />,
       },
       {
         name: "MongoDB",
-        icon: <SiMongodb size={projectSize} color="#47A248" />,
+        icon: <MongodbIcon size={projectSize} color="#47A248" />,
       },
       {
         name: "Redux",
-        icon: <SiRedux size={projectSize} color="#764ABC" />,
+        icon: <ReduxIcon size={projectSize} color="#764ABC" />,
       },
       {
         name: "Axios",
-        icon: <SiAxios size={projectSize} color="#5A29E4" />,
+        icon: <AxiosIcon size={projectSize} color="#5A29E4" />,
       },
     ]
   },
@@ -574,35 +573,35 @@ export const personalProjects: ProjectType[] = [
     icons: [
       {
         name: "TypeScript",
-        icon: <SiTypescript size={projectSize} color="#3178C6" />,
+        icon: <TypescriptIcon size={projectSize} color="#3178C6" />,
       },
       {
         name: "Next.js",
-        icon: <SiNextdotjs size={projectSize} className="text-black dark:text-white" />,
+        icon: <NextdotjsIcon size={projectSize} className="text-black dark:text-white" />,
       },
       {
         name: "Node.js",
-        icon: <SiNodedotjs size={projectSize} color="#339933" />,
+        icon: <NodedotjsIcon size={projectSize} color="#339933" />,
       },
       {
         name: "Express",
-        icon: <SiExpress size={projectSize} className="text-black dark:text-white" />,
+        icon: <ExpressIcon size={projectSize} className="text-black dark:text-white" />,
       },
       {
         name: "Chakra UI",
-        icon: <SiChakraui size={projectSize} color="#319795" />,
+        icon: <ChakrauiIcon size={projectSize} color="#319795" />,
       },
       {
         name: "MongoDB",
-        icon: <SiMongodb size={projectSize} color="#47A248" />,
+        icon: <MongodbIcon size={projectSize} color="#47A248" />,
       },
       {
         name: "GraphQL",
-        icon: <SiGraphql size={projectSize} color="#E10098" />,
+        icon: <GraphqlIcon size={projectSize} color="#E10098" />,
       },
       {
         name: "JWT",
-        icon: <SiJsonwebtokens size={projectSize} className="text-black dark:text-white" />,
+        icon: <JsonwebtokensIcon size={projectSize} className="text-black dark:text-white" />,
       },
     ]
   },

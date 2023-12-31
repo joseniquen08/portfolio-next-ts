@@ -11,9 +11,6 @@ dependencies:
   '@headlessui/react':
     specifier: ^1.7.13
     version: 1.7.17(react-dom@18.2.0)(react@18.2.0)
-  '@icons-pack/react-simple-icons':
-    specifier: ^9.2.0
-    version: 9.2.0(react@18.2.0)
   '@radix-ui/react-dropdown-menu':
     specifier: ^2.0.6
     version: 2.0.6(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-dom@18.2.0)(react@18.2.0)
@@ -23,9 +20,6 @@ dependencies:
   '@radix-ui/react-scroll-area':
     specifier: ^1.0.5
     version: 1.0.5(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-dom@18.2.0)(react@18.2.0)
-  '@react-symbols/icons':
-    specifier: ^1.2.3
-    version: 1.2.3(react-dom@18.2.0)(react@18.2.0)
   '@types/node':
     specifier: 18.15.2
     version: 18.15.2
@@ -873,14 +867,6 @@ packages:
   /@humanwhocodes/object-schema@2.0.1:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
 
-  /@icons-pack/react-simple-icons@9.2.0(react@18.2.0):
-    resolution: {integrity: sha512-09JZZx/jM4ugzwcUw4OSS1l6/83x2sJzG6jwzHpNmPufY1rq7apLdcK+4Cy9nebAuZEwaeVZQ69c8uib736LeA==}
-    peerDependencies:
-      react: ^16.13 || ^17 || ^18
-    dependencies:
-      react: 18.2.0
-    dev: false
-
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
     engines: {node: '>=6.0.0'}
@@ -1615,16 +1601,6 @@ packages:
     resolution: {integrity: sha512-fyrgCaedtvMg9NK3en0pnOYJdtfwxUcNolezkNPUsoX57X8oQk+NkqcvzHXD2uKNij6GXmWU9NDru2IWjrO4BQ==}
     dependencies:
       '@babel/runtime': 7.23.7
-    dev: false
-
-  /@react-symbols/icons@1.2.3(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-bhaVjJwwinWXQHn4wqsIIoW+mYe9syfBV0K7TdGx2b6Y3SSGWb72jGfYSK7n7oK5r9iW5rkFv+bxh5aOZsEJyA==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /@rushstack/eslint-patch@1.5.1:
