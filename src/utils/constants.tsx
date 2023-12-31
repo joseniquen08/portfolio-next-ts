@@ -174,6 +174,30 @@ export const skills: SkillType[] = [
     },
   },
   {
+    name: "Redux",
+    icon: <SiRedux size={size} color="#764ABC" />,
+    experience: {
+      en: "+1 year",
+      es: "+1 año",
+    },
+  },
+  {
+    name: "Axios",
+    icon: <SiAxios size={size} color="#5A29E4" />,
+    experience: {
+      en: "+1 year",
+      es: "+1 año",
+    },
+  },
+  {
+    name: "jQuery",
+    icon: <SiJquery size={size} color="#0769AD" />,
+    experience: {
+      en: "+2 years",
+      es: "+2 años",
+    },
+  },
+  {
     name: "Python",
     icon: <SiPython size={size} color="#3776AB" />,
     experience: {
