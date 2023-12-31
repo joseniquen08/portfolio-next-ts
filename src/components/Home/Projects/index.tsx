@@ -22,7 +22,7 @@ export const Projects = () => {
           </div>
           <div className="hidden md:block w-10 h-1 rounded-lg bg-custom-ligth-accent dark:bg-custom-dark-accent"></div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-3.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-3.5">
           <WorkProjectsSection locale={locale} />
           <PersonalProjectsSection locale={locale} />
         </div>

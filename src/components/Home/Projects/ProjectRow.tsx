@@ -53,7 +53,7 @@ export const ProjectRow = ({
               </Tooltip>
             ))}
           </div>
-          <div className="relative h-60 xs:h-80 md:h-52 lg:h-56 2xl:h-64 rounded-xl overflow-hidden bg-black dark:bg-transparent">
+          <div className="relative h-52 xs:h-60 sm:h-72 md:h-36 lg:h-56 rounded-xl overflow-hidden bg-black dark:bg-transparent">
             <Image
               src={images[0]}
               alt="image_random"
