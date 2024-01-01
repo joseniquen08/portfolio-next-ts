@@ -41,14 +41,14 @@ export const MenuLanguage = () => {
                           type="button"
                           className={`${
                             checked
-                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-dark-text dark:text-custom-dark-text font-medium'
+                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-ligth-text dark:text-custom-ligth-text font-medium'
                               : 'hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10'
                           } px-3 py-1.5 lg:py-1 focus:outline-none rounded-lg flex items-center justify-center space-x-1`}
                         >
                           <p>en</p>
                           <div
                             className={`${
-                              checked ? 'text-custom-dark-text' : 'text-transparent'
+                              checked ? 'text-custom-ligth-text' : 'text-transparent'
                             }`}
                           >
                             <HiCheckCircle className="w-5 h-5" />
@@ -62,14 +62,14 @@ export const MenuLanguage = () => {
                           type="button"
                           className={`${
                             checked
-                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-dark-text dark:text-custom-dark-text font-medium'
+                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-ligth-text dark:text-custom-ligth-text font-medium'
                               : 'hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10'
                           } px-3 py-1.5 lg:py-1 focus:outline-none rounded-lg flex items-center justify-center space-x-1`}
                         >
                           <p>es</p>
                           <div
                             className={`${
-                              checked ? 'text-custom-dark-text' : 'text-transparent'
+                              checked ? 'text-custom-ligth-text' : 'text-transparent'
                             }`}
                           >
                             <HiCheckCircle className="w-5 h-5" />

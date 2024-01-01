@@ -1,7 +1,6 @@
 import perfil from '@public/images/perfil.png';
 import en from '@public/locales/en/header';
 import es from '@public/locales/es/header';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { SiGithub, SiInstagram, SiLinkedin } from 'react-icons/si';
@@ -18,7 +17,7 @@ export const Header = () => {
           <p className="text-3xl font-semibold lg:text-4xl dark:text-custom-dark-text text-custom-ligth-text">
             {t.hi}
           </p>
-          <p className="py-1 text-5xl font-bold leading-tight tracking-tighter text-transparent break-words lg:text-6xl bg-clip-text bg-gradient-to-r from-custom-ligth-primary to-custom-ligth-accent dark:from-custom-dark-primary dark:to-custom-dark-accent">
+          <p className="py-1 text-5xl font-bold leading-tight tracking-tighter text-transparent break-words lg:text-6xl bg-clip-text bg-gradient-to-r from-custom-ligth-accent via-custom-ligth-primary to-custom-ligth-accent dark:from-custom-dark-accent dark:via-custom-dark-primary dark:to-custom-dark-accent">
             {t.name}
           </p>
           <p className="text-3xl font-semibold tracking-tight break-words lg:text-4xl text-custom-ligth-text dark:text-custom-dark-text">
@@ -40,22 +39,16 @@ export const Header = () => {
       <div className="flex justify-center w-full lg:justify-end">
         <div className="flex flex-col items-center space-y-6 lg:space-y-0">
           <div className="w-60 lg:w-72">
-            <motion.div
-              whileHover="hover"
+            <div
               className="relative h-60 w-60 lg:w-72 lg:h-72"
             >
               <Image
                 src={perfil}
                 priority
                 alt="Perfil"
-                className="absolute z-20 rounded-full saturate-150"
+                className="absolute z-20 rounded-full"
               />
-              <motion.div
-                animate={{ scale: 0.98 }}
-                variants={{ hover: { scale: 1.05 } }}
-                className="absolute z-10 hidden scale-90 border-2 border-custom-primary rounded-full w-60 h-60 lg:block lg:w-72 lg:h-72 -bottom-0 -right-0"
-              ></motion.div>
-            </motion.div>
+            </div>
           </div>
           {/* <div className="relative w-72">
             <div className="w-full lg:absolute lg:top-6">

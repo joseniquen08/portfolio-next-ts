@@ -95,8 +95,8 @@ export const Navbar = () => {
       <nav
         className={`dark:text-custom-dark-text text-custom-ligth-text mt-1 z-40 sticky top-0 w-full ${
           showBg
-            ? 'dark:border-b border-b-dark-blue-700 shadow-lg shadow-gray-200/50 dark:shadow-custom-dark-bg/50 backdrop-blur bg-custom-ligth-bg/75 dark:bg-custom-dark-bg/75'
-            : 'bg-gradient-to-r from-custom-ligth-bg to-custom-ligth-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95 bg-custom-ligth-bg'
+            ? 'dark:border-b dark:border-b-custom-dark-text/20 shadow-lg shadow-gray-200/50 dark:shadow-custom-dark-bg/50 backdrop-blur bg-custom-ligth-bg/60 dark:bg-custom-dark-bg/60'
+            : 'bg-white bg-gradient-to-r from-custom-ligth-bg to-custom-ligth-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95'
         }`}
       >
         <div className="relative flex flex-row items-center justify-between max-w-5xl px-3 py-3 mx-auto lg:py-2 sm:px-4 lg:px-16 2xl:max-w-6xl">

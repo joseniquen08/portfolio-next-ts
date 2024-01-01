@@ -17,11 +17,11 @@ export const About = () => {
         <div className="space-y-6">
           <div className="space-y-1">
             <div className="flex flex-col items-center md:items-start">
-              <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center md:text-4xl w-max md:text-left text-custom-ligth-primary dark:text-custom-dark-primary">
+              <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center md:text-4xl w-max md:text-left text-custom-ligth-accent dark:text-custom-dark-primary">
                 {t.title}
               </p>
             </div>
-            <div className="hidden md:block w-10 h-1 rounded-lg bg-custom-ligth-accent dark:bg-custom-dark-accent"></div>
+            <div className="hidden md:block w-10 h-1 rounded-lg bg-custom-ligth-primary dark:bg-custom-dark-accent"></div>
           </div>
           <div className="space-y-6 text-lg font-normal leading-7 md:leading-8 md:text-lg">
             <p className="text-center md:text-start">{t.about_me}</p>

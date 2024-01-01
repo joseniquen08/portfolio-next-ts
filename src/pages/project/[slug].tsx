@@ -1,13 +1,12 @@
 import { ProjectComponent } from '@/components/Project';
 import { Navbar } from '@/components/Project/Navbar';
 import { Footer } from '@/components/Shared/Footer';
-import { DataProjectType } from '@/types';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 
 export default function Project({
-  data,
+  slug,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
@@ -22,7 +21,7 @@ export default function Project({
       <>
         <div className="h-6"></div>
         <Navbar />
-        <ProjectComponent data={data} />
+        <ProjectComponent slug={slug} />
         <Footer />
       </>
     </>
@@ -30,14 +29,9 @@ export default function Project({
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}api/projects/${context.params?.id}`
-  );
-  const data: DataProjectType = await response.json();
-
   return {
     props: {
-      data,
+      slug: context.params?.slug,
       ...(await serverSideTranslations(`${context?.locale}`, [])),
     },
   };

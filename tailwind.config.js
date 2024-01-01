@@ -59,18 +59,18 @@ module.exports = {
         },
         custom: {
           ligth: {
-            text: '#080420',
-            bg: '#fbfbfe',
-            primary: '#5347bd',
-            secondary: '#877cee',
-            accent: '#e75087',
+            text: '#151702',
+            bg: '#fbfef1',
+            primary: '#d4ff02',
+            secondary: '#7eb4f1',
+            accent: '#7f5ce0',
           },
           dark: {
-            text: '#e3dffb',
-            bg: '#010104',
-            primary: '#4e42b8',
-            secondary: '#1c1183',
-            accent: '#af184f',
+            text: '#fbfde8',
+            bg: '#0b0e01',
+            primary: '#cff122',
+            secondary: '#0e4481',
+            accent: '#421fa3',
           }
         },
       },

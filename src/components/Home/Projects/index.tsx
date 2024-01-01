@@ -16,11 +16,11 @@ export const Projects = () => {
       <div className="space-y-6">
         <div className="space-y-1">
           <div className="flex justify-center md:justify-start">
-            <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center md:text-4xl w-max md:text-left text-custom-ligth-primary dark:text-custom-dark-primary">
+            <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center md:text-4xl w-max md:text-left text-custom-ligth-accent dark:text-custom-dark-primary">
               {t.title}
             </p>
           </div>
-          <div className="hidden md:block w-10 h-1 rounded-lg bg-custom-ligth-accent dark:bg-custom-dark-accent"></div>
+          <div className="hidden md:block w-10 h-1 rounded-lg bg-custom-ligth-primary dark:bg-custom-dark-accent"></div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-3.5">
           <WorkProjectsSection locale={locale} />

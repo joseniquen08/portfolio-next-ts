@@ -74,14 +74,14 @@ export const MenuTheme = ({
                           onClick={() => changeTheme('light')}
                           className={`${
                             checked
-                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-dark-text font-medium'
+                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-ligth-text font-medium'
                               : 'hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10'
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
                           <div
                             className={`${
                               checked
-                                ? 'text-custom-dark-text'
+                                ? 'text-custom-ligth-text'
                                 : 'text-custom-ligth-text dark:text-custom-dark-text'
                             }`}
                           >
@@ -98,14 +98,14 @@ export const MenuTheme = ({
                           onClick={() => changeTheme('dark')}
                           className={`${
                             checked
-                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-dark-text font-medium'
+                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-ligth-text font-medium'
                               : 'hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10'
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
                           <div
                             className={`${
                               checked
-                                ? 'text-custom-ligth-text dark:text-custom-dark-text'
+                                ? 'text-custom-ligth-text'
                                 : 'text-custom-ligth-text dark:text-custom-dark-text'
                             }`}
                           >
@@ -122,14 +122,14 @@ export const MenuTheme = ({
                           onClick={() => changeTheme(undefined)}
                           className={`${
                             checked
-                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-dark-text font-medium'
+                              ? 'bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-ligth-text font-medium'
                               : 'hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10'
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
                           <div
                             className={`${
                               checked
-                                ? 'text-custom-ligth-text dark:text-custom-dark-text'
+                                ? 'text-custom-ligth-text'
                                 : 'text-custom-ligth-text dark:text-custom-dark-text'
                             }`}
                           >
