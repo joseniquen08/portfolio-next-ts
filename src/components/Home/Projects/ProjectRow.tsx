@@ -13,11 +13,11 @@ type Props = ProjectType & {
 const customTheme: CustomFlowbiteTheme['tooltip'] = {
   arrow: {
     style: {
-      dark: "bg-gray-300 dark:bg-custom-dark-primary",
+      dark: "bg-gray-300 dark:bg-custom-dark-accent",
     },
   },
   style: {
-    dark: "bg-gray-300 text-custom-ligth-text dark:bg-custom-dark-primary dark:text-custom-dark-text",
+    dark: "bg-gray-300 text-custom-ligth-text dark:bg-custom-dark-accent dark:text-custom-dark-text",
   },
 }
 

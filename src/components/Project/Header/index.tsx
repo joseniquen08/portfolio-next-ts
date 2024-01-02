@@ -16,11 +16,11 @@ interface Props {
 const customTheme: CustomFlowbiteTheme['tooltip'] = {
   arrow: {
     style: {
-      dark: "bg-gray-300 dark:bg-custom-dark-primary",
+      dark: "bg-gray-300 dark:bg-custom-dark-accent",
     },
   },
   style: {
-    dark: "bg-gray-300 text-custom-ligth-text dark:bg-custom-dark-primary dark:text-custom-dark-text",
+    dark: "bg-gray-300 text-custom-ligth-text dark:bg-custom-dark-accent dark:text-custom-dark-text",
   },
 }
 
@@ -29,7 +29,7 @@ export const Header = ({ data }: Props) => {
 
   return (
     <div className="flex flex-col justify-center flex-none space-y-10">
-      <div className="flex space-x-2 lg:space-x-2.5">
+      <div className="flex flex-col md:flex-row gap-2 lg:gap-2.5">
         <button
           type="button"
           onClick={() => router.back()}
@@ -37,12 +37,12 @@ export const Header = ({ data }: Props) => {
         >
           <HiArrowSmLeft className="w-8 h-8" />
         </button>
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 px-4 md:px-0">
           <p className="text-2xl mt-1.5 lg:text-3xl font-semibold dark:text-custom-dark-text text-custom-ligth-text">
             {data.title}
           </p>
           <div className="flex gap-3 flex-wrap">
-            <div className="flex space-x-4 bg-custom-ligth-text/5 dark:bg-custom-dark-text/10 px-5 py-2.5 rounded-xl">
+            <div className="flex gap-3 flex-wrap bg-custom-ligth-text/5 dark:bg-custom-dark-text/10 px-5 py-2.5 rounded-xl">
               {data.icons.map(({ name, icon }, i) => (
                 <div key={i}>
                   <Tooltip key={i} content={name} theme={customTheme} placement="bottom">

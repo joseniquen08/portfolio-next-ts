@@ -14,7 +14,7 @@ export const ProjectComponent = ({ slug }: Props) => {
   }
 
   return (
-    <div className="flex flex-col w-full max-w-6xl px-2 py-10 mx-auto space-y-4 lg:px-16">
+    <div className="flex flex-col w-full max-w-6xl px-2 py-2 md:py-10 mx-auto space-y-4 lg:px-16">
       {data && (
         <>
           <Header data={data} />
