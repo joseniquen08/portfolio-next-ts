@@ -1,6 +1,6 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Timeline } from "flowbite-react";
-import { HiOutlineBriefcase, HiOutlineSortAscending, HiOutlineSortDescending } from "react-icons/hi";
+import { HiOutlineAcademicCap, HiOutlineSortAscending, HiOutlineSortDescending } from "react-icons/hi";
 import { ProjectRow } from "./ProjectRow";
 import { useState } from "react";
 import { ProjectType } from "@/types";
@@ -37,7 +37,7 @@ export const PersonalProjectsSection = ({ locale }: Props) => {
     <div className="flex flex-col gap-2 md:gap-4 border border-gray-200 dark:border-white/10 p-3.5 rounded-xl">
       <div className="flex items-center justify-between">
         <p className="text-xl md:text-2xl font-medium flex items-center gap-2.5">
-          <HiOutlineBriefcase className="w-6 h-6" />
+          <HiOutlineAcademicCap className="w-6 h-6" />
           <span>Personales</span>
         </p>
         <DropdownMenu modal={false}>
