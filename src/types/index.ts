@@ -30,7 +30,7 @@ export type ProjectType = {
     name: string;
     icon: ReactNode;
   }[];
-}
+};
 
 export type SkillType = {
   name: string;
@@ -38,5 +38,10 @@ export type SkillType = {
   experience: {
     en: string;
     es: string;
-  }
-}
+  };
+};
+
+export type TechnologyType = {
+  name: string;
+  icon: ReactNode;
+};
