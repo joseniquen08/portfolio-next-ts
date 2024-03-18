@@ -14,8 +14,8 @@ export default function Classes() {
           sea pan comido!
         </p>
         <div className="flex flex-wrap justify-center gap-4 w-full text-2xl">
-          {technologies.map(({ slug, name, icon }, i) => (
-            <CardTech key={i} slug={slug} icon={icon} name={name} />
+          {technologies.map((tech, i) => (
+            <CardTech key={i} tech={tech} />
           ))}
         </div>
       </div>
