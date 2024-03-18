@@ -16,7 +16,7 @@ interface Props {
 
 export const Content = ({ data }: Props) => {
   return (
-    <div className="px-4 md:px-14 dark:text-custom-dark-text">
+    <div className="md:px-14 dark:text-custom-dark-text">
       <div className="border-t border-custom-light-text/50 dark:border-custom-dark-text/50 py-4 flex flex-col gap-3.5">
         <p>{data.description.es}</p>
         <div className="">

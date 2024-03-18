@@ -21,7 +21,7 @@ export const Skills = () => {
   return (
     <div
       id="skills"
-      className="max-w-5xl px-5 pt-24 pb-12 mx-auto sm:px-8 lg:px-16 2xl:max-w-6xl text-custom-light-text dark:text-custom-dark-text w-full"
+      className="max-w-5xl px-4 pt-24 pb-12 mx-auto sm:px-8 lg:px-16 2xl:max-w-6xl text-custom-light-text dark:text-custom-dark-text w-full"
     >
       <div className="space-y-6">
         <div className="space-y-1">

@@ -35,11 +35,11 @@ export const Header = ({ data }: Props) => {
         <button
           type="button"
           onClick={() => router.back()}
-          className="flex items-center justify-center flex-none w-12 h-12 rounded-full text-custom-light-text dark:text-custom-dark-text dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-10 hover:bg-custom-light-text"
+          className="flex items-center justify-center flex-none w-8 h-8 sm:w-12 sm:h-12 rounded-full text-custom-light-text dark:text-custom-dark-text dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-10 hover:bg-custom-light-text"
         >
           <HiArrowSmLeft className="w-8 h-8" />
         </button>
-        <div className="flex flex-col space-y-4 px-4 md:px-0">
+        <div className="flex flex-col space-y-4 md:px-0">
           <p className="text-2xl mt-1.5 lg:text-3xl font-semibold dark:text-custom-dark-text text-custom-light-text">
             {data.title}
           </p>

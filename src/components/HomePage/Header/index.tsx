@@ -7,7 +7,7 @@ import { SiGithub, SiInstagram, SiLinkedin } from "react-icons/si";
 
 export function Header() {
   return (
-    <div className="flex flex-col-reverse w-full max-w-5xl px-2 pt-12 mx-auto space-y-8 space-y-reverse lg:space-y-0 lg:flex-row lg:px-16 lg:pt-28 lg:pb-16 2xl:max-w-6xl">
+    <div className="flex flex-col-reverse w-full max-w-5xl px-4 pt-12 mx-auto space-y-8 space-y-reverse lg:space-y-0 lg:flex-row lg:px-16 lg:pt-28 lg:pb-16 2xl:max-w-6xl">
       <div className="flex flex-col justify-center flex-none space-y-10">
         <div className="flex flex-col lg:items-start items-center justify-center space-y-1 lg:space-y-2.5 text-center lg:text-left">
           <p className="text-2xl xs:text-3xl font-semibold lg:text-4xl dark:text-custom-dark-text text-custom-light-text">

@@ -26,7 +26,7 @@ const customTheme: CustomFlowbiteTheme["timeline"] = {
 
 export function ClassPage({ tech }: { tech: TechnologyType }) {
   return (
-    <div className="flex flex-col w-full max-w-6xl px-2 py-2 md:py-10 mx-auto space-y-3 lg:px-16 text-custom-light-text dark:text-custom-dark-text flex-1 gap-2">
+    <div className="flex flex-col w-full max-w-6xl px-4 py-2 md:py-10 mx-auto space-y-3 lg:px-16 text-custom-light-text dark:text-custom-dark-text flex-1 gap-2">
       <BreadcrumbClass tech={tech} />
       <p className="text-5xl font-bold text-custom-light-accent dark:text-custom-dark-primary">
         {tech.name}
@@ -40,7 +40,7 @@ export function ClassPage({ tech }: { tech: TechnologyType }) {
             un nivel principiante. Para aprender a programar te recomiendo
             empezar con PSeInt, ya que ahí se verán las bases de los algoritmos.
           </p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {tech.roadmap.map((card, i) => (
               <div
                 key={i}
