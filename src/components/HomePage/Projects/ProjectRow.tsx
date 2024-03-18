@@ -1,6 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 import { ProjectType } from "@/types";
-import { CustomFlowbiteTheme, Timeline, Tooltip } from "flowbite-react";
+import {
+  CustomFlowbiteTheme,
+  Flowbite,
+  Timeline,
+  Tooltip,
+} from "flowbite-react";
 import Image from "next/image";
 import Link from "next/link";
 import { HiOutlineEye, HiOutlineGlobeAlt } from "react-icons/hi";
@@ -13,7 +18,7 @@ const customTheme: CustomFlowbiteTheme["tooltip"] = {
     },
   },
   style: {
-    dark: "bg-gray-300 text-custom-ligth-text dark:bg-custom-dark-accent dark:text-custom-dark-text",
+    dark: "bg-gray-300 text-custom-light-text dark:bg-custom-dark-accent dark:text-custom-dark-text",
   },
 };
 
@@ -68,7 +73,7 @@ export const ProjectRow = ({
                 href={web}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 block text-custom-ligth-bg dark:text-custom-dark-text border-2 border-custom-ligth-bg dark:border-custom-dark-text hover:bg-custom-ligth-primary/5 dark:hover:bg-custom-dark-primary/30 rounded-xl"
+                className="p-2 block text-custom-light-bg dark:text-custom-dark-text border-2 border-custom-light-bg dark:border-custom-dark-text hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-primary/30 rounded-xl"
               >
                 <HiOutlineGlobeAlt className="w-5 h-5" />
               </a>
@@ -77,13 +82,13 @@ export const ProjectRow = ({
                   href={github}
                   target="_blank"
                   rel="noreferrer"
-                  className="p-2 block text-custom-ligth-bg dark:text-custom-dark-text border-2 border-custom-ligth-bg dark:border-custom-dark-text hover:bg-custom-ligth-primary/5 dark:hover:bg-custom-dark-primary/30 rounded-xl"
+                  className="p-2 block text-custom-light-bg dark:text-custom-dark-text border-2 border-custom-light-bg dark:border-custom-dark-text hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-primary/30 rounded-xl"
                 >
                   <SiGithub className="w-5 h-5" />
                 </a>
               )}
               <Link href={`project/${slug}`} legacyBehavior>
-                <a className="p-2 block text-custom-ligth-bg dark:text-custom-dark-text border-2 border-custom-ligth-bg dark:border-custom-dark-text hover:bg-custom-ligth-primary/5 dark:hover:bg-custom-dark-primary/30 rounded-xl">
+                <a className="p-2 block text-custom-light-bg dark:text-custom-dark-text border-2 border-custom-light-bg dark:border-custom-dark-text hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-primary/30 rounded-xl">
                   <HiOutlineEye className="w-5 h-5" />
                 </a>
               </Link>

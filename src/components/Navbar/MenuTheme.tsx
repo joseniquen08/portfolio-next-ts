@@ -33,17 +33,17 @@ export const MenuTheme = ({
   return (
     <Menu as="section" className="relative sm:mr-1">
       <motion.div whileTap={{ scale: 0.9 }}>
-        <Menu.Button className="flex items-center justify-center p-1.5 lg:p-2 text-4xl hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5 rounded-xl focus:outline-none">
+        <Menu.Button className="flex items-center justify-center p-1.5 lg:p-2 text-4xl hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5 rounded-xl focus:outline-none">
           {themeInLocalStorage ? (
             themeSelected === "dark" ? (
-              <HiOutlineMoon className="w-6 h-6 text-custom-ligth-primary dark:text-custom-dark-primary" />
+              <HiOutlineMoon className="w-6 h-6 text-custom-light-primary dark:text-custom-dark-primary" />
             ) : (
               <HiOutlineSun className="w-6 h-6 text-yellow-500" />
             )
           ) : themeSystem === "dark" ? (
-            <HiOutlineMoon className="w-6 h-6 text-custom-ligth-text dark:text-custom-dark-text" />
+            <HiOutlineMoon className="w-6 h-6 text-custom-light-text dark:text-custom-dark-text" />
           ) : (
-            <HiOutlineSun className="w-6 h-6 text-custom-ligth-text dark:text-custom-dark-text" />
+            <HiOutlineSun className="w-6 h-6 text-custom-light-text dark:text-custom-dark-text" />
           )}
         </Menu.Button>
       </motion.div>
@@ -56,8 +56,8 @@ export const MenuTheme = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-40 mt-2 origin-top-right bg-custom-ligth-bg rounded-lg shadow-lg focus:outline-none dark:bg-custom-dark-bg">
-          <div className="bg-custom-ligth-bg dark:bg-custom-dark-bg border rounded-lg bg-opacity-10 dark:border-transparent">
+        <Menu.Items className="absolute right-0 z-40 mt-2 origin-top-right bg-custom-light-bg rounded-lg shadow-lg focus:outline-none dark:bg-custom-dark-bg">
+          <div className="bg-custom-light-bg dark:bg-custom-dark-bg border rounded-lg bg-opacity-10 dark:border-transparent">
             <div className="px-2.5 py-2">
               <Menu.Item as="div" className="focus:outline-none">
                 <RadioGroup value={themeSelected} onChange={setThemeSelected}>
@@ -69,15 +69,15 @@ export const MenuTheme = ({
                           onClick={() => changeTheme("light")}
                           className={`${
                             checked
-                              ? "bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-ligth-text font-medium"
-                              : "hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10"
+                              ? "bg-custom-light-primary dark:bg-custom-dark-primary text-custom-light-text font-medium"
+                              : "hover:bg-custom-light-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10"
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
                           <div
                             className={`${
                               checked
-                                ? "text-custom-ligth-text"
-                                : "text-custom-ligth-text dark:text-custom-dark-text"
+                                ? "text-custom-light-text"
+                                : "text-custom-light-text dark:text-custom-dark-text"
                             }`}
                           >
                             <HiOutlineSun className="w-5 h-5" />
@@ -93,15 +93,15 @@ export const MenuTheme = ({
                           onClick={() => changeTheme("dark")}
                           className={`${
                             checked
-                              ? "bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-ligth-text font-medium"
-                              : "hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10"
+                              ? "bg-custom-light-primary dark:bg-custom-dark-primary text-custom-light-text font-medium"
+                              : "hover:bg-custom-light-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10"
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
                           <div
                             className={`${
                               checked
-                                ? "text-custom-ligth-text"
-                                : "text-custom-ligth-text dark:text-custom-dark-text"
+                                ? "text-custom-light-text"
+                                : "text-custom-light-text dark:text-custom-dark-text"
                             }`}
                           >
                             <HiOutlineMoon className="w-5 h-5" />
@@ -117,15 +117,15 @@ export const MenuTheme = ({
                           onClick={() => changeTheme(undefined)}
                           className={`${
                             checked
-                              ? "bg-custom-ligth-primary dark:bg-custom-dark-primary text-custom-ligth-text font-medium"
-                              : "hover:bg-custom-ligth-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10"
+                              ? "bg-custom-light-primary dark:bg-custom-dark-primary text-custom-light-text font-medium"
+                              : "hover:bg-custom-light-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10"
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
                           <div
                             className={`${
                               checked
-                                ? "text-custom-ligth-text"
-                                : "text-custom-ligth-text dark:text-custom-dark-text"
+                                ? "text-custom-light-text"
+                                : "text-custom-light-text dark:text-custom-dark-text"
                             }`}
                           >
                             <HiOutlineDesktopComputer className="w-5 h-5" />

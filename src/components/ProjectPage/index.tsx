@@ -6,7 +6,7 @@ interface Props {
   slug: string;
 }
 
-export const ProjectPage = ({ slug }: Props) => {
+export function ProjectPage({ slug }: Props) {
   let data = workProjects.find((project) => project.slug === slug);
 
   if (!data) {
@@ -23,4 +23,4 @@ export const ProjectPage = ({ slug }: Props) => {
       )}
     </div>
   );
-};
+}

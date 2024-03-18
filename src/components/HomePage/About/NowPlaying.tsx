@@ -87,9 +87,9 @@ export const NowPlaying = () => {
   return (
     <div className="w-full mb-2 overflow-hidden">
       {!data?.songUrl ? (
-        <div className="flex items-center justify-center w-full px-3 py-4 space-x-2 cursor-default rounded-xl dark:bg-custom-dark-text dark:bg-opacity-10 bg-custom-ligth-text bg-opacity-5">
+        <div className="flex items-center justify-center w-full px-3 py-4 space-x-2 cursor-default rounded-xl dark:bg-custom-dark-text dark:bg-opacity-10 bg-custom-light-text bg-opacity-5">
           <FaSpotify className="text-[#1ED760] h-7 w-7" />
-          <p className="text-lg font-medium text-custom-ligth-text dark:text-custom-dark-text">
+          <p className="text-lg font-medium text-custom-light-text dark:text-custom-dark-text">
             Sin reproducir música
           </p>
         </div>
@@ -174,7 +174,7 @@ export const NowPlaying = () => {
                 </div>
               </div>
             ) : (
-              <div className="px-3 py-1.5 rounded-full backdrop-blur bg-custom-ligth-bg/60 dark:bg-custom-dark-bg/60 border dark:border-custom-dark-text/20">
+              <div className="px-3 py-1.5 rounded-full backdrop-blur bg-custom-light-bg/60 dark:bg-custom-dark-bg/60 border dark:border-custom-dark-text/20">
                 <p className="text-sm font-medium text-center">
                   Previa no disponible
                 </p>
@@ -205,7 +205,7 @@ export const NowPlaying = () => {
             className="absolute bg-slate-500 bg-opacity-10 dark:bg-opacity-30 rounded-full flex items-center justify-center w-6 h-6 lg:w-[1.8rem] lg:h-[1.8rem] -bottom-[0.5rem] -right-[0.5rem] cursor-pointer"
           >
             <motion.span animate={control}>
-              <FaRedoAlt className="text-custom-ligth-accent w-4 h-4 lg:w-[1rem] lg:h-[1rem]" />
+              <FaRedoAlt className="text-custom-light-accent w-4 h-4 lg:w-[1rem] lg:h-[1rem]" />
             </motion.span>
           </motion.span>
         </div>

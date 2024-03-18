@@ -10,7 +10,7 @@ import { LinkSocialNetwork } from "./LinkSocialNetwork";
 
 export const Footer = () => {
   return (
-    <footer className="text-custom-ligth-text dark:text-custom-dark-text">
+    <footer className="text-custom-light-text dark:text-custom-dark-text w-full">
       <div className="max-w-6xl px-4 pt-6 pb-10 mx-auto sm:px-10 lg:px-16 md:py-6">
         <div className="relative flex flex-col items-center justify-between w-full space-y-8 md:flex-row md:space-y-0">
           <div className="flex flex-col z-20 md:flex-row space-y-3 md:space-y-0 space-x-0 md:space-x-2.5 items-center justify-center">
@@ -25,9 +25,9 @@ export const Footer = () => {
             <p className="flex items-center justify-center text-lg font-medium text-center md:font-normal">
               © 2024 José Ñiquen.
             </p>
-            <p className="text-xs font-medium text-custom-ligth-text/90 dark:text-custom-dark-text/70">
+            <p className="text-xs font-medium text-custom-light-text/90 dark:text-custom-dark-text/70">
               Gracias de ❤️{" "}
-              <i className="font-semibold text-custom-ligth-text dark:text-custom-dark-text">
+              <i className="font-semibold text-custom-light-text dark:text-custom-dark-text">
                 Rosse Villegas
               </i>
             </p>

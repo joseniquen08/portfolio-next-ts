@@ -133,17 +133,17 @@ export const ModalContact = ({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="relative inline-block w-full max-w-5xl overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-xl border border-custom-ligth-primary dark:border-custom-dark-primary">
-              <div className="px-6 pt-8 pb-6 space-y-3 md:grid md:grid-cols-2 md:space-y-0 md:gap-x-8 md:px-8 md:pt-10 md:pb-10 bg-gradient-to-r from-custom-ligth-bg to-custom-ligth-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95">
+            <div className="relative inline-block w-full max-w-5xl overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-xl border border-custom-light-primary dark:border-custom-dark-primary">
+              <div className="px-6 pt-8 pb-6 space-y-3 md:grid md:grid-cols-2 md:space-y-0 md:gap-x-8 md:px-8 md:pt-10 md:pb-10 bg-gradient-to-r from-custom-light-bg to-custom-light-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95">
                 <div className="space-y-4 md:col-span-1 md:space-y-5 md:px-3">
                   <Dialog.Title
                     as="h3"
-                    className="text-2xl font-semibold leading-6 tracking-tight text-custom-ligth-primary md:text-5xl dark:text-custom-dark-text"
+                    className="text-2xl font-semibold leading-6 tracking-tight text-custom-light-primary md:text-5xl dark:text-custom-dark-text"
                   >
                     Contáctame
                   </Dialog.Title>
                   <div>
-                    <p className="text-base font-medium text-justify text-custom-ligth-text/50 dark:text-custom-dark-text/60 md:text-lg">
+                    <p className="text-base font-medium text-justify text-custom-light-text/50 dark:text-custom-dark-text/60 md:text-lg">
                       Me interesan los retos que pongan a prueba mis
                       habilidades. Si necesitas que te realice algún trabajo o
                       simplemente tienes una pregunta, no dudes en contactarme.
@@ -197,7 +197,7 @@ export const ModalContact = ({
                   </ul>
                 </div>
                 <div className="md:col-span-1 md:px-3">
-                  <div className="mt-3.5 bg-custom-ligth-primary/10 dark:bg-custom-dark-primary/10 px-5 md:px-6 py-6 rounded-2xl">
+                  <div className="mt-3.5 bg-custom-light-primary/10 dark:bg-custom-dark-primary/10 px-5 md:px-6 py-6 rounded-2xl">
                     <div className="relative h-104 md:h-108">
                       <Transition
                         as={Fragment}
@@ -217,7 +217,7 @@ export const ModalContact = ({
                         </div>
                       </Transition>
                       <form ref={form} onSubmit={sendEmail}>
-                        <div className="space-y-3 text-custom-ligth-text dark:text-custom-dark-text p-0.5">
+                        <div className="space-y-3 text-custom-light-text dark:text-custom-dark-text p-0.5">
                           <div className="space-y-1.5 md:space-y-2">
                             <label
                               htmlFor="user_name"
@@ -233,7 +233,7 @@ export const ModalContact = ({
                               onChange={(e) => handleInputChange(e)}
                               required
                               placeholder="p.ej. Juan García"
-                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-ligth-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-ligth-text/10 focus:border-custom-ligth-text/10 dark:border-custom-dark-secondary/40 dark:bg-gray-900/50 focus:outline-none focus:shadow-lg dark:focus:shadow-custom-dark-secondary/50 focus:ring-0"
+                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-light-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-light-text/10 focus:border-custom-light-text/10 dark:border-custom-dark-secondary/40 dark:bg-gray-900/50 focus:outline-none focus:shadow-lg dark:focus:shadow-custom-dark-secondary/50 focus:ring-0"
                             />
                           </div>
                           <div className="space-y-1.5 md:space-y-2">
@@ -251,7 +251,7 @@ export const ModalContact = ({
                               onChange={(e) => handleInputChange(e)}
                               required
                               placeholder="p.ej. juan_garcia@gmail.com"
-                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-ligth-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-ligth-text/10 focus:border-custom-ligth-text/10 dark:border-custom-dark-secondary/40 dark:bg-gray-900/50 focus:outline-none focus:shadow-lg dark:focus:shadow-custom-dark-secondary/50 focus:ring-0"
+                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-light-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-light-text/10 focus:border-custom-light-text/10 dark:border-custom-dark-secondary/40 dark:bg-gray-900/50 focus:outline-none focus:shadow-lg dark:focus:shadow-custom-dark-secondary/50 focus:ring-0"
                             />
                           </div>
                           <div className="space-y-1.5 md:space-y-2">
@@ -269,7 +269,7 @@ export const ModalContact = ({
                               required
                               onChange={(e) => handleInputChange(e)}
                               placeholder="Escriba su mensaje aquí"
-                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-ligth-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-ligth-text/10 focus:border-custom-ligth-text/10 dark:border-custom-dark-secondary/40 dark:bg-gray-900/50 focus:outline-none focus:shadow-lg dark:focus:shadow-custom-dark-secondary/50 focus:ring-0"
+                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-light-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-light-text/10 focus:border-custom-light-text/10 dark:border-custom-dark-secondary/40 dark:bg-gray-900/50 focus:outline-none focus:shadow-lg dark:focus:shadow-custom-dark-secondary/50 focus:ring-0"
                             ></textarea>
                           </div>
                           <div className="w-full">
@@ -297,7 +297,7 @@ export const ModalContact = ({
                               <button
                                 type="submit"
                                 disabled={checkedReCaptcha ? false : true}
-                                className="w-24 text-sm font-medium text-custom-dark-text bg-custom-ligth-primary dark:bg-custom-dark-primary shadow-lg md:w-28 h-9 disabled:opacity-50 disabled:hover:bg-custom-ligth-primary dark:disabled:hover:bg-custom-dark-primary md:text-base shadow-custom-ligth-primary/50 rounded-xl hover:bg-custom-ligth-primary/90 dark:hover:bg-custom-dark-primary/90 focus:outline-none"
+                                className="w-24 text-sm font-medium text-custom-dark-text bg-custom-light-primary dark:bg-custom-dark-primary shadow-lg md:w-28 h-9 disabled:opacity-50 disabled:hover:bg-custom-light-primary dark:disabled:hover:bg-custom-dark-primary md:text-base shadow-custom-light-primary/50 rounded-xl hover:bg-custom-light-primary/90 dark:hover:bg-custom-dark-primary/90 focus:outline-none"
                               >
                                 Enviar
                               </button>
@@ -313,7 +313,7 @@ export const ModalContact = ({
                 <button
                   onClick={closeContactModal}
                   type="button"
-                  className="focus:outline-none bg-custom-ligth-text/5 hover:bg-custom-ligth-text/10 dark:bg-custom-dark-text/10 dark:hover:bg-custom-dark-text/20 text-custom-ligth-text dark:text-custom-dark-text rounded-full p-1.5"
+                  className="focus:outline-none bg-custom-light-text/5 hover:bg-custom-light-text/10 dark:bg-custom-dark-text/10 dark:hover:bg-custom-dark-text/20 text-custom-light-text dark:text-custom-dark-text rounded-full p-1.5"
                 >
                   <HiOutlineX className="w-5 h-5" />
                 </button>

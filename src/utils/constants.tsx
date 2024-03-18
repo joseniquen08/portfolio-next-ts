@@ -30,8 +30,8 @@ import {
   SupabaseIcon,
   TailwindcssIcon,
   TypescriptIcon,
+  PSeIntIcon,
 } from "@/icons";
-import PSeIntIcon from "@/icons/Pseint";
 import type { ProjectType, SkillType, TechnologyType } from "@/types";
 
 const size = 36;
@@ -662,31 +662,182 @@ const technologyColor = "rgb(251 253 232 / 0.1)";
 
 export const technologies: TechnologyType[] = [
   {
+    slug: "javascript",
     name: "JavaScript",
-    icon: <JavascriptIcon size={technologySize} color={technologyColor} />,
+    icon: (
+      <JavascriptIcon size={technologySize} color="rgba(247, 223, 30, 0.1)" />
+    ),
+    description:
+      "JavaScript es la piedra angular del desarrollo web moderno. Es un lenguaje versátil que nos permite crear experiencias web interactivas y dinámicas tanto en el frontend como en el backend. Aprender JavaScript te abrirá las puertas a un mundo de posibilidades en el desarrollo web, permitiéndote crear desde simples páginas interactivas hasta aplicaciones web complejas.",
+    roadmap: [
+      {
+        title: "Nivel Principiante",
+        items: [
+          {
+            level: 1,
+            title: "Introducción a la Programación con JavaScript",
+            content: [
+              "Aprender qué es JavaScript y su importancia en el desarrollo web.",
+              "Comprender los conceptos básicos de la programación: variables, tipos de datos, operadores.",
+              "Realizar ejercicios simples para practicar la sintaxis básica de JavaScript.",
+            ],
+          },
+          {
+            level: 2,
+            title: "Estructuras de Control",
+            content: [
+              "Estudiar las estructuras de control condicionales: if, else, else if.",
+              "Aprender a utilizar bucles como for y while para realizar tareas repetitivas.",
+              "Practicar con ejercicios que involucren el uso de estructuras de control.",
+            ],
+          },
+          {
+            level: 3,
+            title: "Funciones y Ámbito de las Variables",
+            content: [
+              "Entender qué son las funciones y cómo se declaran en JavaScript.",
+              "Aprender sobre los parámetros y el retorno de las funciones.",
+              "Comprender el ámbito de las variables y el concepto de variables locales y globales.",
+              "Practicar con la creación de funciones simples y su invocación.",
+            ],
+          },
+          {
+            level: 4,
+            title: "Arrays y Objetos",
+            content: [
+              "Familiarizarse con la manipulación de arrays en JavaScript: creación, acceso a elementos, iteración.",
+              "Estudiar la sintaxis de los objetos en JavaScript y cómo acceder a sus propiedades.",
+              "Practicar con ejercicios que involucren la manipulación de arrays y objetos.",
+            ],
+          },
+          {
+            level: 5,
+            title: "Manipulación del DOM",
+            content: [
+              "Aprender a seleccionar elementos del DOM utilizando métodos como getElementById, getElementsByClassName, etc.",
+              "Entender cómo manipular los atributos y el contenido de los elementos del DOM.",
+              "Practicar con la manipulación dinámica del DOM mediante la creación, eliminación y modificación de elementos.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Nivel Intermedio",
+        items: [
+          {
+            level: 1,
+            title: "Funciones Avanzadas",
+            content: [
+              "Estudiar conceptos como funciones de orden superior, callbacks y closures.",
+              "Aprender a utilizar funciones de orden superior como map, filter, reduce.",
+              "Practicar con ejercicios que impliquen el uso de funciones avanzadas.",
+            ],
+          },
+          {
+            level: 2,
+            title: "Trabajo con Arrays y Objetos",
+            content: [
+              "Profundizar en el trabajo con arrays utilizando métodos avanzados como forEach, map, filter, reduce.",
+              "Estudiar métodos para la manipulación de objetos como Object.keys, Object.values, Object.entries.",
+              "Practicar con la resolución de problemas que requieran el uso avanzado de arrays y objetos.",
+            ],
+          },
+          {
+            level: 3,
+            title: "Programación Asincrónica",
+            content: [
+              "Entender los conceptos básicos de la programación asincrónica en JavaScript.",
+              "Aprender a trabajar con Promesas y manejar errores utilizando catch y finally.",
+              "Familiarizarse con async/await y cómo simplifica el manejo de código asincrónico.",
+              "Practicar con ejercicios que involucren la programación asincrónica.",
+            ],
+          },
+          {
+            level: 4,
+            title: "Conceptos Avanzados del DOM",
+            content: [
+              "Estudiar eventos avanzados del DOM como event bubbling, event delegation.",
+              "Aprender a trabajar con eventos de usuario como el movimiento del ratón y el teclado.",
+              "Entender la importancia del rendimiento y la optimización en la manipulación del DOM.",
+              "Practicar con la creación de aplicaciones interactivas y dinámicas utilizando eventos avanzados del DOM.",
+            ],
+          },
+          {
+            level: 5,
+            title: "Frameworks y Bibliotecas",
+            content: [
+              "Introducción a frameworks como React, Angular o Vue.js y cómo simplifican el desarrollo web.",
+              "Aprender los conceptos básicos de un framework elegido y cómo utilizarlo para construir aplicaciones web.",
+              "Practicar con la creación de proyectos utilizando un framework y aplicar los conocimientos adquiridos sobre JavaScript en un entorno de trabajo real.",
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
+    slug: "typescript",
     name: "TypeScript",
-    icon: <TypescriptIcon size={technologySize} color={technologyColor} />,
+    icon: (
+      <TypescriptIcon size={technologySize} color="rgba(49, 120, 198, 0.2)" />
+    ),
+    description:
+      "TypeScript es como una versión mejorada de JavaScript. Agrega la capacidad de tipado estático, lo que significa que puedes detectar errores en tu código antes de ejecutarlo, lo que mejora enormemente la calidad y la robustez de tus aplicaciones. Aprender TypeScript te hará un desarrollador más eficiente y te preparará para proyectos de mayor envergadura.",
+    roadmap: [],
   },
   {
+    slug: "java",
     name: "Java",
-    icon: <JavaIcon size={technologySize} color={technologyColor} />,
+    icon: <JavaIcon size={technologySize} color="rgba(244, 67, 54, 0.2)" />,
+    description:
+      "Java es un lenguaje de programación sólido y confiable, especialmente popular en el desarrollo de aplicaciones empresariales y móviles. Su portabilidad y seguridad lo hacen ideal para proyectos a gran escala. Aprender Java te proporcionará una base sólida en programación orientada a objetos y te abrirá las puertas a un amplio espectro de oportunidades laborales.",
+    roadmap: [],
+  },
+  // {
+  //   slug: "javascript",
+  //   name: "PHP",
+  //   icon: <PhpIcon size={technologySize} color="rgba(119, 123, 180, 0.2)" />,
+  // },
+  {
+    slug: "pseint",
+    name: "PSeInt",
+    icon: <PSeIntIcon size={technologySize} color="rgba(255, 254, 197, 0.2)" />,
+    description:
+      "PSeInt es una herramienta excelente para aquellos que están dando sus primeros pasos en el mundo de la programación. Está diseñado para enseñar los fundamentos de la lógica de programación y el diseño de algoritmos de una manera clara y accesible. Aprender con PSeInt te ayudará a construir una base sólida antes de aventurarte en lenguajes de programación más complejos.",
+    roadmap: [],
   },
   {
-    name: "PHP",
-    icon: <PhpIcon size={technologySize} color={technologyColor} />,
-  },
-  {
-    name: "PSeint",
-    icon: <PSeIntIcon size={technologySize} color={technologyColor} />,
-  },
-  {
+    slug: "html-css",
     name: "HTML/CSS",
-    icon: <Html5Icon size={technologySize} color={technologyColor} />,
+    icon: <Html5Icon size={technologySize} color="rgba(227, 79, 38, 0.2)" />,
+    description:
+      "HTML y CSS son los lenguajes fundamentales del desarrollo web. HTML se encarga de la estructura y el contenido de una página web, mientras que CSS se encarga del diseño y la presentación. Aprender HTML y CSS te permitirá crear sitios web desde cero y diseñarlos de manera profesional, preparándote para aprender frameworks y librerías más avanzadas en el futuro.",
+    roadmap: [],
   },
   {
+    slug: "python",
     name: "Python",
-    icon: <PythonIcon size={technologySize} color={technologyColor} />,
+    icon: <PythonIcon size={technologySize} color="rgba(55, 118, 171, 0.2)" />,
+    description:
+      "Python es un lenguaje de programación versátil y fácil de aprender que se utiliza en una amplia gama de aplicaciones, desde desarrollo web y científico hasta inteligencia artificial y aprendizaje automático. Su sintaxis limpia y legible lo hace ideal tanto para principiantes como para desarrolladores experimentados. Aprender Python te abrirá las puertas a un mundo de posibilidades en la programación, permitiéndote crear desde simples scripts hasta aplicaciones complejas. Además, su popularidad en la industria y su creciente demanda lo convierten en una habilidad valiosa para cualquier desarrollador.",
+    roadmap: [],
+  },
+  {
+    slug: "react",
+    name: "React",
+    icon: <ReactIcon size={technologySize} color="rgba(97, 218, 251, 0.2)" />,
+    description:
+      "React es una biblioteca de JavaScript que revolucionó la forma en que construimos interfaces de usuario en la web. Su enfoque en la creación de componentes reutilizables y su paradigma de programación declarativa lo hacen ideal para el desarrollo de aplicaciones web modernas y escalables. Aprender React te abrirá las puertas a un mundo de oportunidades en el desarrollo frontend.",
+    roadmap: [],
+  },
+  {
+    slug: "nextjs",
+    name: "Next.js",
+    icon: (
+      <NextdotjsIcon size={technologySize} color="rgba(128, 128, 128, 0.2)" />
+    ),
+    description:
+      "Next.js es un framework de React que lleva el desarrollo web al siguiente nivel. Con características como la generación de páginas estáticas y dinámicas, el enrutamiento integrado y la escalabilidad, Next.js es ideal para construir aplicaciones web rápidas y eficientes. Aprender Next.js te permitirá crear aplicaciones web de alta calidad con una mejor experiencia de usuario y mayores oportunidades laborales.",
+    roadmap: [],
   },
 ];

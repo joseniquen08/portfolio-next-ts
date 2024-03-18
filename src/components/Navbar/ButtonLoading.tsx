@@ -3,10 +3,10 @@ export const ButtonLoading = () => {
     <button
       type="button"
       disabled
-      className="flex items-center justify-center w-24 text-sm text-custom-ligth-text dark:text-custom-dark-text transition duration-150 ease-in-out shadow-lg cursor-not-allowed h-9 md:w-28 rounded-xl disabled:opacity-50 shadow-custom-ligth-secondary/50 dark:shadow-custom-dark-secondary/50 disabled:bg-custom-ligth-secondary dark:disabled:bg-custom-dark-secondary"
+      className="flex items-center justify-center w-24 text-sm text-custom-light-text dark:text-custom-dark-text transition duration-150 ease-in-out shadow-lg cursor-not-allowed h-9 md:w-28 rounded-xl disabled:opacity-50 shadow-custom-light-secondary/50 dark:shadow-custom-dark-secondary/50 disabled:bg-custom-light-secondary dark:disabled:bg-custom-dark-secondary"
     >
       <svg
-        className="w-5 h-5 text-custom-ligth-text dark:text-custom-dark-text animate-spin"
+        className="w-5 h-5 text-custom-light-text dark:text-custom-dark-text animate-spin"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

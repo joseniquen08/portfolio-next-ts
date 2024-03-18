@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.className} min-h-screen bg-white bg-gradient-to-r from-custom-ligth-bg to-custom-ligth-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95`}
+        className={`${poppins.className} flex flex-col min-h-screen bg-white bg-gradient-to-r from-custom-light-bg to-custom-light-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95`}
       >
         <div className="h-6"></div>
         <Navbar />

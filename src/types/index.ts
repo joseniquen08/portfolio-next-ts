@@ -42,6 +42,16 @@ export type SkillType = {
 };
 
 export type TechnologyType = {
+  slug: string;
   name: string;
   icon: ReactNode;
+  description: string;
+  roadmap: {
+    title: string;
+    items: {
+      level: number;
+      title: string;
+      content: string[];
+    }[];
+  }[];
 };

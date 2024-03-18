@@ -1,11 +1,19 @@
-const NextdotjsIcon = ({ className, size }: { className: string; size: number }) => {
+const NextdotjsIcon = ({
+  className,
+  size,
+  color,
+}: {
+  className?: string;
+  size: number;
+  color?: string;
+}) => {
   return (
     <svg
       role="img"
       width={size}
       height={size}
-      className={className}
-      fill="currentColor"
+      className={className && ""}
+      fill={color ? color : "currentColor"}
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >

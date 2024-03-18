@@ -65,7 +65,7 @@ const config: Config = {
           900: "#012a4a",
         },
         custom: {
-          ligth: {
+          light: {
             text: "#151702",
             bg: "#fbfef1",
             primary: "#d4ff02",

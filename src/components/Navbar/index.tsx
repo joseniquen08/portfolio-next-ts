@@ -1,6 +1,6 @@
 "use client";
 
-import { useCycle, motion, AnimatePresence } from "framer-motion";
+import { useCycle, motion, AnimatePresence, Cycle } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Link as LinkReactScroll, animateScroll } from "react-scroll";
@@ -87,10 +87,10 @@ export function Navbar() {
   return (
     <>
       <nav
-        className={`dark:text-custom-dark-text text-custom-ligth-text mt-1 z-40 sticky top-0 w-full ${
+        className={`dark:text-custom-dark-text text-custom-light-text mt-1 z-40 sticky top-0 w-full ${
           showBg
-            ? "dark:border-b dark:border-b-custom-dark-text/20 shadow-lg shadow-gray-200/50 dark:shadow-custom-dark-bg/50 backdrop-blur bg-custom-ligth-bg/60 dark:bg-custom-dark-bg/60"
-            : "bg-white bg-gradient-to-r from-custom-ligth-bg to-custom-ligth-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95"
+            ? "dark:border-b dark:border-b-custom-dark-text/20 shadow-lg shadow-gray-200/50 dark:shadow-custom-dark-bg/50 backdrop-blur bg-custom-light-bg/60 dark:bg-custom-dark-bg/60"
+            : "bg-white bg-gradient-to-r from-custom-light-bg to-custom-light-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95"
         }`}
       >
         <div className="relative flex flex-row items-center justify-between max-w-5xl px-3 py-3 mx-auto lg:py-2 sm:px-4 lg:px-16 2xl:max-w-6xl">
@@ -149,7 +149,7 @@ export function Navbar() {
               <motion.li whileTap={{ scale: 0.9 }}>
                 <Link
                   href="/classes"
-                  className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5 relative"
+                  className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5 relative"
                 >
                   Clases
                   <Badge
@@ -184,36 +184,26 @@ export function Navbar() {
               open: { opacity: 1, display: "block" },
             }}
             exit={{ opacity: 0, display: "none" }}
-            className="absolute w-full font-medium text-custom-ligth-text bg-custom-ligth-bg shadow-xl md:hidden dark:text-custom-dark-text dark:bg-custom-dark-bg shadow-gray-200/50 dark:shadow-custom-dark-bg/50"
+            className="absolute w-full font-medium text-custom-light-text bg-custom-light-bg shadow-xl md:hidden dark:text-custom-dark-text dark:bg-custom-dark-bg shadow-gray-200/50 dark:shadow-custom-dark-bg/50"
           >
             <div className="px-2.5 sm:px-4 py-3 space-y-1.5">
-              <LinkReactScroll
-                onClick={() => toggleOpen()}
-                to="projects"
-                smooth={true}
-                duration={500}
-                className="block cursor-pointer rounded-xl focus:bg-custom-ligth-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
+              {pathname == "/" ? (
+                <ListHomeMobile toggleOpen={toggleOpen} />
+              ) : (
+                <ListOtherPagesMobile />
+              )}
+              <Link
+                href="/classes"
+                className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
               >
-                Experiencia
-              </LinkReactScroll>
-              <LinkReactScroll
-                onClick={() => toggleOpen()}
-                to="about"
-                smooth={true}
-                duration={500}
-                className="block cursor-pointer rounded-xl focus:bg-custom-ligth-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
-              >
-                Sobre mí
-              </LinkReactScroll>
-              <LinkReactScroll
-                onClick={() => toggleOpen()}
-                to="skills"
-                smooth={true}
-                duration={500}
-                className="block cursor-pointer rounded-xl focus:bg-custom-ligth-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
-              >
-                Habilidades
-              </LinkReactScroll>
+                Clases
+                <Badge
+                  variant="destructive"
+                  className="ml-2 text-2xs px-1.5 border-none"
+                >
+                  Nuevo
+                </Badge>
+              </Link>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -235,7 +225,7 @@ function ListHome() {
           to="projects"
           smooth={true}
           duration={500}
-          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
+          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
         >
           Experiencia
         </LinkReactScroll>
@@ -245,7 +235,7 @@ function ListHome() {
           to="about"
           smooth={true}
           duration={500}
-          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
+          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
         >
           Sobre mí
         </LinkReactScroll>
@@ -255,11 +245,45 @@ function ListHome() {
           to="skills"
           smooth={true}
           duration={500}
-          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
+          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
         >
           Habilidades
         </LinkReactScroll>
       </motion.li>
+    </>
+  );
+}
+
+function ListHomeMobile({ toggleOpen }: { toggleOpen: Cycle }) {
+  return (
+    <>
+      <LinkReactScroll
+        onClick={() => toggleOpen()}
+        to="projects"
+        smooth={true}
+        duration={500}
+        className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
+      >
+        Experiencia
+      </LinkReactScroll>
+      <LinkReactScroll
+        onClick={() => toggleOpen()}
+        to="about"
+        smooth={true}
+        duration={500}
+        className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
+      >
+        Sobre mí
+      </LinkReactScroll>
+      <LinkReactScroll
+        onClick={() => toggleOpen()}
+        to="skills"
+        smooth={true}
+        duration={500}
+        className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
+      >
+        Habilidades
+      </LinkReactScroll>
     </>
   );
 }
@@ -269,25 +293,50 @@ function ListOtherPages() {
     <>
       <motion.li whileTap={{ scale: 0.9 }}>
         <Link href="/#projects" legacyBehavior>
-          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
             Experiencia
           </a>
         </Link>
       </motion.li>
       <motion.li whileTap={{ scale: 0.9 }}>
         <Link href="/#about" legacyBehavior>
-          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
             Sobre mí
           </a>
         </Link>
       </motion.li>
       <motion.li whileTap={{ scale: 0.9 }}>
         <Link href="/#skills" legacyBehavior>
-          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-ligth-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
             Habilidades
           </a>
         </Link>
       </motion.li>
+    </>
+  );
+}
+
+function ListOtherPagesMobile() {
+  return (
+    <>
+      <Link
+        href="/#projects"
+        className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
+      >
+        Experiencia
+      </Link>
+      <Link
+        href="/#about"
+        className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
+      >
+        Sobre mí
+      </Link>
+      <Link
+        href="/#skills"
+        className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
+      >
+        Habilidades
+      </Link>
     </>
   );
 }

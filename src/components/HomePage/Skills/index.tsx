@@ -21,16 +21,16 @@ export const Skills = () => {
   return (
     <div
       id="skills"
-      className="max-w-5xl px-5 pt-24 pb-12 mx-auto sm:px-8 lg:px-16 2xl:max-w-6xl text-custom-ligth-text dark:text-custom-dark-text"
+      className="max-w-5xl px-5 pt-24 pb-12 mx-auto sm:px-8 lg:px-16 2xl:max-w-6xl text-custom-light-text dark:text-custom-dark-text w-full"
     >
       <div className="space-y-6">
         <div className="space-y-1">
           <div className="flex justify-center md:justify-start">
-            <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center md:text-4xl w-max md:text-left text-custom-ligth-accent dark:text-custom-dark-primary">
+            <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center md:text-4xl w-max md:text-left text-custom-light-accent dark:text-custom-dark-primary">
               Habilidades
             </p>
           </div>
-          <div className="hidden md:block w-10 h-1 rounded-lg bg-custom-ligth-primary dark:bg-custom-dark-accent"></div>
+          <div className="hidden md:block w-10 h-1 rounded-lg bg-custom-light-primary dark:bg-custom-dark-accent"></div>
         </div>
         <div className="py-5 space-y-6">
           <div className="w-full">
@@ -46,7 +46,7 @@ export const Skills = () => {
               <button
                 type="button"
                 onClick={onClick}
-                className="border border-custom-ligth-primary/30 dark:border-custom-dark-primary/40 rounded-lg py-4 px-1 flex flex-col justify-center items-center space-y-2 hover:bg-custom-ligth-primary hover:bg-opacity-5 dark:hover:bg-custom-dark-primary/10 dark:hover:backdrop-blur"
+                className="border border-custom-light-primary/30 dark:border-custom-dark-primary/40 rounded-lg py-4 px-1 flex flex-col justify-center items-center space-y-2 hover:bg-custom-light-primary hover:bg-opacity-5 dark:hover:bg-custom-dark-primary/10 dark:hover:backdrop-blur"
               >
                 {more ? (
                   <HiMinus className="w-9 h-9" />

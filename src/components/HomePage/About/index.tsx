@@ -7,17 +7,17 @@ export const About = () => {
   return (
     <motion.div
       id="about"
-      className="max-w-5xl px-4 pt-24 pb-0 mx-auto sm:px-10 2xl:max-w-6xl lg:px-16 text-custom-ligth-text dark:text-custom-dark-text"
+      className="max-w-5xl px-4 pt-24 pb-0 mx-auto sm:px-10 2xl:max-w-6xl lg:px-16 text-custom-light-text dark:text-custom-dark-text w-full"
     >
       <div className="flex flex-col items-center space-y-8 lg:items-start">
         <div className="space-y-6">
           <div className="space-y-1">
             <div className="flex flex-col items-center md:items-start">
-              <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center md:text-4xl w-max md:text-left text-custom-ligth-accent dark:text-custom-dark-primary">
+              <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center md:text-4xl w-max md:text-left text-custom-light-accent dark:text-custom-dark-primary">
                 Sobre mí
               </p>
             </div>
-            <div className="hidden md:block w-10 h-1 rounded-lg bg-custom-ligth-primary dark:bg-custom-dark-accent"></div>
+            <div className="hidden md:block w-10 h-1 rounded-lg bg-custom-light-primary dark:bg-custom-dark-accent"></div>
           </div>
           <div className="space-y-6 text-lg font-normal leading-7 md:leading-8 md:text-lg max-w-[75ch]">
             <p className="text-center md:text-start">

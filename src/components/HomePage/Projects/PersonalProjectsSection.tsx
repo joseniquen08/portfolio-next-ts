@@ -1,7 +1,7 @@
 "use client";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Timeline } from "flowbite-react";
+import { CustomFlowbiteTheme, Timeline } from "flowbite-react";
 import {
   HiOutlineAcademicCap,
   HiOutlineSortAscending,
@@ -27,6 +27,25 @@ const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   preload: false,
 });
+
+const customTheme: CustomFlowbiteTheme["timeline"] = {
+  root: {
+    direction: {
+      vertical:
+        "relative border-l border-custom-light-text/20 dark:border-custom-dark-text/20",
+    },
+  },
+  item: {
+    point: {
+      marker: {
+        base: {
+          vertical:
+            "absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-custom-light-accent bg-custom-light-accent dark:border-custom-dark-primary dark:bg-custom-dark-primary",
+        },
+      },
+    },
+  },
+};
 
 export const PersonalProjectsSection = () => {
   const [personalProjectsSort, setPersonalProjectsSort] =
@@ -84,7 +103,7 @@ export const PersonalProjectsSection = () => {
       </div>
       <ScrollArea className="h-152 md:h-136">
         <div className="px-1.5">
-          <Timeline>
+          <Timeline theme={customTheme}>
             {personalProjectsSort.map(
               (
                 {
