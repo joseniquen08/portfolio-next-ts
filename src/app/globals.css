@@ -118,8 +118,12 @@
   background: var(--selectedKnobby);
 }
 
+.fc .fc-toolbar {
+  @apply flex-col sm:flex-row gap-3 sm:gap-0;
+}
+
 .fc .fc-toolbar-title {
-  @apply text-lg font-semibold;
+  @apply text-xl sm:text-lg font-semibold;
 }
 
 .fc-timegrid-slot-label-cushion {

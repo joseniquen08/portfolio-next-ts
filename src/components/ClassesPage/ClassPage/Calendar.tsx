@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
+import { HiInformationCircle } from "react-icons/hi";
 
 const FormSchema = z.object({
   start_time: z.date(),
@@ -28,7 +29,11 @@ const FormSchema = z.object({
   email: z.string(),
 });
 
-export function Calendar() {
+interface Props {
+  tech: string;
+}
+
+export function Calendar({ tech }: Props) {
   const [openModal, setOpenModal] = useState(false);
   const [startToCreate, setStartToCreate] = useState("");
   const [endToCreate, setEndToCreate] = useState("");
@@ -85,8 +90,8 @@ export function Calendar() {
       body: JSON.stringify({
         start: startToCreate,
         end: endToCreate,
-        summary: "JAVASCRIPT - Reservado",
-        description: "Clase de JavaScript - " + data.name,
+        summary: `${tech.toUpperCase()} - Reservado`,
+        description: `Clase de ${tech} - ${data.name}`,
         attendee_name: data.name,
         attendee_email: data.email,
       }),
@@ -95,6 +100,7 @@ export function Calendar() {
     const data_response = await response.json();
 
     if (data_response == "Accepted") {
+      form.reset();
       setOpenModal(false);
     }
   }
@@ -106,8 +112,15 @@ export function Calendar() {
         <p className="text-lg max-w-[80ch]">
           ¡Verifica mi disponibilidad y agenda una clase conmigo!
         </p>
-        <p className="text-custom-light-text/70 dark:text-custom-dark-text/60">
-          El rango diario es desde las 6 am hasta las 11 pm
+        <p className="text-custom-light-text/70 dark:text-custom-dark-text/60 max-w-[80ch]">
+          El rango diario es desde las 6 am hasta las 12 am
+        </p>
+      </div>
+      <div>
+        <p className="max-w-[80ch] text-custom-light-text/70 dark:text-custom-dark-text/60 inline-flex items-start gap-1">
+          <HiInformationCircle size={22} className="mt-0.5" /> Manten pulsado y
+          arrastra. Si vas a adquirir tu primera clase gratuita, asegúrate de
+          agendar 1 hora, ya que de otra manera no será gratuita.
         </p>
       </div>
       <div className="max-w-4xl w-full h-full mx-auto">
@@ -131,6 +144,9 @@ export function Calendar() {
           locale={es}
           initialView="timeGridWeek"
           aspectRatio={1.7}
+          height={600}
+          expandRows={true}
+          stickyFooterScrollbar={true}
           headerToolbar={{
             left: "prev,next",
             center: "title",
@@ -143,10 +159,16 @@ export function Calendar() {
             week: "Semana",
             day: "Día",
           }}
+          windowResize={function (arg: any) {
+            if (arg.view.calendar.el.clientWidth < 400) {
+              arg.view.calendar.changeView("timeGridDay");
+            }
+          }}
           allDaySlot={false}
           selectable={true}
           selectOverlap={false}
           select={handleDateClick}
+          scrollTime={new Date().toLocaleTimeString()}
           slotDuration="01:00:00"
           slotLabelFormat={{
             hour: "2-digit",
@@ -160,7 +182,10 @@ export function Calendar() {
       </div>
       <Modal
         show={openModal}
-        onClose={() => setOpenModal(false)}
+        onClose={() => {
+          setOpenModal(false);
+          form.reset();
+        }}
         className="bg-custom-light-bg dark:bg-custom-dark-bg"
       >
         <Form {...form}>
