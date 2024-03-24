@@ -27,7 +27,7 @@ export default async function Classes() {
   return (
     <div className="flex flex-col w-full max-w-6xl px-4 py-2 md:py-14 mx-auto space-y-4 lg:px-16 text-custom-light-text dark:text-custom-dark-text">
       <div className="flex flex-col justify-center items-center gap-10">
-        <p className="py-1 text-4xl px-12 xs:text-5xl lg:text-6xl font-bold leading-tight tracking-tighter text-transparent break-words bg-clip-text bg-gradient-to-r from-custom-light-primary via-custom-light-primary to-custom-light-primary dark:from-custom-dark-primary dark:via-custom-dark-primary dark:to-custom-dark-primary text-center">
+        <p className="py-1 text-4xl px-12 xs:text-5xl lg:text-6xl font-bold leading-tight tracking-tighter text-transparent break-words bg-clip-text bg-gradient-to-r from-custom-light-accent via-custom-light-accent to-custom-light-accent dark:from-custom-dark-primary dark:via-custom-dark-primary dark:to-custom-dark-primary text-center">
           Clases personalizadas
         </p>
         <p className="text-xl font-medium text-center max-w-[60ch]">

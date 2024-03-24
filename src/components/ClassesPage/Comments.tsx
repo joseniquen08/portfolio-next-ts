@@ -11,8 +11,8 @@ interface Props {
 
 export function Comments({ comments }: Props) {
   return (
-    <>
-      <p className="text-3xl font-semibold">Comentarios</p>
+    <div className="flex flex-col items-center gap-6">
+      <p className="text-4xl font-bold">Comentarios</p>
       {comments.length > 0 ? (
         <div className="flex justify-center gap-10 flex-wrap">
           {comments.map((comment) => (
@@ -41,6 +41,11 @@ export function Comments({ comments }: Props) {
         </div>
       ) : (
         <>
+          <div>
+            <p className="text-custom-light-text dark:text-custom-dark-text text-opacity-70 dark:text-opacity-50 w-full text-center">
+              Actualmente no hay comentarios
+            </p>
+          </div>
           <div className="flex justify-center gap-10 flex-wrap">
             <div className="flex items-center space-x-2">
               <Skeleton className="h-16 w-16 rounded-full" />
@@ -67,11 +72,8 @@ export function Comments({ comments }: Props) {
               </div>
             </div>
           </div>
-          <div>
-            <p>Actualmente no hay comentarios</p>
-          </div>
         </>
       )}
-    </>
+    </div>
   );
 }

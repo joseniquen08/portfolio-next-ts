@@ -117,3 +117,39 @@
   transform: scale(1.4);
   background: var(--selectedKnobby);
 }
+
+.fc .fc-toolbar-title {
+  @apply text-lg font-semibold;
+}
+
+.fc-timegrid-slot-label-cushion {
+  @apply text-xs;
+}
+
+.fc .fc-timegrid-axis-cushion,
+.fc .fc-timegrid-slot-label-cushion {
+  @apply h-16 py-2 px-4;
+}
+
+.fc-col-header-cell-cushion {
+  @apply text-xs;
+}
+
+.fc-event-title-container {
+  @apply text-xs font-medium;
+}
+
+.fc .fc-button {
+  @apply text-sm;
+}
+
+.fc-scroller::-webkit-scrollbar {
+  width: 12px;
+  background: rgba(192, 192, 192, 1);
+}
+
+.fc-scroller::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 10px;
+  border: 3px solid rgba(192, 192, 192, 1);
+}
