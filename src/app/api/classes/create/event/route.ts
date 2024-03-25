@@ -1,6 +1,13 @@
 export async function POST(request: Request) {
-  const { start, end, summary, description, attendee_name, attendee_email } =
-    await request.json();
+  const {
+    start,
+    end,
+    summary,
+    description,
+    attendee_name,
+    attendee_email,
+    phone,
+  } = await request.json();
 
   const response = await fetch(`${process.env.MAKE_URL_WEBHOOK}`, {
     method: "POST",
@@ -12,11 +19,11 @@ export async function POST(request: Request) {
       description,
       attendee_name,
       attendee_email,
+      phone,
     }),
   });
 
   const data = await response.text();
-  console.log("🚀 ~ POST ~ data:", data);
 
   return Response.json(data);
 }

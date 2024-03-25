@@ -32,7 +32,12 @@ import {
   TypescriptIcon,
   PSeIntIcon,
 } from "@/icons";
-import type { ProjectType, SkillType, TechnologyType } from "@/types";
+import type {
+  PriceType,
+  ProjectType,
+  SkillType,
+  TechnologyType,
+} from "@/types";
 
 const size = 36;
 
@@ -661,6 +666,117 @@ const technologySize = 170;
 
 export const technologies: TechnologyType[] = [
   {
+    status: 2,
+    slug: "pseint",
+    name: "PSeInt",
+    icon: <PSeIntIcon size={technologySize} color="rgba(255, 239, 68, 0.2)" />,
+    description:
+      "PSeInt es una herramienta excelente para aquellos que están dando sus primeros pasos en el mundo de la programación. Está diseñado para enseñar los fundamentos de la lógica de programación y el diseño de algoritmos de una manera clara y accesible. Aprender con PSeInt te ayudará a construir una base sólida antes de aventurarte en lenguajes de programación más complejos.",
+    roadmap: [
+      {
+        title: "Nivel Principiante",
+        items: [
+          {
+            level: 1,
+            title: "Introducción a la Lógica de Programación",
+            content: [
+              "Comprender los conceptos básicos de la lógica de programación y su importancia en el desarrollo de algoritmos.",
+              "Aprender a utilizar pseudocódigo como una herramienta para expresar algoritmos de manera clara y concisa.",
+              "Familiarizarse con la estructura básica de un algoritmo en PSeInt y cómo se relaciona con la solución de problemas.",
+            ],
+          },
+          {
+            level: 2,
+            title: "Estructuras de Control",
+            content: [
+              "Estudiar las estructuras de control secuenciales, condicionales y repetitivas en PSeInt.",
+              "Aprender a utilizar estructuras de control para controlar el flujo de ejecución de un programa.",
+              "Practicar con ejercicios que involucren el uso de estructuras de control para resolver problemas simples.",
+            ],
+          },
+          {
+            level: 3,
+            title: "Tipos de Datos y Variables",
+            content: [
+              "Entender los diferentes tipos de datos disponibles en PSeInt y cómo se utilizan para almacenar información.",
+              "Aprender a declarar variables y asignarles valores en PSeInt.",
+              "Practicar con ejercicios que involucren el uso de tipos de datos y variables en PSeInt.",
+            ],
+          },
+          {
+            level: 4,
+            title: "Entrada/Salida Básica",
+            content: [
+              "Aprender a realizar operaciones de entrada/salida básicas en PSeInt, como la lectura de datos desde el teclado y la escritura en la pantalla.",
+              "Estudiar cómo utilizar las funciones Leer y Escribir para interactuar con el usuario.",
+              "Practicar con ejercicios que involucren operaciones de entrada/salida básicas en PSeInt.",
+            ],
+          },
+          {
+            level: 5,
+            title: "Subalgoritmos y Modularidad",
+            content: [
+              "Estudiar el concepto de subalgoritmos y cómo se utilizan para dividir un problema grande en problemas más pequeños y manejables.",
+              "Aprender a crear y utilizar subalgoritmos en PSeInt.",
+              "Practicar con ejercicios que involucren el uso de subalgoritmos para resolver problemas complejos.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Nivel Intermedio",
+        items: [
+          {
+            level: 1,
+            title: "Arreglos y Matrices",
+            content: [
+              "Entender cómo se definen y utilizan los arreglos y matrices en PSeInt.",
+              "Aprender a acceder a elementos individuales de un arreglo o matriz y a modificar su contenido.",
+              "Practicar con ejercicios que involucren el uso de arreglos y matrices para almacenar y manipular datos.",
+            ],
+          },
+          {
+            level: 2,
+            title: "Recursión",
+            content: [
+              "Estudiar el concepto de recursión y cómo se utiliza para resolver problemas que se pueden descomponer en casos más simples.",
+              "Aprender a implementar funciones recursivas en PSeInt.",
+              "Practicar con ejercicios que involucren la implementación de algoritmos recursivos en PSeInt.",
+            ],
+          },
+          {
+            level: 3,
+            title: "Algoritmos de Búsqueda y Ordenamiento",
+            content: [
+              "Entender los diferentes algoritmos de búsqueda y ordenamiento disponibles en PSeInt, como búsqueda binaria, ordenamiento por inserción, etc.",
+              "Aprender a implementar algoritmos de búsqueda y ordenamiento en PSeInt.",
+              "Practicar con ejercicios que involucren la implementación de algoritmos de búsqueda y ordenamiento en PSeInt.",
+            ],
+          },
+          {
+            level: 4,
+            title: "Estructuras de Datos Avanzadas",
+            content: [
+              "Estudiar estructuras de datos más avanzadas, como listas enlazadas, pilas y colas.",
+              "Aprender a implementar estas estructuras de datos en PSeInt y a utilizarlas para resolver problemas específicos.",
+              "Practicar con ejercicios que involucren el uso de estructuras de datos avanzadas en PSeInt.",
+            ],
+          },
+          {
+            level: 5,
+            title: "Proyectos Prácticos",
+            content: [
+              "Aplicar los conocimientos adquiridos en PSeInt para desarrollar proyectos prácticos y resolver problemas del mundo real.",
+              "Trabajar en proyectos individuales y en equipo para aplicar y consolidar los conceptos aprendidos.",
+              "Refactorizar y mejorar proyectos existentes para aplicar las mejores prácticas de programación.",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    status: 2,
     slug: "javascript",
     name: "JavaScript",
     icon: (
@@ -775,6 +891,7 @@ export const technologies: TechnologyType[] = [
     ],
   },
   {
+    status: 2,
     slug: "typescript",
     name: "TypeScript",
     icon: (
@@ -886,229 +1003,7 @@ export const technologies: TechnologyType[] = [
     ],
   },
   {
-    slug: "java",
-    name: "Java",
-    icon: <JavaIcon size={technologySize} color="rgba(244, 67, 54, 0.2)" />,
-    description:
-      "Java es un lenguaje de programación sólido y confiable, especialmente popular en el desarrollo de aplicaciones empresariales y móviles. Su portabilidad y seguridad lo hacen ideal para proyectos a gran escala. Aprender Java te proporcionará una base sólida en programación orientada a objetos y te abrirá las puertas a un amplio espectro de oportunidades laborales.",
-    roadmap: [
-      {
-        title: "Nivel Principiante",
-        items: [
-          {
-            level: 1,
-            title: "Introducción a Java",
-            content: [
-              "Comprender los conceptos básicos de Java y su importancia en el desarrollo de aplicaciones.",
-              "Aprender a configurar un entorno de desarrollo Java.",
-              "Familiarizarse con la sintaxis básica de Java y las diferencias clave con otros lenguajes de programación.",
-            ],
-          },
-          {
-            level: 2,
-            title: "Estructuras de Control",
-            content: [
-              "Estudiar las estructuras de control como if, else, switch, for, while en Java.",
-              "Aprender a utilizar bucles para realizar tareas repetitivas.",
-              "Practicar con ejercicios que involucren el uso de estructuras de control.",
-            ],
-          },
-          {
-            level: 3,
-            title: "Clases y Objetos",
-            content: [
-              "Entender el concepto de clases y objetos en Java.",
-              "Aprender a declarar clases y crear objetos a partir de ellas.",
-              "Practicar con la creación y el uso de clases y objetos en Java.",
-            ],
-          },
-          {
-            level: 4,
-            title: "Herencia y Polimorfismo",
-            content: [
-              "Estudiar el concepto de herencia y cómo se implementa en Java.",
-              "Aprender sobre el polimorfismo y cómo se utiliza para crear código más flexible y reutilizable.",
-              "Practicar con ejemplos que involucren el uso de herencia y polimorfismo en Java.",
-            ],
-          },
-          {
-            level: 5,
-            title: "Entrada/Salida Básica",
-            content: [
-              "Aprender a realizar operaciones de entrada/salida básicas en Java, como la lectura de datos desde el teclado y la escritura en la consola.",
-              "Estudiar cómo leer y escribir archivos en Java utilizando las clases FileReader, FileWriter, etc.",
-              "Practicar con ejercicios que involucren operaciones de entrada/salida en Java.",
-            ],
-          },
-        ],
-      },
-      {
-        title: "Nivel Intermedio",
-        items: [
-          {
-            level: 1,
-            title: "Colecciones y Genéricos",
-            content: [
-              "Estudiar las diferentes colecciones disponibles en Java, como ArrayList, LinkedList, HashMap, etc.",
-              "Aprender a utilizar genéricos para crear clases y métodos que pueden trabajar con diferentes tipos de datos.",
-              "Practicar con ejercicios que involucren el uso de colecciones y genéricos en Java.",
-            ],
-          },
-          {
-            level: 2,
-            title: "Manejo de Excepciones",
-            content: [
-              "Entender cómo manejar errores y excepciones en Java utilizando try-catch-finally.",
-              "Aprender a crear y lanzar excepciones personalizadas.",
-              "Practicar con ejemplos que involucren el manejo de excepciones en Java.",
-            ],
-          },
-          {
-            level: 3,
-            title: "Programación Orientada a Aspectos (AOP)",
-            content: [
-              "Estudiar el concepto de AOP y cómo se implementa en Java utilizando frameworks como AspectJ.",
-              "Aprender a separar las preocupaciones transversales del código principal utilizando aspectos.",
-              "Practicar con ejemplos que involucren el uso de AOP en Java.",
-            ],
-          },
-          {
-            level: 4,
-            title: "Expresiones Lambda y Streams",
-            content: [
-              "Entender cómo trabajar con expresiones lambda y streams en Java 8 y versiones posteriores.",
-              "Aprender a utilizar las operaciones de filtrado, mapeo, reducción, etc., proporcionadas por la API de streams.",
-              "Practicar con ejemplos que involucren el uso de expresiones lambda y streams en Java.",
-            ],
-          },
-          {
-            level: 5,
-            title: "Bases de Datos y JDBC",
-            content: [
-              "Estudiar cómo conectarse a una base de datos desde una aplicación Java utilizando JDBC (Java Database Connectivity).",
-              "Aprender a ejecutar consultas SQL, insertar y actualizar datos desde una aplicación Java.",
-              "Practicar con ejemplos que involucren el acceso a bases de datos desde Java utilizando JDBC.",
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  // {
-  //   slug: "javascript",
-  //   name: "PHP",
-  //   icon: <PhpIcon size={technologySize} color="rgba(119, 123, 180, 0.2)" />,
-  // },
-  {
-    slug: "pseint",
-    name: "PSeInt",
-    icon: <PSeIntIcon size={technologySize} color="rgba(255, 254, 197, 0.2)" />,
-    description:
-      "PSeInt es una herramienta excelente para aquellos que están dando sus primeros pasos en el mundo de la programación. Está diseñado para enseñar los fundamentos de la lógica de programación y el diseño de algoritmos de una manera clara y accesible. Aprender con PSeInt te ayudará a construir una base sólida antes de aventurarte en lenguajes de programación más complejos.",
-    roadmap: [
-      {
-        title: "Nivel Principiante",
-        items: [
-          {
-            level: 1,
-            title: "Introducción a la Lógica de Programación",
-            content: [
-              "Comprender los conceptos básicos de la lógica de programación y su importancia en el desarrollo de algoritmos.",
-              "Aprender a utilizar pseudocódigo como una herramienta para expresar algoritmos de manera clara y concisa.",
-              "Familiarizarse con la estructura básica de un algoritmo en PSeInt y cómo se relaciona con la solución de problemas.",
-            ],
-          },
-          {
-            level: 2,
-            title: "Estructuras de Control",
-            content: [
-              "Estudiar las estructuras de control secuenciales, condicionales y repetitivas en PSeInt.",
-              "Aprender a utilizar estructuras de control para controlar el flujo de ejecución de un programa.",
-              "Practicar con ejercicios que involucren el uso de estructuras de control para resolver problemas simples.",
-            ],
-          },
-          {
-            level: 3,
-            title: "Tipos de Datos y Variables",
-            content: [
-              "Entender los diferentes tipos de datos disponibles en PSeInt y cómo se utilizan para almacenar información.",
-              "Aprender a declarar variables y asignarles valores en PSeInt.",
-              "Practicar con ejercicios que involucren el uso de tipos de datos y variables en PSeInt.",
-            ],
-          },
-          {
-            level: 4,
-            title: "Entrada/Salida Básica",
-            content: [
-              "Aprender a realizar operaciones de entrada/salida básicas en PSeInt, como la lectura de datos desde el teclado y la escritura en la pantalla.",
-              "Estudiar cómo utilizar las funciones Leer y Escribir para interactuar con el usuario.",
-              "Practicar con ejercicios que involucren operaciones de entrada/salida básicas en PSeInt.",
-            ],
-          },
-          {
-            level: 5,
-            title: "Subalgoritmos y Modularidad",
-            content: [
-              "Estudiar el concepto de subalgoritmos y cómo se utilizan para dividir un problema grande en problemas más pequeños y manejables.",
-              "Aprender a crear y utilizar subalgoritmos en PSeInt.",
-              "Practicar con ejercicios que involucren el uso de subalgoritmos para resolver problemas complejos.",
-            ],
-          },
-        ],
-      },
-      {
-        title: "Nivel Intermedio",
-        items: [
-          {
-            level: 1,
-            title: "Arreglos y Matrices",
-            content: [
-              "Entender cómo se definen y utilizan los arreglos y matrices en PSeInt.",
-              "Aprender a acceder a elementos individuales de un arreglo o matriz y a modificar su contenido.",
-              "Practicar con ejercicios que involucren el uso de arreglos y matrices para almacenar y manipular datos.",
-            ],
-          },
-          {
-            level: 2,
-            title: "Recursión",
-            content: [
-              "Estudiar el concepto de recursión y cómo se utiliza para resolver problemas que se pueden descomponer en casos más simples.",
-              "Aprender a implementar funciones recursivas en PSeInt.",
-              "Practicar con ejercicios que involucren la implementación de algoritmos recursivos en PSeInt.",
-            ],
-          },
-          {
-            level: 3,
-            title: "Algoritmos de Búsqueda y Ordenamiento",
-            content: [
-              "Entender los diferentes algoritmos de búsqueda y ordenamiento disponibles en PSeInt, como búsqueda binaria, ordenamiento por inserción, etc.",
-              "Aprender a implementar algoritmos de búsqueda y ordenamiento en PSeInt.",
-              "Practicar con ejercicios que involucren la implementación de algoritmos de búsqueda y ordenamiento en PSeInt.",
-            ],
-          },
-          {
-            level: 4,
-            title: "Estructuras de Datos Avanzadas",
-            content: [
-              "Estudiar estructuras de datos más avanzadas, como listas enlazadas, pilas y colas.",
-              "Aprender a implementar estas estructuras de datos en PSeInt y a utilizarlas para resolver problemas específicos.",
-              "Practicar con ejercicios que involucren el uso de estructuras de datos avanzadas en PSeInt.",
-            ],
-          },
-          {
-            level: 5,
-            title: "Proyectos Prácticos",
-            content: [
-              "Aplicar los conocimientos adquiridos en PSeInt para desarrollar proyectos prácticos y resolver problemas del mundo real.",
-              "Trabajar en proyectos individuales y en equipo para aplicar y consolidar los conceptos aprendidos.",
-              "Refactorizar y mejorar proyectos existentes para aplicar las mejores prácticas de programación.",
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
+    status: 2,
     slug: "html-css",
     name: "HTML/CSS",
     icon: <Html5Icon size={technologySize} color="rgba(227, 79, 38, 0.2)" />,
@@ -1218,115 +1113,7 @@ export const technologies: TechnologyType[] = [
     ],
   },
   {
-    slug: "python",
-    name: "Python",
-    icon: <PythonIcon size={technologySize} color="rgba(55, 118, 171, 0.2)" />,
-    description:
-      "Python es un lenguaje de programación versátil y fácil de aprender que se utiliza en una amplia gama de aplicaciones, desde desarrollo web y científico hasta inteligencia artificial y aprendizaje automático. Su sintaxis limpia y legible lo hace ideal tanto para principiantes como para desarrolladores experimentados. Aprender Python te abrirá las puertas a un mundo de posibilidades en la programación, permitiéndote crear desde simples scripts hasta aplicaciones complejas. Además, su popularidad en la industria y su creciente demanda lo convierten en una habilidad valiosa para cualquier desarrollador.",
-    roadmap: [
-      {
-        title: "Nivel Principiante",
-        items: [
-          {
-            level: 1,
-            title: "Introducción a Python",
-            content: [
-              "Comprender los fundamentos de Python y su importancia en la programación.",
-              "Aprender la sintaxis básica de Python: variables, tipos de datos, operadores.",
-              "Familiarizarse con la estructura básica de un programa Python y cómo ejecutarlo.",
-            ],
-          },
-          {
-            level: 2,
-            title: "Estructuras de Control",
-            content: [
-              "Estudiar las estructuras de control condicionales: if, else, elif.",
-              "Aprender a utilizar bucles como for y while para realizar tareas repetitivas.",
-              "Practicar con ejercicios que involucren el uso de estructuras de control en Python.",
-            ],
-          },
-          {
-            level: 3,
-            title: "Funciones y Modularidad",
-            content: [
-              "Entender qué son las funciones en Python y cómo se definen.",
-              "Aprender a crear funciones con parámetros y valores de retorno.",
-              "Estudiar la modularidad en Python y cómo dividir un programa en módulos reutilizables.",
-            ],
-          },
-          {
-            level: 4,
-            title: "Estructuras de Datos Básicas",
-            content: [
-              "Aprender sobre estructuras de datos básicas como listas, tuplas, conjuntos y diccionarios en Python.",
-              "Entender cómo acceder y manipular elementos en estas estructuras de datos.",
-              "Practicar con ejercicios que involucren el uso de estructuras de datos en Python.",
-            ],
-          },
-          {
-            level: 5,
-            title: "Manipulación de Archivos y Entrada/Salida",
-            content: [
-              "Estudiar cómo abrir, leer y escribir archivos en Python.",
-              "Aprender a manejar la entrada y salida de datos desde y hacia archivos.",
-              "Practicar con la manipulación de archivos y entrada/salida en Python mediante la resolución de problemas prácticos.",
-            ],
-          },
-        ],
-      },
-      {
-        title: "Nivel Intermedio",
-        items: [
-          {
-            level: 1,
-            title: "Programación Orientada a Objetos",
-            content: [
-              "Entender los conceptos fundamentales de la programación orientada a objetos (POO) en Python.",
-              "Aprender a definir clases y crear objetos en Python.",
-              "Estudiar conceptos avanzados de POO como herencia, encapsulamiento y polimorfismo.",
-            ],
-          },
-          {
-            level: 2,
-            title: "Gestión de Errores y Excepciones",
-            content: [
-              "Aprender a manejar errores y excepciones en Python utilizando bloques try-except.",
-              "Estudiar cómo levantar excepciones personalizadas para manejar situaciones específicas.",
-              "Practicar con ejercicios que involucren el manejo de errores y excepciones en Python.",
-            ],
-          },
-          {
-            level: 3,
-            title: "Módulos y Paquetes",
-            content: [
-              "Estudiar cómo organizar y reutilizar código utilizando módulos y paquetes en Python.",
-              "Aprender a importar módulos y paquetes en un programa Python.",
-              "Practicar con la creación y el uso de módulos y paquetes para modularizar proyectos más grandes.",
-            ],
-          },
-          {
-            level: 4,
-            title: "Programación Funcional",
-            content: [
-              "Entender los conceptos de programación funcional en Python y cómo se diferencian de la programación imperativa.",
-              "Aprender a utilizar funciones de orden superior, expresiones lambda y funciones generadoras en Python.",
-              "Practicar con ejercicios que involucren el uso de programación funcional en Python.",
-            ],
-          },
-          {
-            level: 5,
-            title: "Proyectos Prácticos",
-            content: [
-              "Aplicar los conocimientos adquiridos en Python para desarrollar proyectos prácticos y resolver problemas del mundo real.",
-              "Trabajar en proyectos individuales y en equipo para aplicar y consolidar los conceptos aprendidos.",
-              "Refactorizar y mejorar proyectos existentes para aplicar las mejores prácticas de programación en Python.",
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
+    status: 2,
     slug: "react",
     name: "React",
     icon: <ReactIcon size={technologySize} color="rgba(97, 218, 251, 0.2)" />,
@@ -1436,6 +1223,7 @@ export const technologies: TechnologyType[] = [
     ],
   },
   {
+    status: 2,
     slug: "nextjs",
     name: "Next.js",
     icon: (
@@ -1545,5 +1333,350 @@ export const technologies: TechnologyType[] = [
         ],
       },
     ],
+  },
+  {
+    status: 1,
+    slug: "python",
+    name: "Python",
+    icon: <PythonIcon size={technologySize} color="rgba(55, 118, 171, 0.2)" />,
+    description:
+      "Python es un lenguaje de programación versátil y fácil de aprender que se utiliza en una amplia gama de aplicaciones, desde desarrollo web y científico hasta inteligencia artificial y aprendizaje automático. Su sintaxis limpia y legible lo hace ideal tanto para principiantes como para desarrolladores experimentados. Aprender Python te abrirá las puertas a un mundo de posibilidades en la programación, permitiéndote crear desde simples scripts hasta aplicaciones complejas. Además, su popularidad en la industria y su creciente demanda lo convierten en una habilidad valiosa para cualquier desarrollador.",
+    roadmap: [
+      {
+        title: "Nivel Principiante",
+        items: [
+          {
+            level: 1,
+            title: "Introducción a Python",
+            content: [
+              "Comprender los fundamentos de Python y su importancia en la programación.",
+              "Aprender la sintaxis básica de Python: variables, tipos de datos, operadores.",
+              "Familiarizarse con la estructura básica de un programa Python y cómo ejecutarlo.",
+            ],
+          },
+          {
+            level: 2,
+            title: "Estructuras de Control",
+            content: [
+              "Estudiar las estructuras de control condicionales: if, else, elif.",
+              "Aprender a utilizar bucles como for y while para realizar tareas repetitivas.",
+              "Practicar con ejercicios que involucren el uso de estructuras de control en Python.",
+            ],
+          },
+          {
+            level: 3,
+            title: "Funciones y Modularidad",
+            content: [
+              "Entender qué son las funciones en Python y cómo se definen.",
+              "Aprender a crear funciones con parámetros y valores de retorno.",
+              "Estudiar la modularidad en Python y cómo dividir un programa en módulos reutilizables.",
+            ],
+          },
+          {
+            level: 4,
+            title: "Estructuras de Datos Básicas",
+            content: [
+              "Aprender sobre estructuras de datos básicas como listas, tuplas, conjuntos y diccionarios en Python.",
+              "Entender cómo acceder y manipular elementos en estas estructuras de datos.",
+              "Practicar con ejercicios que involucren el uso de estructuras de datos en Python.",
+            ],
+          },
+          {
+            level: 5,
+            title: "Manipulación de Archivos y Entrada/Salida",
+            content: [
+              "Estudiar cómo abrir, leer y escribir archivos en Python.",
+              "Aprender a manejar la entrada y salida de datos desde y hacia archivos.",
+              "Practicar con la manipulación de archivos y entrada/salida en Python mediante la resolución de problemas prácticos.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Nivel Intermedio",
+        items: [
+          {
+            level: 1,
+            title: "Programación Orientada a Objetos",
+            content: [
+              "Entender los conceptos fundamentales de la programación orientada a objetos (POO) en Python.",
+              "Aprender a definir clases y crear objetos en Python.",
+              "Estudiar conceptos avanzados de POO como herencia, encapsulamiento y polimorfismo.",
+            ],
+          },
+          {
+            level: 2,
+            title: "Gestión de Errores y Excepciones",
+            content: [
+              "Aprender a manejar errores y excepciones en Python utilizando bloques try-except.",
+              "Estudiar cómo levantar excepciones personalizadas para manejar situaciones específicas.",
+              "Practicar con ejercicios que involucren el manejo de errores y excepciones en Python.",
+            ],
+          },
+          {
+            level: 3,
+            title: "Módulos y Paquetes",
+            content: [
+              "Estudiar cómo organizar y reutilizar código utilizando módulos y paquetes en Python.",
+              "Aprender a importar módulos y paquetes en un programa Python.",
+              "Practicar con la creación y el uso de módulos y paquetes para modularizar proyectos más grandes.",
+            ],
+          },
+          {
+            level: 4,
+            title: "Programación Funcional",
+            content: [
+              "Entender los conceptos de programación funcional en Python y cómo se diferencian de la programación imperativa.",
+              "Aprender a utilizar funciones de orden superior, expresiones lambda y funciones generadoras en Python.",
+              "Practicar con ejercicios que involucren el uso de programación funcional en Python.",
+            ],
+          },
+          {
+            level: 5,
+            title: "Proyectos Prácticos",
+            content: [
+              "Aplicar los conocimientos adquiridos en Python para desarrollar proyectos prácticos y resolver problemas del mundo real.",
+              "Trabajar en proyectos individuales y en equipo para aplicar y consolidar los conceptos aprendidos.",
+              "Refactorizar y mejorar proyectos existentes para aplicar las mejores prácticas de programación en Python.",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    status: 1,
+    slug: "java",
+    name: "Java",
+    icon: <JavaIcon size={technologySize} color="rgba(244, 67, 54, 0.2)" />,
+    description:
+      "Java es un lenguaje de programación sólido y confiable, especialmente popular en el desarrollo de aplicaciones empresariales y móviles. Su portabilidad y seguridad lo hacen ideal para proyectos a gran escala. Aprender Java te proporcionará una base sólida en programación orientada a objetos y te abrirá las puertas a un amplio espectro de oportunidades laborales.",
+    roadmap: [
+      {
+        title: "Nivel Principiante",
+        items: [
+          {
+            level: 1,
+            title: "Introducción a Java",
+            content: [
+              "Comprender los conceptos básicos de Java y su importancia en el desarrollo de aplicaciones.",
+              "Aprender a configurar un entorno de desarrollo Java.",
+              "Familiarizarse con la sintaxis básica de Java y las diferencias clave con otros lenguajes de programación.",
+            ],
+          },
+          {
+            level: 2,
+            title: "Estructuras de Control",
+            content: [
+              "Estudiar las estructuras de control como if, else, switch, for, while en Java.",
+              "Aprender a utilizar bucles para realizar tareas repetitivas.",
+              "Practicar con ejercicios que involucren el uso de estructuras de control.",
+            ],
+          },
+          {
+            level: 3,
+            title: "Clases y Objetos",
+            content: [
+              "Entender el concepto de clases y objetos en Java.",
+              "Aprender a declarar clases y crear objetos a partir de ellas.",
+              "Practicar con la creación y el uso de clases y objetos en Java.",
+            ],
+          },
+          {
+            level: 4,
+            title: "Herencia y Polimorfismo",
+            content: [
+              "Estudiar el concepto de herencia y cómo se implementa en Java.",
+              "Aprender sobre el polimorfismo y cómo se utiliza para crear código más flexible y reutilizable.",
+              "Practicar con ejemplos que involucren el uso de herencia y polimorfismo en Java.",
+            ],
+          },
+          {
+            level: 5,
+            title: "Entrada/Salida Básica",
+            content: [
+              "Aprender a realizar operaciones de entrada/salida básicas en Java, como la lectura de datos desde el teclado y la escritura en la consola.",
+              "Estudiar cómo leer y escribir archivos en Java utilizando las clases FileReader, FileWriter, etc.",
+              "Practicar con ejercicios que involucren operaciones de entrada/salida en Java.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Nivel Intermedio",
+        items: [
+          {
+            level: 1,
+            title: "Colecciones y Genéricos",
+            content: [
+              "Estudiar las diferentes colecciones disponibles en Java, como ArrayList, LinkedList, HashMap, etc.",
+              "Aprender a utilizar genéricos para crear clases y métodos que pueden trabajar con diferentes tipos de datos.",
+              "Practicar con ejercicios que involucren el uso de colecciones y genéricos en Java.",
+            ],
+          },
+          {
+            level: 2,
+            title: "Manejo de Excepciones",
+            content: [
+              "Entender cómo manejar errores y excepciones en Java utilizando try-catch-finally.",
+              "Aprender a crear y lanzar excepciones personalizadas.",
+              "Practicar con ejemplos que involucren el manejo de excepciones en Java.",
+            ],
+          },
+          {
+            level: 3,
+            title: "Programación Orientada a Aspectos (AOP)",
+            content: [
+              "Estudiar el concepto de AOP y cómo se implementa en Java utilizando frameworks como AspectJ.",
+              "Aprender a separar las preocupaciones transversales del código principal utilizando aspectos.",
+              "Practicar con ejemplos que involucren el uso de AOP en Java.",
+            ],
+          },
+          {
+            level: 4,
+            title: "Expresiones Lambda y Streams",
+            content: [
+              "Entender cómo trabajar con expresiones lambda y streams en Java 8 y versiones posteriores.",
+              "Aprender a utilizar las operaciones de filtrado, mapeo, reducción, etc., proporcionadas por la API de streams.",
+              "Practicar con ejemplos que involucren el uso de expresiones lambda y streams en Java.",
+            ],
+          },
+          {
+            level: 5,
+            title: "Bases de Datos y JDBC",
+            content: [
+              "Estudiar cómo conectarse a una base de datos desde una aplicación Java utilizando JDBC (Java Database Connectivity).",
+              "Aprender a ejecutar consultas SQL, insertar y actualizar datos desde una aplicación Java.",
+              "Practicar con ejemplos que involucren el acceso a bases de datos desde Java utilizando JDBC.",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+
+const base_price = 20;
+
+export const prices: PriceType[] = [
+  {
+    pack: "Pack x1",
+    value: "x1",
+    x1: {
+      real: base_price * 1 * 1,
+      discount: base_price * 1 * 1 * 1 * 1,
+    },
+    x2: {
+      real: base_price * 1 * 2,
+      discount: base_price * 1 * 1 * 0.95 * 2,
+    },
+    x3: {
+      real: base_price * 1 * 3,
+      discount: base_price * 1 * 1 * 0.9 * 3,
+    },
+    x4: {
+      real: base_price * 1 * 4,
+      discount: base_price * 1 * 1 * 0.85 * 4,
+    },
+    x5: {
+      real: base_price * 1 * 5,
+      discount: base_price * 1 * 1 * 0.8 * 5,
+    },
+  },
+  {
+    pack: "Pack x5",
+    value: "x5",
+    x1: {
+      real: base_price * 5 * 1,
+      discount: base_price * 5 * 0.95 * 1 * 1,
+    },
+    x2: {
+      real: base_price * 5 * 2,
+      discount: base_price * 5 * 0.9 * 0.95 * 2,
+    },
+    x3: {
+      real: base_price * 5 * 3,
+      discount: base_price * 5 * 0.85 * 0.9 * 3,
+    },
+    x4: {
+      real: base_price * 5 * 4,
+      discount: base_price * 5 * 0.8 * 0.85 * 4,
+    },
+    x5: {
+      real: base_price * 5 * 5,
+      discount: base_price * 5 * 0.75 * 0.8 * 5,
+    },
+  },
+  {
+    pack: "Pack x10",
+    value: "x10",
+    x1: {
+      real: base_price * 10 * 1,
+      discount: base_price * 10 * 0.9 * 1 * 1,
+    },
+    x2: {
+      real: base_price * 10 * 2,
+      discount: base_price * 10 * 0.85 * 0.95 * 2,
+    },
+    x3: {
+      real: base_price * 10 * 3,
+      discount: base_price * 10 * 0.8 * 0.9 * 3,
+    },
+    x4: {
+      real: base_price * 10 * 4,
+      discount: base_price * 10 * 0.75 * 0.85 * 4,
+    },
+    x5: {
+      real: base_price * 10 * 5,
+      discount: base_price * 10 * 0.7 * 0.8 * 5,
+    },
+  },
+  {
+    pack: "Pack x15",
+    value: "x15",
+    x1: {
+      real: base_price * 15 * 1,
+      discount: base_price * 15 * 0.85 * 1 * 1,
+    },
+    x2: {
+      real: base_price * 15 * 2,
+      discount: base_price * 15 * 0.8 * 0.95 * 2,
+    },
+    x3: {
+      real: base_price * 15 * 3,
+      discount: base_price * 15 * 0.75 * 0.9 * 3,
+    },
+    x4: {
+      real: base_price * 15 * 4,
+      discount: base_price * 15 * 0.7 * 0.85 * 4,
+    },
+    x5: {
+      real: base_price * 15 * 5,
+      discount: base_price * 15 * 0.65 * 0.8 * 5,
+    },
+  },
+  {
+    pack: "Pack x20",
+    value: "x20",
+    x1: {
+      real: base_price * 20 * 1,
+      discount: base_price * 20 * 0.8 * 1 * 1,
+    },
+    x2: {
+      real: base_price * 20 * 2,
+      discount: base_price * 20 * 0.75 * 0.95 * 2,
+    },
+    x3: {
+      real: base_price * 20 * 3,
+      discount: base_price * 20 * 0.7 * 0.9 * 3,
+    },
+    x4: {
+      real: base_price * 20 * 4,
+      discount: base_price * 20 * 0.65 * 0.85 * 4,
+    },
+    x5: {
+      real: base_price * 20 * 5,
+      discount: base_price * 20 * 0.6 * 0.8 * 5,
+    },
   },
 ];

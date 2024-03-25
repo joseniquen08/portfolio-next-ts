@@ -42,6 +42,7 @@ export type SkillType = {
 };
 
 export type TechnologyType = {
+  status: number;
   slug: string;
   name: string;
   icon: ReactNode;
@@ -54,4 +55,29 @@ export type TechnologyType = {
       content: string[];
     }[];
   }[];
+};
+
+export type PriceType = {
+  pack: string;
+  value: string;
+  x1: {
+    real: number;
+    discount: number;
+  };
+  x2: {
+    real: number;
+    discount: number;
+  };
+  x3: {
+    real: number;
+    discount: number;
+  };
+  x4: {
+    real: number;
+    discount: number;
+  };
+  x5: {
+    real: number;
+    discount: number;
+  };
 };

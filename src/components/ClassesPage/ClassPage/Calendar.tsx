@@ -10,6 +10,7 @@ import { Modal } from "flowbite-react";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,12 +22,34 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { HiInformationCircle } from "react-icons/hi";
+import { ImSpinner } from "react-icons/im";
+
+const phoneRegex = new RegExp(/^([9])+(\d{8})$/g);
 
 const FormSchema = z.object({
   start_time: z.date(),
   end_time: z.date(),
-  name: z.string(),
-  email: z.string(),
+  name: z
+    .string({
+      required_error: "Ingrese su nombre",
+    })
+    .min(1, {
+      message: "Ingrese su nombre",
+    }),
+  email: z
+    .string({
+      required_error: "Ingrese su correo",
+    })
+    .email({
+      message: "Ingrese un correo válido",
+    })
+    .min(1, { message: "Ingrese su correo" }),
+  phone: z
+    .string({
+      required_error: "Ingrese su número de celular",
+    })
+    .regex(phoneRegex, "Número inválido")
+    .min(1, { message: "Ingrese su número de celular" }),
 });
 
 interface Props {
@@ -34,19 +57,18 @@ interface Props {
 }
 
 export function Calendar({ tech }: Props) {
-  const [openModal, setOpenModal] = useState(false);
-  const [startToCreate, setStartToCreate] = useState("");
-  const [endToCreate, setEndToCreate] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [startToCreate, setStartToCreate] = useState<string>("");
+  const [endToCreate, setEndToCreate] = useState<string>("");
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      start_time: new Date(),
-      end_time: new Date(),
-      name: "",
-      email: "",
-    },
   });
+
+  const {
+    formState: { isValid },
+  } = form;
 
   const handleDateClick: (event: DateSelectArg) => void = debounce(
     (event: DateSelectArg) => {
@@ -85,6 +107,7 @@ export function Calendar({ tech }: Props) {
   );
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setLoading(true);
     const response = await fetch("/api/classes/create/event", {
       method: "POST",
       body: JSON.stringify({
@@ -94,6 +117,7 @@ export function Calendar({ tech }: Props) {
         description: `Clase de ${tech} - ${data.name}`,
         attendee_name: data.name,
         attendee_email: data.email,
+        phone: data.phone,
       }),
     });
 
@@ -103,6 +127,7 @@ export function Calendar({ tech }: Props) {
       form.reset();
       setOpenModal(false);
     }
+    setLoading(false);
   }
 
   return (
@@ -118,9 +143,9 @@ export function Calendar({ tech }: Props) {
       </div>
       <div>
         <p className="max-w-[80ch] text-custom-light-text/70 dark:text-custom-dark-text/60 inline-flex items-start gap-1">
-          <HiInformationCircle size={22} className="mt-0.5" /> Manten pulsado y
-          arrastra. Si vas a adquirir tu primera clase gratuita, asegúrate de
-          agendar 1 hora, ya que de otra manera no será gratuita.
+          <HiInformationCircle size={22} className="flex-none mt-0.5" /> Manten
+          pulsado y arrastra. Si vas a adquirir tu primera clase gratuita,
+          asegúrate de agendar 1 hora, ya que de otra manera no será validado.
         </p>
       </div>
       <div className="max-w-4xl w-full h-full mx-auto">
@@ -162,6 +187,8 @@ export function Calendar({ tech }: Props) {
           windowResize={function (arg: any) {
             if (arg.view.calendar.el.clientWidth < 400) {
               arg.view.calendar.changeView("timeGridDay");
+            } else {
+              arg.view.calendar.changeView("timeGridWeek");
             }
           }}
           allDaySlot={false}
@@ -191,7 +218,7 @@ export function Calendar({ tech }: Props) {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <Modal.Header className="py-3 px-4 border bg-custom-light-bg dark:bg-custom-dark-bg">
-              Agendar una clase
+              Agendar una clase de {tech}
             </Modal.Header>
             <Modal.Body className="border-l-[1px] border-r-[1px] dark:border-gray-600 bg-custom-light-bg dark:bg-custom-dark-bg">
               <div className="w-full grid grid-cols-2 gap-4">
@@ -284,11 +311,50 @@ export function Calendar({ tech }: Props) {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem className="col-span-2">
+                      <FormLabel className="text-custom-light-text dark:text-custom-dark-text">
+                        Celular (sin código de país)
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          autoComplete="off"
+                          className="text-custom-light-text font-medium dark:text-custom-dark-text"
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Es necesario el número de celular para contactarme
+                        contigo (WhatsApp) y brintarte más información. Además,
+                        para confirmar la clase y coordinar los pagos.{" "}
+                        <span className="font-semibold">
+                          Estate atento a mi comunicación, será lo más pronto
+                          posible.
+                        </span>
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             </Modal.Body>
             <Modal.Footer className="py-3 px-4 border justify-end bg-custom-light-bg dark:bg-custom-dark-bg">
-              <Button type="submit" variant="destructive">
-                Confirmar
+              <Button
+                disabled={!isValid || loading}
+                type="submit"
+                variant="destructive"
+              >
+                {loading ? (
+                  <>
+                    <ImSpinner className="mr-2 h-4 w-4 animate-spin" />{" "}
+                    Cargando...
+                  </>
+                ) : (
+                  <>Confirmar</>
+                )}
               </Button>
             </Modal.Footer>
           </form>
