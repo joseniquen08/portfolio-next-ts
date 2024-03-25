@@ -4,6 +4,8 @@ import Image from "next/image";
 import perfil from "@public/images/perfil.png";
 import { LinkSocialNetwork } from "./LinkSocialNetwork";
 import { SiGithub, SiInstagram, SiLinkedin } from "react-icons/si";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function Header() {
   return (
@@ -30,6 +32,11 @@ export function Header() {
           <LinkSocialNetwork href="https://www.instagram.com/joseniquen_">
             <SiInstagram className="h-7 w-7" />
           </LinkSocialNetwork>
+        </div>
+        <div className="flex justify-center lg:justify-start">
+          <Button variant="destructive" size="lg" className="text-lg" asChild>
+            <Link href="/classes">Agenda una clase conmigo</Link>
+          </Button>
         </div>
       </div>
       <div className="flex justify-center w-full lg:justify-end">

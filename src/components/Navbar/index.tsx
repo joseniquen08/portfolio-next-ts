@@ -25,6 +25,10 @@ export function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
+    console.log(isOpen);
+  }, [isOpen]);
+
+  useEffect(() => {
     if (!("theme" in localStorage)) {
       setThemeSelected(undefined);
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -178,21 +182,20 @@ export function Navbar() {
           <motion.div
             initial={false}
             transition={{ type: "spring" }}
-            animate={isOpen ? "open" : "closed"}
-            variants={{
-              closed: { opacity: 0, display: "none" },
-              open: { opacity: 1, display: "block" },
+            animate={{
+              opacity: isOpen ? 1 : 0,
+              visibility: isOpen ? "visible" : "hidden",
             }}
-            exit={{ opacity: 0, display: "none" }}
             className="absolute w-full font-medium text-custom-light-text bg-custom-light-bg shadow-xl md:hidden dark:text-custom-dark-text dark:bg-custom-dark-bg shadow-gray-200/50 dark:shadow-custom-dark-bg/50"
           >
             <div className="px-2.5 sm:px-4 py-3 space-y-1.5">
               {pathname == "/" ? (
                 <ListHomeMobile toggleOpen={toggleOpen} />
               ) : (
-                <ListOtherPagesMobile />
+                <ListOtherPagesMobile toggleOpen={toggleOpen} />
               )}
               <Link
+                onClick={() => toggleOpen()}
                 href="/classes"
                 className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
               >
@@ -316,22 +319,25 @@ function ListOtherPages() {
   );
 }
 
-function ListOtherPagesMobile() {
+function ListOtherPagesMobile({ toggleOpen }: { toggleOpen: Cycle }) {
   return (
     <>
       <Link
+        onClick={() => toggleOpen()}
         href="/#projects"
         className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
       >
         Experiencia
       </Link>
       <Link
+        onClick={() => toggleOpen()}
         href="/#about"
         className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
       >
         Sobre mí
       </Link>
       <Link
+        onClick={() => toggleOpen()}
         href="/#skills"
         className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
       >
