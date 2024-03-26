@@ -23,12 +23,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { HiInformationCircle } from "react-icons/hi";
 import { ImSpinner } from "react-icons/im";
+import { dateToString } from "@/utils/dateToString";
 
 const phoneRegex = new RegExp(/^([9])+(\d{8})$/g);
 
 const FormSchema = z.object({
-  start_time: z.date(),
-  end_time: z.date(),
+  start_time: z.string(),
+  end_time: z.string(),
   name: z
     .string({
       required_error: "Ingrese su nombre",
@@ -72,35 +73,12 @@ export function Calendar({ tech }: Props) {
 
   const handleDateClick: (event: DateSelectArg) => void = debounce(
     (event: DateSelectArg) => {
-      const start_formatted = new Intl.DateTimeFormat("es-PE", {
-        timeZone: "America/Lima",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      })
-        .format(event.start)
-        .split("/")
-        .reverse()
-        .join("-");
-      const end_formatted = new Intl.DateTimeFormat("es-PE", {
-        timeZone: "America/Lima",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      })
-        .format(event.start)
-        .split("/")
-        .reverse()
-        .join("-");
-      console.log(start_formatted);
-      const start_array = event.start.toLocaleString().split(", ");
-      const end_array = event.end.toLocaleString().split(", ");
-      const start = start_formatted + "T" + start_array[1];
-      const end = end_formatted + "T" + end_array[1];
+      const start = dateToString(event.start).split(".")[0];
+      const end = dateToString(event.end).split(".")[0];
       setStartToCreate(start);
       setEndToCreate(end);
-      form.setValue("start_time", event.start);
-      form.setValue("end_time", event.end);
+      form.setValue("start_time", start.split("T")[1]);
+      form.setValue("end_time", end.split("T")[1]);
       setOpenModal(true);
     },
     50
@@ -237,11 +215,7 @@ export function Calendar({ tech }: Props) {
                           {...field}
                           className="text-stone-600 font-semibold dark:text-stone-400 read-only:bg-custom-light-text/5 dark:read-only:bg-custom-dark-text/5"
                           readOnly
-                          value={
-                            field.value instanceof Date
-                              ? field.value.toLocaleTimeString()
-                              : field.value
-                          }
+                          value={field.value}
                         />
                       </FormControl>
                       <FormMessage />
@@ -263,11 +237,7 @@ export function Calendar({ tech }: Props) {
                           {...field}
                           className="text-stone-600 font-semibold dark:text-stone-400 read-only:bg-custom-light-text/5 dark:read-only:bg-custom-dark-text/5"
                           readOnly
-                          value={
-                            field.value instanceof Date
-                              ? field.value.toLocaleTimeString()
-                              : field.value
-                          }
+                          value={field.value}
                         />
                       </FormControl>
                       <FormMessage />

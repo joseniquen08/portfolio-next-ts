@@ -25,10 +25,6 @@ export function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log(isOpen);
-  }, [isOpen]);
-
-  useEffect(() => {
     if (!("theme" in localStorage)) {
       setThemeSelected(undefined);
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {

@@ -12,7 +12,7 @@ export function FAQ() {
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">
           <AccordionTrigger>
-            <span className="text-base">
+            <span className="text-base text-left">
               ¿Cuánto es la duración de cada clase?
             </span>
           </AccordionTrigger>
@@ -27,7 +27,7 @@ export function FAQ() {
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger>
-            <span className="text-base">
+            <span className="text-base text-left">
               ¿Cómo puedo hacer uso del Pack que he adquirido?
             </span>
           </AccordionTrigger>
@@ -46,7 +46,7 @@ export function FAQ() {
         </AccordionItem>
         <AccordionItem value="item-3">
           <AccordionTrigger>
-            <span className="text-base">
+            <span className="text-base text-left">
               ¿Cuál es el proceso de pago para las clases?
             </span>
           </AccordionTrigger>
@@ -64,7 +64,9 @@ export function FAQ() {
         </AccordionItem>
         <AccordionItem value="item-4">
           <AccordionTrigger>
-            <span className="text-base">¿Cuáles son los métodos de pago?</span>
+            <span className="text-base text-left">
+              ¿Cuáles son los métodos de pago?
+            </span>
           </AccordionTrigger>
           <AccordionContent>
             <p className="max-w-[80ch]">
