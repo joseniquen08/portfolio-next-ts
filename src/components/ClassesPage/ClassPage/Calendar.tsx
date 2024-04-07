@@ -6,7 +6,7 @@ import es from "@fullcalendar/core/locales/es";
 import { DateSelectArg } from "@fullcalendar/core/index.js";
 import { useState } from "react";
 import { debounce } from "@/utils/debounce";
-import { Modal } from "flowbite-react";
+import { CustomFlowbiteTheme, Modal } from "flowbite-react";
 import {
   Form,
   FormControl,
@@ -56,6 +56,13 @@ const FormSchema = z.object({
 interface Props {
   tech: string;
 }
+
+const customTheme: CustomFlowbiteTheme["modal"] = {
+  content: {
+    inner:
+      "relative flex max-h-[90dvh] flex-col rounded-2xl bg-white shadow dark:bg-gray-700",
+  },
+};
 
 export function Calendar({ tech }: Props) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -191,11 +198,12 @@ export function Calendar({ tech }: Props) {
           setOpenModal(false);
           form.reset();
         }}
-        className="bg-custom-light-bg dark:bg-custom-dark-bg"
+        className="bg-custom-light-bg dark:bg-custom-dark-bg bg-opacity-80 backdrop-blur-sm"
+        theme={customTheme}
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <Modal.Header className="py-3 px-4 border bg-custom-light-bg dark:bg-custom-dark-bg">
+            <Modal.Header className="rounded-t-xl py-3 px-4 border bg-custom-light-bg dark:bg-custom-dark-bg">
               Agendar una clase de {tech}
             </Modal.Header>
             <Modal.Body className="border-l-[1px] border-r-[1px] dark:border-gray-600 bg-custom-light-bg dark:bg-custom-dark-bg">
@@ -311,7 +319,7 @@ export function Calendar({ tech }: Props) {
                 />
               </div>
             </Modal.Body>
-            <Modal.Footer className="py-3 px-4 border justify-end bg-custom-light-bg dark:bg-custom-dark-bg">
+            <Modal.Footer className="rounded-b-xl py-3 px-4 border justify-end bg-custom-light-bg dark:bg-custom-dark-bg">
               <Button
                 disabled={!isValid || loading}
                 type="submit"

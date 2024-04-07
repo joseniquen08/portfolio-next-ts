@@ -98,7 +98,7 @@ export function Packs() {
   }, [watch]);
 
   return (
-    <div className="flex flex-col gap-6 pt-20" id="schedule-class">
+    <div className="flex flex-col gap-6 pt-20">
       <p className="text-3xl font-semibold">Adquiere un pack de clases</p>
       <div>
         <p className="text-lg max-w-[80ch]">
@@ -119,19 +119,19 @@ export function Packs() {
             <TableRow>
               <TableHead>Pack / Cant. alumnos</TableHead>
               <TableHead className="text-center font-medium text-custom-light-text dark:text-custom-dark-text">
-                x1
+                1 alumno
               </TableHead>
               <TableHead className="text-center font-medium text-custom-light-text dark:text-custom-dark-text">
-                x2
+                2 alumnos
               </TableHead>
               <TableHead className="text-center font-medium text-custom-light-text dark:text-custom-dark-text">
-                x3
+                3 alumnos
               </TableHead>
               <TableHead className="text-center font-medium text-custom-light-text dark:text-custom-dark-text">
-                x4
+                4 alumnos
               </TableHead>
               <TableHead className="text-center font-medium text-custom-light-text dark:text-custom-dark-text">
-                x5
+                5 alumnos
               </TableHead>
             </TableRow>
           </TableHeader>

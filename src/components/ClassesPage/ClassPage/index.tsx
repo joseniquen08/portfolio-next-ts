@@ -5,16 +5,21 @@ import { BreadcrumbClass } from "./BreadcrumbClass";
 import { Button } from "@/components/ui/button";
 import { Link as LinkReactScroll } from "react-scroll";
 import { Calendar } from "./Calendar";
-import { Roadmap } from "./Roadmap";
 import { Packs } from "./Packs";
 import { FAQ } from "./FAQ";
+import { Badge } from "@/components/ui/badge";
+import { Modalities } from "./Modalities";
+import { TabsModalities } from "./TabsModalities";
 
 export function ClassPage({ tech }: { tech: TechnologyType }) {
   return (
     <div className="flex flex-col w-full max-w-6xl px-4 py-2 md:py-10 mx-auto lg:px-16 text-custom-light-text dark:text-custom-dark-text flex-1">
       <BreadcrumbClass tech={tech} />
-      <div className="flex flex-col gap-5 sm:flex-row justify-between items-center mt-10">
-        <p className="text-5xl font-bold text-custom-light-accent dark:text-custom-dark-primary">
+      <div className="flex flex-col gap-5 justify-between items-center sm:items-start mt-10">
+        {tech.status == 2 && (
+          <Badge variant="default">¡Tu primera clase es gratuita!</Badge>
+        )}
+        <p className="text-6xl font-bold text-custom-light-accent dark:text-custom-dark-primary">
           {tech.name}
         </p>
         {tech.status == 2 && (
@@ -26,24 +31,16 @@ export function ClassPage({ tech }: { tech: TechnologyType }) {
       {tech.status == 2 ? (
         <>
           <p className="max-w-[80ch] mt-8">{tech.description}</p>
-          <p className="max-w-[80ch] mt-4">
-            Para esta tecnología, existen 2 modalidades de enseñanza. La primera
-            es seguir una{" "}
-            <span className="font-semibold text-custom-light-accent dark:text-custom-dark-primary">
-              Ruta de aprendizaje
-            </span>{" "}
-            divida en niveles, que proporciona un enfoque estructurado para
-            dominar gradualmente los conceptos desde principiante hasta un nivel
-            más avanzado. La segunda modalidad consiste en{" "}
-            <span className="font-semibold text-custom-light-accent dark:text-custom-dark-primary">
-              Sesiones Personalizadas
-            </span>{" "}
-            enfocadas en resolver dudas o dificultades específicas que puedas
-            tener durante tu proceso de aprendizaje. Ambas modalidades están
-            diseñadas para adaptarse a tus necesidades y estilo de aprendizaje.
-          </p>
-          {tech.roadmap.length > 0 && <Roadmap tech={tech} />}
+          <Modalities />
+          <TabsModalities tech={tech} />
           <Packs />
+          {/* <iframe
+            src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3dqEeg0bnh6eDnWVPmUgIWcjbQMKif1EBir_Y3dqPy1bKNizcCwjR3nqGMdQpAlOzm6lOO0DZb?gv=true"
+            style={{ border: 0 }}
+            className="dark:bg-white dark:tex-red-600"
+            width="100%"
+            height="640"
+          ></iframe> */}
           <Calendar tech={tech.name} />
           <FAQ />
         </>
