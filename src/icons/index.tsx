@@ -2,6 +2,7 @@ import AwsIcon from "./AwsIcon";
 import AxiosIcon from "./AxiosIcon";
 import BootstrapIcon from "./BootstrapIcon";
 import ChakrauiIcon from "./ChakrauiIcon";
+import ClaudeIcon from "./ClaudeIcon";
 import CodeigniterIcon from "./CodeigniterIcon";
 import Css3Icon from "./Css3Icon";
 import DockerIcon from "./DockerIcon";
@@ -23,7 +24,6 @@ import MysqlIcon from "./MysqlIcon";
 import N8nIcon from "./N8nIcon";
 import NextdotjsIcon from "./NextdotjsIcon";
 import NodedotjsIcon from "./NodedotjsIcon";
-import OpenaiIcon from "./OpenaiIcon";
 import PhpIcon from "./PhpIcon";
 import PostgresqlIcon from "./PostgresqlIcon";
 import PSeIntIcon from "./PseIntIcon";
@@ -41,6 +41,7 @@ export {
   AxiosIcon,
   BootstrapIcon,
   ChakrauiIcon,
+  ClaudeIcon,
   CodeigniterIcon,
   Css3Icon,
   DockerIcon,
@@ -62,7 +63,6 @@ export {
   N8nIcon,
   NextdotjsIcon,
   NodedotjsIcon,
-  OpenaiIcon,
   PhpIcon,
   PostgresqlIcon,
   PSeIntIcon,

@@ -3,6 +3,7 @@ import {
   AxiosIcon,
   BootstrapIcon,
   ChakrauiIcon,
+  ClaudeIcon,
   CodeigniterIcon,
   Css3Icon,
   DockerIcon,
@@ -24,7 +25,6 @@ import {
   N8nIcon,
   NextdotjsIcon,
   NodedotjsIcon,
-  OpenaiIcon,
   PhpIcon,
   PostgresqlIcon,
   PSeIntIcon,
@@ -49,7 +49,7 @@ const size = 36;
 export const skills: SkillType[] = [
   {
     name: "AWS",
-    icon: <AwsIcon size={size} color="#232F3E" />,
+    icon: <AwsIcon size={size} color="#FF9900" />,
     experience: {
       en: "+1.5 years",
       es: "+1.5 años",
@@ -57,14 +57,14 @@ export const skills: SkillType[] = [
   },
   {
     name: "n8n",
-    icon: <N8nIcon size={size} color="#EA445A" />,
+    icon: <N8nIcon size={size} color="#EA4B71" />,
     experience: {
       en: "+1.5 years",
       es: "+1.5 años",
     },
   },
   {
-    name: "Docker", // Muy común si usas AWS y backend
+    name: "Docker",
     icon: <DockerIcon size={size} color="#2496ED" />,
     experience: {
       en: "+1.5 years",
@@ -72,23 +72,21 @@ export const skills: SkillType[] = [
     },
   },
   {
-    name: "OpenAI / AI Tools", // Representa el uso de IA
-    icon: <OpenaiIcon size={size} className="text-black dark:text-white" />,
+    name: "Claude / AI Tools",
+    icon: <ClaudeIcon size={size} color="#D97757" />,
     experience: {
       en: "+1.5 years",
       es: "+1.5 años",
     },
   },
   {
-    name: "Linux", // Fundamental para cloud y backend
+    name: "Linux",
     icon: <LinuxIcon size={size} color="#FCC624" />,
     experience: {
       en: "+2 years",
       es: "+2 años",
     },
   },
-
-  // --- Skills Anteriores (Actualizadas con +1.5 años) ---
   {
     name: "JavaScript",
     icon: <JavascriptIcon size={size} color="#F7DF1E" />,
