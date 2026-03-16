@@ -21,12 +21,7 @@ export const About = () => {
           </div>
           <div className="space-y-6 text-lg font-normal leading-7 md:leading-8 md:text-lg max-w-[75ch]">
             <p className="text-center md:text-start">
-              Soy un desarrollador FullStack radicado en Perú 🇵🇪. Me gusta
-              desarrollar aplicaciones bonitas y confiables. Siempre estoy en
-              constante aprendizaje de tecnologías relacionadas con el
-              desarrollo web. Trabajo principalmente con React, sin embargo,
-              todos los días aprendo algo nuevo de diferentes lenguajes,
-              librerías y frameworks.
+              Soy José Ñiquen, Ingeniero de Software radicado en Perú 🇵🇪. Actualmente trabajo en Ticketmaster. Actualmente estoy enfocado en el desarrollo backend, el manejo de infraestructura en AWS y la creación de automatizaciones (con n8n). Me gusta construir sistemas que funcionen bien y resuelvan problemas reales. Además, siempre estoy probando cosas nuevas, y hoy en día me apoyo mucho en la IA para optimizar mi código y desarrollar soluciones más rápido.
             </p>
             <p className="text-center md:text-start">
               También, me gusta escuchar música mientras realizo cualquier

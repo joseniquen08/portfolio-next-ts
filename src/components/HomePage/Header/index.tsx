@@ -19,7 +19,7 @@ export function Header() {
             Soy José Ñiquen
           </p>
           <p className="text-3xl font-semibold tracking-tight break-words lg:text-4xl text-custom-light-text dark:text-custom-dark-text">
-            FullStack Developer
+            Software Engineer
           </p>
         </div>
         <div className="flex justify-center pl-1 space-x-5 text-lg lg:space-x-7 lg:justify-start dark:text-custom-dark-text text-custom-light-text">
