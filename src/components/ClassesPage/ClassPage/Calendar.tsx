@@ -32,14 +32,14 @@ const FormSchema = z.object({
   end_time: z.string(),
   name: z
     .string({
-      required_error: "Ingrese su nombre",
+      error: "Ingrese su nombre",
     })
     .min(1, {
       message: "Ingrese su nombre",
     }),
   email: z
     .string({
-      required_error: "Ingrese su correo",
+      error: "Ingrese su correo",
     })
     .email({
       message: "Ingrese un correo válido",
@@ -47,7 +47,7 @@ const FormSchema = z.object({
     .min(1, { message: "Ingrese su correo" }),
   phone: z
     .string({
-      required_error: "Ingrese su número de celular",
+      error: "Ingrese su número de celular",
     })
     .regex(phoneRegex, "Número inválido")
     .min(1, { message: "Ingrese su número de celular" }),

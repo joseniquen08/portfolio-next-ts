@@ -1,5 +1,5 @@
 import emailjs from "@emailjs/browser";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, DialogBackdrop, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { Poppins } from "next/font/google";
 import { ChangeEvent, FormEvent, Fragment, useRef, useState } from "react";
@@ -103,7 +103,7 @@ export const ModalContact = ({
         onClose={closeContactModal}
       >
         <div className="min-h-screen px-2.5 text-center">
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -112,15 +112,15 @@ export const ModalContact = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0" />
-          </Transition.Child>
+            <DialogBackdrop className="fixed inset-0" />
+          </TransitionChild>
           <span
             className="inline-block h-screen align-middle"
             aria-hidden="true"
           >
             &#8203;
           </span>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 scale-95"
@@ -132,12 +132,12 @@ export const ModalContact = ({
             <div className="relative inline-block w-full max-w-5xl overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-xl border border-custom-light-primary dark:border-custom-dark-primary">
               <div className="px-6 pt-8 pb-6 space-y-3 md:grid md:grid-cols-2 md:space-y-0 md:gap-x-8 md:px-8 md:pt-10 md:pb-10 bg-gradient-to-r from-custom-light-bg to-custom-light-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95">
                 <div className="space-y-4 md:col-span-1 md:space-y-5 md:px-3">
-                  <Dialog.Title
+                  <DialogTitle
                     as="h3"
                     className="text-2xl font-semibold leading-6 tracking-tight text-custom-light-primary md:text-5xl dark:text-custom-dark-text"
                   >
                     Contáctame
-                  </Dialog.Title>
+                  </DialogTitle>
                   <div>
                     <p className="text-base font-medium text-justify text-custom-light-text/50 dark:text-custom-dark-text/60 md:text-lg">
                       Me interesan los retos que pongan a prueba mis
@@ -315,7 +315,7 @@ export const ModalContact = ({
                 </button>
               </div>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
     </Transition>
