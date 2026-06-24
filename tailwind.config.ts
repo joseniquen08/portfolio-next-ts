@@ -14,6 +14,11 @@ const config: Config = {
       ...defaultTheme.screens,
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
+        display: ["var(--font-display)", ...defaultTheme.fontFamily.sans],
+        mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
+      },
       fontSize: {
         "2xs": [
           "0.625rem",
@@ -38,30 +43,6 @@ const config: Config = {
         152: "38rem",
       },
       colors: {
-        "dark-blue": {
-          50: "#00406c",
-          100: "#003a61",
-          200: "#003356",
-          300: "#002e4e",
-          400: "#002945",
-          500: "#00253e",
-          600: "#002137",
-          700: "#001a2c",
-          800: "#001523",
-          900: "#00111c",
-        },
-        "light-blue": {
-          50: "#a9d6e5",
-          100: "#89c2d9",
-          200: "#61a5c2",
-          300: "#468faf",
-          400: "#2c7da0",
-          500: "#2a6f97",
-          600: "#014f86",
-          700: "#01497c",
-          800: "#013a63",
-          900: "#012a4a",
-        },
         custom: {
           light: {
             text: "#151702",
@@ -76,6 +57,7 @@ const config: Config = {
             primary: "#cff122",
             secondary: "#0e4481",
             accent: "#421fa3",
+            "accent-text": "#9d83f2",
           },
         },
       },

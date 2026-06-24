@@ -1,7 +1,6 @@
 import emailjs from "@emailjs/browser";
 import { Dialog, DialogBackdrop, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { motion } from "framer-motion";
-import { Poppins } from "next/font/google";
 import { ChangeEvent, FormEvent, Fragment, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { HiCheckCircle, HiOutlineX } from "react-icons/hi";
@@ -16,10 +15,6 @@ interface Props {
   closeContactModal: () => void;
 }
 
-const poppins = Poppins({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
-});
 
 export const ModalContact = ({
   theme,
@@ -99,7 +94,7 @@ export const ModalContact = ({
     <Transition appear show={contactModalIsOpen} as={Fragment}>
       <Dialog
         as="div"
-        className={`fixed inset-0 z-50 overflow-y-auto bg-black/80 ${poppins.className} font-poppins`}
+        className="fixed inset-0 z-50 overflow-y-auto bg-black/80 font-sans"
         onClose={closeContactModal}
       >
         <div className="min-h-screen px-2.5 text-center">

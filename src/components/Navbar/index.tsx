@@ -154,7 +154,7 @@ export function Navbar() {
                 >
                   Clases
                   <Badge
-                    variant="destructive"
+                    variant="brand"
                     className="absolute -top-[0.315rem] -right-4 text-2xs px-1.5 border-none"
                   >
                     Nuevo
@@ -292,24 +292,18 @@ function ListOtherPages() {
   return (
     <>
       <motion.li whileTap={{ scale: 0.9 }}>
-        <Link href="/#projects" legacyBehavior>
-          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+        <Link href="/#projects" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
             Experiencia
-          </a>
         </Link>
       </motion.li>
       <motion.li whileTap={{ scale: 0.9 }}>
-        <Link href="/#about" legacyBehavior>
-          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+        <Link href="/#about" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
             Sobre mí
-          </a>
         </Link>
       </motion.li>
       <motion.li whileTap={{ scale: 0.9 }}>
-        <Link href="/#skills" legacyBehavior>
-          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+        <Link href="/#skills" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
             Habilidades
-          </a>
         </Link>
       </motion.li>
     </>

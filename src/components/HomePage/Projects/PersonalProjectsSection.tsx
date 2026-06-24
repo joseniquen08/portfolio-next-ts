@@ -20,13 +20,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Poppins } from "next/font/google";
 import { Button } from "@/components/ui/button";
-
-const poppins = Poppins({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
-});
 
 const customTheme = {
   root: {
@@ -83,7 +77,7 @@ export const PersonalProjectsSection = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
-            className={`${poppins.className} font-poppins`}
+            className="font-sans"
           >
             <DropdownMenuLabel>Ordenar por</DropdownMenuLabel>
             <DropdownMenuSeparator />

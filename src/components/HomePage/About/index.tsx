@@ -1,19 +1,28 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { NowPlaying } from "./NowPlaying";
 
 export const About = () => {
+  const prefersReduced = useReducedMotion();
+
   return (
     <motion.div
       id="about"
       className="max-w-5xl px-4 pt-24 pb-0 mx-auto sm:px-10 2xl:max-w-6xl lg:px-16 text-custom-light-text dark:text-custom-dark-text w-full"
+      initial={prefersReduced ? false : { opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="flex flex-col items-center space-y-8 lg:items-start">
         <div className="space-y-6">
-          <div className="space-y-1">
+          <div className="space-y-2">
+            <p className="font-mono text-xs tracking-widest uppercase text-custom-light-accent/60 dark:text-custom-dark-accent-text/60 text-center md:text-left">
+              jose_niquen.md
+            </p>
             <div className="flex flex-col items-center md:items-start">
-              <p className="py-1 pr-2 text-3xl font-bold tracking-tight text-center md:text-4xl w-max md:text-left text-custom-light-accent dark:text-custom-dark-primary">
+              <p className="font-display py-1 pr-2 text-3xl font-bold tracking-tight text-center md:text-4xl w-max md:text-left text-custom-light-accent dark:text-custom-dark-primary">
                 Sobre mí
               </p>
             </div>
