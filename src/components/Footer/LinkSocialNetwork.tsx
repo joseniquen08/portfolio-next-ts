@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 
 interface Props {
   href: string;
-  children: JSX.Element;
+  children: ReactNode;
 }
 
 export const LinkSocialNetwork = ({ href, children }: Props) => {

@@ -1,11 +1,10 @@
 import { ProjectPage } from "@/components/ProjectPage";
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
-export default function Project({ params }: Props) {
-  return <ProjectPage slug={params.slug} />;
+export default async function Project({ params }: Props) {
+  const { slug } = await params;
+  return <ProjectPage slug={slug} />;
 }

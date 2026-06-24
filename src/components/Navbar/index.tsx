@@ -26,6 +26,7 @@ export function Navbar() {
 
   useEffect(() => {
     if (!("theme" in localStorage)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setThemeSelected(undefined);
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         document.getElementsByTagName("HTML")[0].setAttribute("class", "dark");

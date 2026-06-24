@@ -24,6 +24,7 @@ export const MenuTheme = ({
 
   useEffect(() => {
     if ("theme" in localStorage) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setThemeInLocalStorage(true);
     } else {
       setThemeInLocalStorage(false);

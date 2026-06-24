@@ -3,13 +3,12 @@ import { technologies } from "@/utils/constants";
 import { notFound } from "next/navigation";
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
-export default function Class({ params }: Props) {
-  const tech = technologies.find((element) => element.slug == params.slug);
+export default async function Class({ params }: Props) {
+  const { slug } = await params;
+  const tech = technologies.find((element) => element.slug == slug);
 
   if (!tech) {
     notFound();

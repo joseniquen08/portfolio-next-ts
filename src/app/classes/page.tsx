@@ -22,7 +22,7 @@ async function getComments() {
 }
 
 export default async function Classes() {
-  const comments: Tables<"class_comments">[] = await getComments();
+  const comments: Tables<"class_comments">[] = (await getComments()) ?? [];
 
   return (
     <div className="flex flex-col w-full max-w-6xl px-4 py-2 md:py-14 mx-auto space-y-4 lg:px-16 text-custom-light-text dark:text-custom-dark-text">

@@ -16,7 +16,7 @@ export const NowPlaying = () => {
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressBarRef = useRef<HTMLInputElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(undefined);
 
   const onLoadedMetadata = () => {
     const seconds = Math.round(audioRef.current?.duration || 0);
