@@ -2,10 +2,10 @@ import { HiOutlinePlusSm } from "react-icons/hi";
 import {
   SiGithub,
   SiInstagram,
-  SiLinkedin,
   SiNextdotjs,
   SiTailwindcss,
 } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 import { LinkSocialNetwork } from "./LinkSocialNetwork";
 
 export const Footer = () => {
@@ -37,7 +37,7 @@ export const Footer = () => {
               <SiGithub className="w-6 h-6" />
             </LinkSocialNetwork>
             <LinkSocialNetwork href="https://www.linkedin.com/in/jose-niquen">
-              <SiLinkedin className="w-6 h-6" />
+              <FaLinkedin className="w-6 h-6" />
             </LinkSocialNetwork>
             <LinkSocialNetwork href="https://www.instagram.com/joseniquen_">
               <SiInstagram className="w-6 h-6" />

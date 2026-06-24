@@ -194,8 +194,6 @@ export const NowPlaying = () => {
                 transition: {
                   repeat: 1,
                   repeatType: "mirror",
-                  from: 0,
-                  to: 360,
                   ease: "easeInOut",
                   duration: 0.65,
                 },

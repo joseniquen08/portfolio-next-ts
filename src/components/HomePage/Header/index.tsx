@@ -3,7 +3,8 @@
 import Image from "next/image";
 import perfil from "@public/images/perfil.png";
 import { LinkSocialNetwork } from "./LinkSocialNetwork";
-import { SiGithub, SiInstagram, SiLinkedin } from "react-icons/si";
+import { SiGithub, SiInstagram } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -27,7 +28,7 @@ export function Header() {
             <SiGithub className="h-7 w-7" />
           </LinkSocialNetwork>
           <LinkSocialNetwork href="https://www.linkedin.com/in/jose-niquen">
-            <SiLinkedin className="h-7 w-7" />
+            <FaLinkedin className="h-7 w-7" />
           </LinkSocialNetwork>
           <LinkSocialNetwork href="https://www.instagram.com/joseniquen_">
             <SiInstagram className="h-7 w-7" />

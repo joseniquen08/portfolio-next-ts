@@ -5,12 +5,8 @@ import { Poppins } from "next/font/google";
 import { ChangeEvent, FormEvent, Fragment, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { HiCheckCircle, HiOutlineX } from "react-icons/hi";
-import {
-  SiInstagram,
-  SiLinkedin,
-  SiTelegram,
-  SiWhatsapp,
-} from "react-icons/si";
+import { SiInstagram, SiTelegram, SiWhatsapp } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 import { useTimeoutFn } from "react-use";
 import { ButtonLoading } from "./ButtonLoading";
 
@@ -191,7 +187,7 @@ export const ModalContact = ({
                         rel="noreferrer"
                         className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#0A66C2] bg-opacity-100 dark:bg-opacity-30 dark:hover:bg-opacity-40 hover:bg-opacity-90 text-custom-dark-text"
                       >
-                        <SiLinkedin className="w-6 h-6 md:w-7 md:h-7" />
+                        <FaLinkedin className="w-6 h-6 md:w-7 md:h-7" />
                       </motion.a>
                     </li>
                   </ul>

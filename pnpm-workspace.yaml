@@ -1,0 +1,4 @@
+allowBuilds:
+  unrs-resolver: true
+minimumReleaseAgeExclude:
+  - autoprefixer@10.5.1
