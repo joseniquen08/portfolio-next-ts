@@ -1,9 +1,13 @@
 import { Badge } from "@/components/ui/badge";
 import { ProjectType } from "@/types";
 import {
-  CustomFlowbiteTheme,
-  Flowbite,
   Timeline,
+  TimelineItem,
+  TimelinePoint,
+  TimelineContent,
+  TimelineTime,
+  TimelineTitle,
+  TimelineBody,
   Tooltip,
 } from "flowbite-react";
 import Image from "next/image";
@@ -11,7 +15,7 @@ import Link from "next/link";
 import { HiOutlineEye, HiOutlineGlobeAlt } from "react-icons/hi";
 import { SiGithub } from "react-icons/si";
 
-const customTheme: CustomFlowbiteTheme["tooltip"] = {
+const customTheme = {
   arrow: {
     style: {
       dark: "bg-gray-300 dark:bg-custom-dark-accent",
@@ -33,10 +37,10 @@ export const ProjectRow = ({
   github,
 }: ProjectType) => {
   return (
-    <Timeline.Item className="mb-8">
-      <Timeline.Point />
-      <Timeline.Content>
-        <Timeline.Time>
+    <TimelineItem className="mb-8">
+      <TimelinePoint />
+      <TimelineContent>
+        <TimelineTime>
           <div className="flex space-x-2 items-center py-0.5">
             {badges.map(({ name }, i) => (
               <Badge key={i} variant="role" className="rounded-full">
@@ -44,9 +48,9 @@ export const ProjectRow = ({
               </Badge>
             ))}
           </div>
-        </Timeline.Time>
-        <Timeline.Title>{title}</Timeline.Title>
-        <Timeline.Body className="flex flex-col space-y-4">
+        </TimelineTime>
+        <TimelineTitle>{title}</TimelineTitle>
+        <TimelineBody className="flex flex-col space-y-4">
           <p>{description.es}</p>
           <div className="flex gap-3.5 flex-wrap">
             {icons.map(({ name, icon }, i) => (
@@ -94,8 +98,8 @@ export const ProjectRow = ({
               </Link>
             </div>
           </div>
-        </Timeline.Body>
-      </Timeline.Content>
-    </Timeline.Item>
+        </TimelineBody>
+      </TimelineContent>
+    </TimelineItem>
   );
 };

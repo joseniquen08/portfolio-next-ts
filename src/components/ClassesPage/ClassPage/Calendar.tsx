@@ -6,7 +6,7 @@ import es from "@fullcalendar/core/locales/es";
 import { DateSelectArg } from "@fullcalendar/core/index.js";
 import { useState } from "react";
 import { debounce } from "@/utils/debounce";
-import { CustomFlowbiteTheme, Modal } from "flowbite-react";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "flowbite-react";
 import {
   Form,
   FormControl,
@@ -57,7 +57,7 @@ interface Props {
   tech: string;
 }
 
-const customTheme: CustomFlowbiteTheme["modal"] = {
+const customTheme = {
   content: {
     inner:
       "relative flex max-h-[90dvh] flex-col rounded-2xl bg-white shadow dark:bg-gray-700",
@@ -203,10 +203,10 @@ export function Calendar({ tech }: Props) {
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <Modal.Header className="rounded-t-xl py-3 px-4 border bg-custom-light-bg dark:bg-custom-dark-bg">
+            <ModalHeader className="rounded-t-xl py-3 px-4 border bg-custom-light-bg dark:bg-custom-dark-bg">
               Agendar una clase de {tech}
-            </Modal.Header>
-            <Modal.Body className="border-l-[1px] border-r-[1px] dark:border-gray-600 bg-custom-light-bg dark:bg-custom-dark-bg">
+            </ModalHeader>
+            <ModalBody className="border-l-[1px] border-r-[1px] dark:border-gray-600 bg-custom-light-bg dark:bg-custom-dark-bg">
               <div className="w-full grid grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
@@ -318,8 +318,8 @@ export function Calendar({ tech }: Props) {
                   )}
                 />
               </div>
-            </Modal.Body>
-            <Modal.Footer className="rounded-b-xl py-3 px-4 border justify-end bg-custom-light-bg dark:bg-custom-dark-bg">
+            </ModalBody>
+            <ModalFooter className="rounded-b-xl py-3 px-4 border justify-end bg-custom-light-bg dark:bg-custom-dark-bg">
               <Button
                 disabled={!isValid || loading}
                 type="submit"
@@ -334,7 +334,7 @@ export function Calendar({ tech }: Props) {
                   <>Confirmar</>
                 )}
               </Button>
-            </Modal.Footer>
+            </ModalFooter>
           </form>
         </Form>
       </Modal>

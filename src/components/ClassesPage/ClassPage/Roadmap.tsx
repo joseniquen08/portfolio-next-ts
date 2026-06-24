@@ -1,8 +1,8 @@
 import { TechnologyType } from "@/types";
-import { CustomFlowbiteTheme, Timeline } from "flowbite-react";
+import { Timeline, TimelineItem, TimelinePoint, TimelineContent, TimelineTitle, TimelineBody } from "flowbite-react";
 import { HiOutlineChevronRight } from "react-icons/hi";
 
-const customTheme: CustomFlowbiteTheme["timeline"] = {
+const customTheme = {
   root: {
     direction: {
       vertical:
@@ -39,13 +39,13 @@ export function Roadmap({ tech }: { tech: TechnologyType }) {
             <div className="px-1.5">
               <Timeline theme={customTheme}>
                 {card.items.map((item) => (
-                  <Timeline.Item key={item.level} className="mb-8">
-                    <Timeline.Point />
-                    <Timeline.Content>
-                      <Timeline.Title>
+                  <TimelineItem key={item.level} className="mb-8">
+                    <TimelinePoint />
+                    <TimelineContent>
+                      <TimelineTitle>
                         {item.level}. {item.title}
-                      </Timeline.Title>
-                      <Timeline.Body className="pt-2">
+                      </TimelineTitle>
+                      <TimelineBody className="pt-2">
                         <ul className="flex flex-col gap-1 text-sm">
                           {item.content.map((element, index) => (
                             <li
@@ -57,9 +57,9 @@ export function Roadmap({ tech }: { tech: TechnologyType }) {
                             </li>
                           ))}
                         </ul>
-                      </Timeline.Body>
-                    </Timeline.Content>
-                  </Timeline.Item>
+                      </TimelineBody>
+                    </TimelineContent>
+                  </TimelineItem>
                 ))}
               </Timeline>
             </div>

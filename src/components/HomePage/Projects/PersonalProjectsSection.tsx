@@ -1,7 +1,7 @@
 "use client";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { CustomFlowbiteTheme, Timeline } from "flowbite-react";
+import { Timeline } from "flowbite-react";
 import {
   HiOutlineAcademicCap,
   HiOutlineSortAscending,
@@ -28,7 +28,7 @@ const poppins = Poppins({
   preload: false,
 });
 
-const customTheme: CustomFlowbiteTheme["timeline"] = {
+const customTheme = {
   root: {
     direction: {
       vertical:

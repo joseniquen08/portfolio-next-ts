@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { ProjectType } from "@/types";
-import { CustomFlowbiteTheme, Tooltip } from "flowbite-react";
+import { Tooltip } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import {
   HiArrowSmLeft,
@@ -15,7 +15,7 @@ interface Props {
   data: ProjectType;
 }
 
-const customTheme: CustomFlowbiteTheme["tooltip"] = {
+const customTheme = {
   arrow: {
     style: {
       dark: "bg-gray-300 dark:bg-custom-dark-accent",
