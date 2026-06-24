@@ -55,7 +55,7 @@ export const Skills = () => {
               <button
                 type="button"
                 onClick={onClick}
-                className="border border-custom-light-primary/30 dark:border-custom-dark-primary/40 rounded-lg py-4 px-1 flex flex-col justify-center items-center space-y-2 hover:bg-custom-light-primary hover:bg-opacity-5 dark:hover:bg-custom-dark-primary/10 dark:hover:backdrop-blur"
+                className="border border-custom-light-primary/30 dark:border-custom-dark-primary/40 rounded-lg py-4 px-1 flex flex-col justify-center items-center space-y-2 hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-primary/10 dark:hover:backdrop-blur"
               >
                 {more ? (
                   <HiMinus className="w-9 h-9" />

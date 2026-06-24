@@ -34,7 +34,7 @@ export const MenuTheme = ({
   return (
     <Menu as="section" className="relative sm:mr-1">
       <motion.div whileTap={{ scale: 0.9 }}>
-        <Menu.Button className="flex items-center justify-center p-1.5 lg:p-2 text-4xl hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5 rounded-xl focus:outline-none">
+        <Menu.Button className="flex items-center justify-center p-1.5 lg:p-2 text-4xl hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5 rounded-xl focus:outline-none">
           {themeInLocalStorage ? (
             themeSelected === "dark" ? (
               <HiOutlineMoon className="w-6 h-6 text-custom-light-primary dark:text-custom-dark-primary" />
@@ -58,10 +58,15 @@ export const MenuTheme = ({
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="absolute right-0 z-40 mt-2 origin-top-right bg-custom-light-bg rounded-lg shadow-lg focus:outline-none dark:bg-custom-dark-bg">
-          <div className="bg-custom-light-bg dark:bg-custom-dark-bg border rounded-lg bg-opacity-10 dark:border-transparent">
+          <div className="bg-custom-light-bg/10 dark:bg-custom-dark-bg border rounded-lg dark:border-transparent">
             <div className="px-2.5 py-2">
               <Menu.Item as="div" className="focus:outline-none">
-                <RadioGroup value={themeSelected} onChange={setThemeSelected}>
+                <RadioGroup
+                  value={themeSelected ?? "system"}
+                  onChange={(v: "light" | "dark" | "system") =>
+                    setThemeSelected(v === "system" ? undefined : v)
+                  }
+                >
                   <div className="space-y-1.5 text-sm lg:text-base">
                     <RadioGroup.Option value="light">
                       {({ checked }) => (
@@ -71,7 +76,7 @@ export const MenuTheme = ({
                           className={`${
                             checked
                               ? "bg-custom-light-primary dark:bg-custom-dark-primary text-custom-light-text font-medium"
-                              : "hover:bg-custom-light-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10"
+                              : "hover:bg-custom-light-text/5 dark:hover:bg-custom-dark-text/10"
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
                           <div
@@ -95,7 +100,7 @@ export const MenuTheme = ({
                           className={`${
                             checked
                               ? "bg-custom-light-primary dark:bg-custom-dark-primary text-custom-light-text font-medium"
-                              : "hover:bg-custom-light-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10"
+                              : "hover:bg-custom-light-text/5 dark:hover:bg-custom-dark-text/10"
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
                           <div
@@ -111,7 +116,7 @@ export const MenuTheme = ({
                         </button>
                       )}
                     </RadioGroup.Option>
-                    <RadioGroup.Option value={undefined}>
+                    <RadioGroup.Option value="system">
                       {({ checked }) => (
                         <button
                           type="button"
@@ -119,7 +124,7 @@ export const MenuTheme = ({
                           className={`${
                             checked
                               ? "bg-custom-light-primary dark:bg-custom-dark-primary text-custom-light-text font-medium"
-                              : "hover:bg-custom-light-text/5 dark:hover:bg-custom-dark-text dark:hover:bg-opacity-10"
+                              : "hover:bg-custom-light-text/5 dark:hover:bg-custom-dark-text/10"
                           } w-full px-3 py-2 lg:py-1 focus:outline-none rounded-lg flex items-center justify-start space-x-2`}
                         >
                           <div

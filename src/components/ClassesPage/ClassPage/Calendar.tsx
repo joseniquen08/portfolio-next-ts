@@ -198,7 +198,7 @@ export function Calendar({ tech }: Props) {
           setOpenModal(false);
           form.reset();
         }}
-        className="bg-custom-light-bg dark:bg-custom-dark-bg bg-opacity-80 backdrop-blur-sm"
+        className="bg-custom-light-bg/80 dark:bg-custom-dark-bg/80 backdrop-blur-sm"
         theme={customTheme}
       >
         <Form {...form}>

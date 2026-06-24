@@ -147,7 +147,7 @@ export const ModalContact = ({
                         href="https://api.whatsapp.com/send?phone=51933839178"
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#25D366] bg-opacity-100 dark:bg-opacity-30 dark:hover:bg-opacity-40 hover:bg-opacity-90 text-custom-dark-text"
+                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#25D366] dark:opacity-30 dark:hover:opacity-40 hover:opacity-90 text-custom-dark-text"
                       >
                         <SiWhatsapp className="w-6 h-6 md:w-7 md:h-7" />
                       </motion.a>
@@ -158,7 +158,7 @@ export const ModalContact = ({
                         href="https://api.whatsapp.com/send?phone=51933839178"
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#26A5E4] bg-opacity-100 dark:bg-opacity-30 dark:hover:bg-opacity-40 hover:bg-opacity-90 text-custom-dark-text"
+                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#26A5E4] dark:opacity-30 dark:hover:opacity-40 hover:opacity-90 text-custom-dark-text"
                       >
                         <SiTelegram className="w-6 h-6 md:w-7 md:h-7" />
                       </motion.a>
@@ -169,7 +169,7 @@ export const ModalContact = ({
                         href="https://api.whatsapp.com/send?phone=51933839178"
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#E4405F] bg-opacity-100 dark:bg-opacity-30 dark:hover:bg-opacity-40 hover:bg-opacity-90 text-custom-dark-text"
+                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#E4405F] dark:opacity-30 dark:hover:opacity-40 hover:opacity-90 text-custom-dark-text"
                       >
                         <SiInstagram className="w-6 h-6 md:w-7 md:h-7" />
                       </motion.a>
@@ -180,7 +180,7 @@ export const ModalContact = ({
                         href="https://api.whatsapp.com/send?phone=51933839178"
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#0A66C2] bg-opacity-100 dark:bg-opacity-30 dark:hover:bg-opacity-40 hover:bg-opacity-90 text-custom-dark-text"
+                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#0A66C2] dark:opacity-30 dark:hover:opacity-40 hover:opacity-90 text-custom-dark-text"
                       >
                         <FaLinkedin className="w-6 h-6 md:w-7 md:h-7" />
                       </motion.a>

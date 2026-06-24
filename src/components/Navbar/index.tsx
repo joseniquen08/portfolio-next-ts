@@ -150,7 +150,7 @@ export function Navbar() {
               <motion.li whileTap={{ scale: 0.9 }}>
                 <Link
                   href="/classes"
-                  className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5 relative"
+                  className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5 relative"
                 >
                   Clases
                   <Badge
@@ -225,7 +225,7 @@ function ListHome() {
           to="projects"
           smooth={true}
           duration={500}
-          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
+          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5"
         >
           Experiencia
         </LinkReactScroll>
@@ -235,7 +235,7 @@ function ListHome() {
           to="about"
           smooth={true}
           duration={500}
-          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
+          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5"
         >
           Sobre mí
         </LinkReactScroll>
@@ -245,7 +245,7 @@ function ListHome() {
           to="skills"
           smooth={true}
           duration={500}
-          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
+          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5"
         >
           Habilidades
         </LinkReactScroll>
@@ -292,17 +292,17 @@ function ListOtherPages() {
   return (
     <>
       <motion.li whileTap={{ scale: 0.9 }}>
-        <Link href="/#projects" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+        <Link href="/#projects" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5">
             Experiencia
         </Link>
       </motion.li>
       <motion.li whileTap={{ scale: 0.9 }}>
-        <Link href="/#about" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+        <Link href="/#about" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5">
             Sobre mí
         </Link>
       </motion.li>
       <motion.li whileTap={{ scale: 0.9 }}>
-        <Link href="/#skills" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+        <Link href="/#skills" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5">
             Habilidades
         </Link>
       </motion.li>
