@@ -5,12 +5,9 @@ import {
   ChakrauiIcon,
   ClaudeIcon,
   CodeigniterIcon,
-  Css3Icon,
   DockerIcon,
   ExpressIcon,
   FirebaseIcon,
-  FlutterIcon,
-  GitIcon,
   GraphqlIcon,
   HerokuIcon,
   Html5Icon,
@@ -31,7 +28,6 @@ import {
   PythonIcon,
   ReactIcon,
   ReduxIcon,
-  SassIcon,
   SpringbootIcon,
   SupabaseIcon,
   TailwindcssIcon,
@@ -44,277 +40,41 @@ import type {
   TechnologyType,
 } from "@/types";
 
-const size = 36;
+const size = 18;
 
 export const skills: SkillType[] = [
-  {
-    name: "AWS",
-    icon: <AwsIcon size={size} color="#FF9900" />,
-    experience: {
-      en: "+1.5 years",
-      es: "+1.5 años",
-    },
-  },
-  {
-    name: "n8n",
-    icon: <N8nIcon size={size} color="#EA4B71" />,
-    experience: {
-      en: "+1.5 years",
-      es: "+1.5 años",
-    },
-  },
-  {
-    name: "Docker",
-    icon: <DockerIcon size={size} color="#2496ED" />,
-    experience: {
-      en: "+1.5 years",
-      es: "+1.5 años",
-    },
-  },
-  {
-    name: "Claude / AI Tools",
-    icon: <ClaudeIcon size={size} color="#D97757" />,
-    experience: {
-      en: "+1.5 years",
-      es: "+1.5 años",
-    },
-  },
-  {
-    name: "Linux",
-    icon: <LinuxIcon size={size} color="#FCC624" />,
-    experience: {
-      en: "+2 years",
-      es: "+2 años",
-    },
-  },
-  {
-    name: "JavaScript",
-    icon: <JavascriptIcon size={size} color="#F7DF1E" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "TypeScript",
-    icon: <TypescriptIcon size={size} color="#3178C6" />,
-    experience: {
-      en: "+2.5 years",
-      es: "+2.5 años",
-    },
-  },
-  {
-    name: "HTML5",
-    icon: <Html5Icon size={size} color="#E34F26" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "CSS3",
-    icon: <Css3Icon size={size} color="#1572B6" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "React",
-    icon: <ReactIcon size={size} color="#61DAFB" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "Next.js",
-    icon: <NextdotjsIcon size={size} className="text-black dark:text-white" />,
-    experience: {
-      en: "+2.5 years",
-      es: "+2.5 años",
-    },
-  },
-  {
-    name: "Tailwind CSS",
-    icon: <TailwindcssIcon size={size} color="#06B6D4" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "Chakra UI",
-    icon: <ChakrauiIcon size={size} color="#319795" />,
-    experience: {
-      en: "+2.5 years",
-      es: "+2.5 años",
-    },
-  },
-  {
-    name: "Node.js",
-    icon: <NodedotjsIcon size={size} color="#339933" />,
-    experience: {
-      en: "+2.5 years",
-      es: "+2.5 años",
-    },
-  },
-  {
-    name: "Java",
-    icon: <JavaIcon size={size} color="#F44336" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "Express",
-    icon: <ExpressIcon size={size} className="text-black dark:text-white" />,
-    experience: {
-      en: "+2.5 years",
-      es: "+2.5 años",
-    },
-  },
-  {
-    name: "Spring Boot",
-    icon: <SpringbootIcon size={size} color="#6DB33F" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "MySQL",
-    icon: <MysqlIcon size={size} color="#4479A1" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "Firebase",
-    icon: <FirebaseIcon size={size} color="#FFCA28" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "Supabase",
-    icon: <SupabaseIcon size={size} color="#3FCF8E" />,
-    experience: {
-      en: "+2 years",
-      es: "+2 años",
-    },
-  },
-  {
-    name: "GraphQL",
-    icon: <GraphqlIcon size={size} color="#E10098" />,
-    experience: {
-      en: "+2.5 years",
-      es: "+2.5 años",
-    },
-  },
-  {
-    name: "Git",
-    icon: <GitIcon size={size} color="#F05032" />,
-    experience: {
-      en: "+4.5 years",
-      es: "+4.5 años",
-    },
-  },
-  {
-    name: "PHP",
-    icon: <PhpIcon size={size} color="#777BB4" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "CodeIgniter",
-    icon: <CodeigniterIcon size={size} color="#EF4223" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "Sass",
-    icon: <SassIcon size={size} color="#CC6699" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "Material UI",
-    icon: <MuiIcon size={size} color="#007FFF" />,
-    experience: {
-      en: "+2 years",
-      es: "+2 años",
-    },
-  },
-  {
-    name: "Redux",
-    icon: <ReduxIcon size={size} color="#764ABC" />,
-    experience: {
-      en: "+2.5 years",
-      es: "+2.5 años",
-    },
-  },
-  {
-    name: "Axios",
-    icon: <AxiosIcon size={size} color="#5A29E4" />,
-    experience: {
-      en: "+2.5 years",
-      es: "+2.5 años",
-    },
-  },
-  {
-    name: "jQuery",
-    icon: <JqueryIcon size={size} color="#0769AD" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "Python",
-    icon: <PythonIcon size={size} color="#3776AB" />,
-    experience: {
-      en: "+3.5 years",
-      es: "+3.5 años",
-    },
-  },
-  {
-    name: "PostgreSQL",
-    icon: <PostgresqlIcon size={size} color="#4169E1" />,
-    experience: {
-      en: "+2.5 years",
-      es: "+2.5 años",
-    },
-  },
-  {
-    name: "Flutter",
-    icon: <FlutterIcon size={size} color="#02569B" />,
-    experience: {
-      en: "+2 years",
-      es: "+2 años",
-    },
-  },
+  // cloud
+  { name: "AWS", icon: <AwsIcon size={size} color="#FF9900" />, category: "cloud", experience: { en: "+1.5 years", es: "+1.5 años" } },
+  { name: "n8n", icon: <N8nIcon size={size} color="#EA4B71" />, category: "cloud", experience: { en: "+1.5 years", es: "+1.5 años" } },
+  { name: "Docker", icon: <DockerIcon size={size} color="#2496ED" />, category: "cloud", experience: { en: "+1.5 years", es: "+1.5 años" } },
+  { name: "Linux", icon: <LinuxIcon size={size} color="#FCC624" />, category: "cloud", experience: { en: "+2 years", es: "+2 años" } },
+  { name: "Claude / AI Tools", icon: <ClaudeIcon size={size} color="#D97757" />, category: "cloud", experience: { en: "+1.5 years", es: "+1.5 años" } },
+  // lenguajes
+  { name: "JavaScript", icon: <JavascriptIcon size={size} color="#F7DF1E" />, category: "lenguajes", experience: { en: "+3.5 years", es: "+3.5 años" } },
+  { name: "TypeScript", icon: <TypescriptIcon size={size} color="#3178C6" />, category: "lenguajes", experience: { en: "+2.5 years", es: "+2.5 años" } },
+  { name: "Java", icon: <JavaIcon size={size} color="#F44336" />, category: "lenguajes", experience: { en: "+3.5 years", es: "+3.5 años" } },
+  { name: "Python", icon: <PythonIcon size={size} color="#3776AB" />, category: "lenguajes", experience: { en: "+3.5 years", es: "+3.5 años" } },
+  // frontend
+  { name: "React", icon: <ReactIcon size={size} color="#61DAFB" />, category: "frontend", experience: { en: "+3.5 years", es: "+3.5 años" } },
+  { name: "Next.js", icon: <NextdotjsIcon size={size} className="text-black dark:text-white" />, category: "frontend", experience: { en: "+2.5 years", es: "+2.5 años" } },
+  { name: "Tailwind CSS", icon: <TailwindcssIcon size={size} color="#06B6D4" />, category: "frontend", experience: { en: "+3.5 years", es: "+3.5 años" } },
+  // backend
+  { name: "Node.js", icon: <NodedotjsIcon size={size} color="#339933" />, category: "backend", experience: { en: "+2.5 years", es: "+2.5 años" } },
+  { name: "Express", icon: <ExpressIcon size={size} className="text-black dark:text-white" />, category: "backend", experience: { en: "+2.5 years", es: "+2.5 años" } },
+  { name: "Spring Boot", icon: <SpringbootIcon size={size} color="#6DB33F" />, category: "backend", experience: { en: "+3.5 years", es: "+3.5 años" } },
+  { name: "GraphQL", icon: <GraphqlIcon size={size} color="#E10098" />, category: "backend", experience: { en: "+2.5 years", es: "+2.5 años" } },
+  { name: "MySQL", icon: <MysqlIcon size={size} color="#4479A1" />, category: "backend", experience: { en: "+3.5 years", es: "+3.5 años" } },
+  { name: "PostgreSQL", icon: <PostgresqlIcon size={size} color="#4169E1" />, category: "backend", experience: { en: "+2.5 years", es: "+2.5 años" } },
+  { name: "Firebase", icon: <FirebaseIcon size={size} color="#FFCA28" />, category: "backend", experience: { en: "+3.5 years", es: "+3.5 años" } },
+  { name: "Supabase", icon: <SupabaseIcon size={size} color="#3FCF8E" />, category: "backend", experience: { en: "+2 years", es: "+2 años" } },
 ];
 
 const projectSize = 30;
 
 export const workProjects: ProjectType[] = [
   {
-    badges: [
-      {
-        name: "Tech Lead",
-        color: "pink",
-      },
-    ],
+    badges: [{ name: "Tech Lead", color: "pink" }],
+    period: "2024",
     title: "Dale Delivery (Landing)",
     slug: "dale-delivery",
     description: {
@@ -345,12 +105,8 @@ export const workProjects: ProjectType[] = [
     ],
   },
   {
-    badges: [
-      {
-        name: "Frontend Developer",
-        color: "pink",
-      },
-    ],
+    badges: [{ name: "Frontend Developer", color: "pink" }],
+    period: "2023 — 2024",
     title: "Pro Indie Music (Portal)",
     slug: "pro-indie-music",
     description: {
@@ -389,12 +145,8 @@ export const workProjects: ProjectType[] = [
     ],
   },
   {
-    badges: [
-      {
-        name: "FullStack Developer",
-        color: "pink",
-      },
-    ],
+    badges: [{ name: "FullStack Developer", color: "pink" }],
+    period: "2023",
     title: "Bienvenidad de Cachimbos - UPC 2023 (Landing)",
     slug: "cachimbos-2023",
     description: {
@@ -437,12 +189,8 @@ export const workProjects: ProjectType[] = [
     ],
   },
   {
-    badges: [
-      {
-        name: "FullStack Developer",
-        color: "pink",
-      },
-    ],
+    badges: [{ name: "FullStack Developer", color: "pink" }],
+    period: "2022 — 2023",
     title: "Hampi Corp",
     slug: "hampi-corp",
     description: {
@@ -479,12 +227,8 @@ export const workProjects: ProjectType[] = [
 
 export const personalProjects: ProjectType[] = [
   {
-    badges: [
-      {
-        name: "FullStack",
-        color: "pink",
-      },
-    ],
+    badges: [{ name: "FullStack", color: "pink" }],
+    period: "2022",
     title: "Vocacción",
     slug: "vocaccion-fullstack",
     description: {
@@ -545,12 +289,8 @@ export const personalProjects: ProjectType[] = [
     ],
   },
   {
-    badges: [
-      {
-        name: "FullStack",
-        color: "pink",
-      },
-    ],
+    badges: [{ name: "FullStack", color: "pink" }],
+    period: "2022",
     title: "Licius (Social Network)",
     slug: "licius-fullstack",
     description: {
@@ -601,12 +341,8 @@ export const personalProjects: ProjectType[] = [
     ],
   },
   {
-    badges: [
-      {
-        name: "Frontend",
-        color: "pink",
-      },
-    ],
+    badges: [{ name: "Frontend", color: "pink" }],
+    period: "2021 — 2022",
     title: "Music Player (Deezer API)",
     slug: "music-player-react",
     description: {
@@ -640,12 +376,8 @@ export const personalProjects: ProjectType[] = [
     ],
   },
   {
-    badges: [
-      {
-        name: "Frontend",
-        color: "pink",
-      },
-    ],
+    badges: [{ name: "Frontend", color: "pink" }],
+    period: "2021",
     title: "Portfolio (1° version)",
     slug: "portfolio-react",
     description: {
@@ -671,12 +403,8 @@ export const personalProjects: ProjectType[] = [
     ],
   },
   {
-    badges: [
-      {
-        name: "Frontend",
-        color: "pink",
-      },
-    ],
+    badges: [{ name: "Frontend", color: "pink" }],
+    period: "2022",
     title: "BootcamPe (E-commerce)",
     slug: "bootcampe",
     description: {

@@ -14,11 +14,6 @@ const config: Config = {
       ...defaultTheme.screens,
     },
     extend: {
-      fontFamily: {
-        sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
-        display: ["var(--font-display)", ...defaultTheme.fontFamily.sans],
-        mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
-      },
       fontSize: {
         "2xs": [
           "0.625rem",

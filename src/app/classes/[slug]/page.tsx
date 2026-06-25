@@ -7,12 +7,5 @@ interface Props {
 }
 
 export default async function Class({ params }: Props) {
-  const { slug } = await params;
-  const tech = technologies.find((element) => element.slug == slug);
-
-  if (!tech) {
-    notFound();
-  }
-
-  return <ClassPage tech={tech} />;
+  notFound();
 }

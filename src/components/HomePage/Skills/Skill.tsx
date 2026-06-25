@@ -1,13 +1,10 @@
 import { SkillType } from "@/types";
 
-export const Skill = ({ icon, name, experience }: SkillType) => {
+export const Skill = ({ icon, name }: SkillType) => {
   return (
-    <div className="border border-custom-light-primary/30 dark:border-custom-dark-primary/40 rounded-lg py-4 px-1 flex flex-col items-center space-y-0 hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-primary/10 dark:hover:backdrop-blur cursor-default">
-      {icon}
-      <p className="font-medium pt-3">{name}</p>
-      <p className="font-mono text-custom-light-text/60 dark:text-custom-dark-text/60 text-xs">
-        {experience.es}
-      </p>
+    <div className="flex items-center gap-2 text-custom-light-text dark:text-custom-dark-text [&_svg]:fill-current [&_path]:fill-current">
+      <span className="flex-none">{icon}</span>
+      <span className="text-sm">{name}</span>
     </div>
   );
 };

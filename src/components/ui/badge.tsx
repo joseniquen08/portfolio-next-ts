@@ -15,7 +15,7 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-red-500 text-stone-50 shadow hover:bg-red-500/80 dark:bg-red-900 dark:text-stone-50 dark:hover:bg-red-900/80",
         outline: "text-stone-950 dark:text-stone-50",
-        role: "border-transparent dark:border-transparent bg-custom-light-accent/15 dark:bg-custom-dark-accent-text/15 text-custom-light-accent dark:text-custom-dark-accent-text",
+        role: "border-transparent dark:border-transparent bg-custom-light-primary dark:bg-custom-dark-primary text-custom-light-text dark:text-custom-dark-bg font-medium",
         brand: "border-transparent bg-custom-light-primary text-custom-light-text shadow hover:bg-custom-light-primary/80 dark:bg-custom-dark-primary dark:text-custom-dark-bg dark:hover:bg-custom-dark-primary/80",
       },
     },

@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
 interface Props {
@@ -10,19 +7,8 @@ interface Props {
 
 export const LinkSocialNetwork = ({ href, children }: Props) => {
   return (
-    <motion.div whileHover="hover" className="relative w-11 h-11 group">
-      <motion.div
-        className="w-11 h-11 group-hover:bg-custom-light-text/5 rounded-xl dark:group-hover:bg-custom-dark-text/5"
-        transition={{
-          ease: "easeInOut",
-          duration: 0.65,
-        }}
-        variants={{
-          hover: {
-            rotate: 180,
-          },
-        }}
-      ></motion.div>
+    <div className="relative w-11 h-11 group">
+      <div className="w-11 h-11 group-hover:bg-custom-light-text/5 rounded-xl dark:group-hover:bg-custom-dark-text/5 transition-colors duration-200"></div>
       <a
         href={href}
         target="_blank"
@@ -31,6 +17,6 @@ export const LinkSocialNetwork = ({ href, children }: Props) => {
       >
         {children}
       </a>
-    </motion.div>
+    </div>
   );
 };

@@ -1,48 +1,45 @@
-import { HiOutlinePlusSm } from "react-icons/hi";
-import {
-  SiGithub,
-  SiInstagram,
-  SiNextdotjs,
-  SiTailwindcss,
-} from "react-icons/si";
+import { SiGithub, SiInstagram, SiNextdotjs, SiTailwindcss } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
 import { LinkSocialNetwork } from "./LinkSocialNetwork";
 
 export const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="text-custom-light-text dark:text-custom-dark-text w-full">
-      <div className="max-w-6xl px-4 pt-6 pb-10 mx-auto sm:px-10 lg:px-16 md:py-6">
-        <div className="relative flex flex-col items-center justify-between w-full space-y-8 md:flex-row md:space-y-0">
-          <div className="flex flex-col z-20 md:flex-row space-y-3 md:space-y-0 space-x-0 md:space-x-2.5 items-center justify-center">
-            <p className="text-sm md:text-base">Hecho con</p>
-            <div className="flex items-center space-x-1.5">
-              <SiNextdotjs className="w-16 h-16 md:w-9 md:h-9" />
-              <HiOutlinePlusSm className="w-6 h-6 md:w-4 md:h-4" />
-              <SiTailwindcss className="w-16 h-16 md:w-9 md:h-9" />
-            </div>
-          </div>
-          <div className="inset-0 z-10 md:absolute flex flex-col gap-0.5 items-center">
-            <p className="flex items-center justify-center text-lg font-medium text-center md:font-normal">
-              © 2024 José Ñiquen.
-            </p>
-            <p className="text-xs font-medium text-custom-light-text/90 dark:text-custom-dark-text/70">
-              Gracias de ❤️{" "}
-              <i className="font-semibold text-custom-light-text dark:text-custom-dark-text">
+    <footer className="w-full text-custom-light-text dark:text-custom-dark-text">
+      <div className="max-w-5xl px-4 pt-6 pb-10 mx-auto sm:px-8 lg:px-16 2xl:max-w-6xl">
+        <div className="font-mono text-xs flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-2.5 rounded-lg border border-custom-light-primary/20 dark:border-custom-dark-accent-text/20 bg-custom-light-primary/5 dark:bg-custom-dark-accent-text/5 text-custom-light-text/60 dark:text-custom-dark-text/60">
+          {/* Left: built with */}
+          <span className="flex items-center gap-1.5">
+            <span className="opacity-60">Hecho con</span>
+            <SiNextdotjs className="w-3.5 h-3.5" />
+            <span className="opacity-40">+</span>
+            <SiTailwindcss className="w-3.5 h-3.5" />
+          </span>
+
+          {/* Center: copyright */}
+          <span className="flex flex-col items-center gap-0.5 text-center">
+            <span>© {year} José Ñiquen.</span>
+            <span className="opacity-50 text-[10px]">
+              gracias de ❤️{" "}
+              <span className="text-custom-light-text/70 dark:text-custom-dark-text/70 font-semibold">
                 Rosse Villegas
-              </i>
-            </p>
-          </div>
-          <div className="z-20 flex justify-center space-x-4 text-lg md:space-x-2">
+              </span>
+            </span>
+          </span>
+
+          {/* Right: social icons */}
+          <span className="flex items-center gap-2">
             <LinkSocialNetwork href="https://github.com/joseniquen08">
-              <SiGithub className="w-6 h-6" />
+              <SiGithub className="w-4 h-4" />
             </LinkSocialNetwork>
             <LinkSocialNetwork href="https://www.linkedin.com/in/jose-niquen">
-              <FaLinkedin className="w-6 h-6" />
+              <FaLinkedin className="w-4 h-4" />
             </LinkSocialNetwork>
             <LinkSocialNetwork href="https://www.instagram.com/joseniquen_">
-              <SiInstagram className="w-6 h-6" />
+              <SiInstagram className="w-4 h-4" />
             </LinkSocialNetwork>
-          </div>
+          </span>
         </div>
       </div>
     </footer>

@@ -26,14 +26,8 @@ export function Header() {
       {/* Hero two-column layout */}
       <div className="flex flex-col-reverse w-full max-w-5xl px-4 pt-12 mx-auto space-y-8 space-y-reverse lg:space-y-0 lg:flex-row lg:px-16 lg:pt-28 lg:pb-10 2xl:max-w-6xl">
         {/* Left: text */}
-        <div className="flex flex-col justify-center flex-none space-y-10">
+        <div className="flex flex-col justify-center flex-none space-y-7 lg:space-y-8">
           <div className="flex flex-col lg:items-start items-center justify-center space-y-2 lg:space-y-3 text-center lg:text-left">
-            <motion.p
-              className="font-mono text-xs tracking-widest uppercase text-custom-light-accent/60 dark:text-custom-dark-accent-text/60"
-              {...anim(0.05)}
-            >
-              software_engineer
-            </motion.p>
             <motion.p
               className="font-display py-1 text-4xl xs:text-5xl lg:text-6xl font-bold leading-tight tracking-tighter text-transparent break-words bg-clip-text bg-gradient-to-r from-custom-light-accent via-custom-light-primary to-custom-light-accent dark:from-custom-dark-accent-text dark:via-custom-dark-primary dark:to-custom-dark-accent-text"
               {...anim(0.15)}
@@ -66,9 +60,6 @@ export function Header() {
             {...anim(0.45)}
           >
             <Button variant="brand" size="lg" className="text-lg font-semibold" asChild>
-              <Link href="/classes">Agenda una clase</Link>
-            </Button>
-            <Button variant="brandOutline" size="lg" className="text-lg" asChild>
               <Link href="/#projects">Mi experiencia</Link>
             </Button>
           </motion.div>
@@ -81,11 +72,11 @@ export function Header() {
         >
           <div className="flex flex-col items-center">
             {/* Duotono portrait frame */}
-            <div className="relative w-60 h-60 lg:w-72 lg:h-72">
+            <div className="relative w-64 h-64 lg:w-80 lg:h-80">
               {/* Lime ring — offset top-left */}
-              <div className="absolute inset-0 rounded-full border-2 border-custom-light-primary dark:border-custom-dark-primary opacity-60 -translate-x-2 -translate-y-2" />
+              <div className="absolute inset-0 rounded-full border-[3px] border-custom-light-primary dark:border-custom-dark-primary opacity-70 -translate-x-4 -translate-y-4" />
               {/* Purple ring — offset bottom-right */}
-              <div className="absolute inset-0 rounded-full border-2 border-custom-light-accent dark:border-custom-dark-accent-text opacity-40 translate-x-2 translate-y-2" />
+              <div className="absolute inset-0 rounded-full border-[3px] border-custom-light-accent dark:border-custom-dark-accent-text opacity-50 translate-x-4 translate-y-4" />
               {/* Portrait */}
               <Image
                 src={perfil}
@@ -100,7 +91,7 @@ export function Header() {
 
       {/* Status line — spans full width */}
       <motion.div
-        className="pb-8 lg:pb-12"
+        className="pb-4 lg:pb-6"
         {...anim(0.55)}
       >
         <StatusLine />

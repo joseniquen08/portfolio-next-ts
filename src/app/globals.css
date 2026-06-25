@@ -1,6 +1,17 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @config "../../tailwind.config.ts";
+@source "../../node_modules/flowbite-react/dist";
+
+.font-sans {
+  font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+.font-display {
+  font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+}
+.font-mono {
+  font-family: "JetBrains Mono", ui-monospace, "Courier New", monospace;
+}
 
 ::-webkit-scrollbar {
   width: 14px;

@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { CardTech } from "@/components/ClassesPage/CardTech";
 import { Comments } from "@/components/ClassesPage/Comments";
 import { Database, Tables } from "@/types/database.types";
@@ -22,6 +23,7 @@ async function getComments() {
 }
 
 export default async function Classes() {
+  notFound();
   const comments: Tables<"class_comments">[] = (await getComments()) ?? [];
 
   return (
