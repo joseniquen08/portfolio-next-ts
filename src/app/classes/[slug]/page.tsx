@@ -3,17 +3,9 @@ import { technologies } from "@/utils/constants";
 import { notFound } from "next/navigation";
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
-export default function Class({ params }: Props) {
-  const tech = technologies.find((element) => element.slug == params.slug);
-
-  if (!tech) {
-    notFound();
-  }
-
-  return <ClassPage tech={tech} />;
+export default async function Class({ params }: Props) {
+  notFound();
 }

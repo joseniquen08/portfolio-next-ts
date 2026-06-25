@@ -1,16 +1,11 @@
 import emailjs from "@emailjs/browser";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, DialogBackdrop, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { motion } from "framer-motion";
-import { Poppins } from "next/font/google";
 import { ChangeEvent, FormEvent, Fragment, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { HiCheckCircle, HiOutlineX } from "react-icons/hi";
-import {
-  SiInstagram,
-  SiLinkedin,
-  SiTelegram,
-  SiWhatsapp,
-} from "react-icons/si";
+import { SiGithub, SiInstagram, SiWhatsapp } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 import { useTimeoutFn } from "react-use";
 import { ButtonLoading } from "./ButtonLoading";
 
@@ -20,10 +15,6 @@ interface Props {
   closeContactModal: () => void;
 }
 
-const poppins = Poppins({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
-});
 
 export const ModalContact = ({
   theme,
@@ -103,11 +94,11 @@ export const ModalContact = ({
     <Transition appear show={contactModalIsOpen} as={Fragment}>
       <Dialog
         as="div"
-        className={`fixed inset-0 z-50 overflow-y-auto bg-black/80 ${poppins.className} font-poppins`}
+        className="fixed inset-0 z-50 overflow-y-auto bg-black/80 font-sans"
         onClose={closeContactModal}
       >
         <div className="min-h-screen px-2.5 text-center">
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -116,15 +107,15 @@ export const ModalContact = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0" />
-          </Transition.Child>
+            <DialogBackdrop className="fixed inset-0" />
+          </TransitionChild>
           <span
             className="inline-block h-screen align-middle"
             aria-hidden="true"
           >
             &#8203;
           </span>
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 scale-95"
@@ -133,71 +124,72 @@ export const ModalContact = ({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="relative inline-block w-full max-w-5xl overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-xl border border-custom-light-primary dark:border-custom-dark-primary">
+            <div className="relative inline-block w-full max-w-5xl overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-xl border border-custom-light-primary/20 dark:border-custom-dark-accent-text/20">
               <div className="px-6 pt-8 pb-6 space-y-3 md:grid md:grid-cols-2 md:space-y-0 md:gap-x-8 md:px-8 md:pt-10 md:pb-10 bg-gradient-to-r from-custom-light-bg to-custom-light-bg/95 dark:bg-gradient-to-r dark:from-custom-dark-bg dark:to-custom-dark-bg/95">
                 <div className="space-y-4 md:col-span-1 md:space-y-5 md:px-3">
-                  <Dialog.Title
+                  <p className="font-mono text-xs tracking-widest text-custom-light-primary/60 dark:text-custom-dark-primary/60 mb-1">
+                    {"// contacto"}
+                  </p>
+                  <DialogTitle
                     as="h3"
-                    className="text-2xl font-semibold leading-6 tracking-tight text-custom-light-primary md:text-5xl dark:text-custom-dark-text"
+                    className="font-display text-2xl font-bold leading-tight tracking-tight text-custom-light-accent md:text-5xl dark:text-custom-dark-text"
                   >
                     Contáctame
-                  </Dialog.Title>
+                  </DialogTitle>
                   <div>
-                    <p className="text-base font-medium text-justify text-custom-light-text/50 dark:text-custom-dark-text/60 md:text-lg">
-                      Me interesan los retos que pongan a prueba mis
-                      habilidades. Si necesitas que te realice algún trabajo o
-                      simplemente tienes una pregunta, no dudes en contactarme.
+                    <p className="text-base text-custom-light-text/50 dark:text-custom-dark-text/60 md:text-lg leading-relaxed">
+                      ¿Tienes un proyecto en mente o una pregunta? Escríbeme y te respondo pronto.
                     </p>
                   </div>
-                  <ul className="flex space-x-3">
+                  <ul className="flex space-x-2">
                     <li>
                       <motion.a
                         whileTap={{ scale: 0.95 }}
                         href="https://api.whatsapp.com/send?phone=51933839178"
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#25D366] bg-opacity-100 dark:bg-opacity-30 dark:hover:bg-opacity-40 hover:bg-opacity-90 text-custom-dark-text"
+                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg border border-custom-light-text/10 dark:border-custom-dark-text/10 text-custom-light-text/60 dark:text-custom-dark-text/60 hover:text-custom-light-accent dark:hover:text-custom-dark-accent-text hover:border-custom-light-accent/30 dark:hover:border-custom-dark-accent-text/30 transition-colors duration-200"
                       >
-                        <SiWhatsapp className="w-6 h-6 md:w-7 md:h-7" />
+                        <SiWhatsapp className="w-5 h-5 md:w-6 md:h-6" />
                       </motion.a>
                     </li>
                     <li>
                       <motion.a
                         whileTap={{ scale: 0.95 }}
-                        href="https://api.whatsapp.com/send?phone=51933839178"
+                        href="https://github.com/joseniquen08"
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#26A5E4] bg-opacity-100 dark:bg-opacity-30 dark:hover:bg-opacity-40 hover:bg-opacity-90 text-custom-dark-text"
+                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg border border-custom-light-text/10 dark:border-custom-dark-text/10 text-custom-light-text/60 dark:text-custom-dark-text/60 hover:text-custom-light-accent dark:hover:text-custom-dark-accent-text hover:border-custom-light-accent/30 dark:hover:border-custom-dark-accent-text/30 transition-colors duration-200"
                       >
-                        <SiTelegram className="w-6 h-6 md:w-7 md:h-7" />
+                        <SiGithub className="w-5 h-5 md:w-6 md:h-6" />
                       </motion.a>
                     </li>
                     <li>
                       <motion.a
                         whileTap={{ scale: 0.95 }}
-                        href="https://api.whatsapp.com/send?phone=51933839178"
+                        href="https://www.instagram.com/joseniquen_"
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#E4405F] bg-opacity-100 dark:bg-opacity-30 dark:hover:bg-opacity-40 hover:bg-opacity-90 text-custom-dark-text"
+                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg border border-custom-light-text/10 dark:border-custom-dark-text/10 text-custom-light-text/60 dark:text-custom-dark-text/60 hover:text-custom-light-accent dark:hover:text-custom-dark-accent-text hover:border-custom-light-accent/30 dark:hover:border-custom-dark-accent-text/30 transition-colors duration-200"
                       >
-                        <SiInstagram className="w-6 h-6 md:w-7 md:h-7" />
+                        <SiInstagram className="w-5 h-5 md:w-6 md:h-6" />
                       </motion.a>
                     </li>
                     <li>
                       <motion.a
                         whileTap={{ scale: 0.95 }}
-                        href="https://api.whatsapp.com/send?phone=51933839178"
+                        href="https://www.linkedin.com/in/jose-niquen"
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg bg-[#0A66C2] bg-opacity-100 dark:bg-opacity-30 dark:hover:bg-opacity-40 hover:bg-opacity-90 text-custom-dark-text"
+                        className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-lg border border-custom-light-text/10 dark:border-custom-dark-text/10 text-custom-light-text/60 dark:text-custom-dark-text/60 hover:text-custom-light-accent dark:hover:text-custom-dark-accent-text hover:border-custom-light-accent/30 dark:hover:border-custom-dark-accent-text/30 transition-colors duration-200"
                       >
-                        <SiLinkedin className="w-6 h-6 md:w-7 md:h-7" />
+                        <FaLinkedin className="w-5 h-5 md:w-6 md:h-6" />
                       </motion.a>
                     </li>
                   </ul>
                 </div>
                 <div className="md:col-span-1 md:px-3">
-                  <div className="mt-3.5 bg-custom-light-primary/10 dark:bg-custom-dark-primary/10 px-5 md:px-6 py-6 rounded-2xl">
+                  <div className="mt-3.5 bg-custom-light-text/[0.03] dark:bg-custom-dark-text/[0.03] border border-custom-light-text/5 dark:border-custom-dark-text/5 px-5 md:px-6 py-6 rounded-xl">
                     <div className="relative h-104 md:h-108">
                       <Transition
                         as={Fragment}
@@ -233,7 +225,7 @@ export const ModalContact = ({
                               onChange={(e) => handleInputChange(e)}
                               required
                               placeholder="p.ej. Juan García"
-                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-light-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-light-text/10 focus:border-custom-light-text/10 dark:border-custom-dark-secondary/40 dark:bg-gray-900/50 focus:outline-none focus:shadow-lg dark:focus:shadow-custom-dark-secondary/50 focus:ring-0"
+                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-light-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-light-text/10 focus:border-custom-light-text/10 dark:border-custom-dark-text/10 dark:bg-custom-dark-bg/40 focus:outline-none focus:border-custom-light-accent/40 dark:focus:border-custom-dark-accent-text/40 focus:ring-0"
                             />
                           </div>
                           <div className="space-y-1.5 md:space-y-2">
@@ -251,7 +243,7 @@ export const ModalContact = ({
                               onChange={(e) => handleInputChange(e)}
                               required
                               placeholder="p.ej. juan_garcia@gmail.com"
-                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-light-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-light-text/10 focus:border-custom-light-text/10 dark:border-custom-dark-secondary/40 dark:bg-gray-900/50 focus:outline-none focus:shadow-lg dark:focus:shadow-custom-dark-secondary/50 focus:ring-0"
+                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-light-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-light-text/10 focus:border-custom-light-text/10 dark:border-custom-dark-text/10 dark:bg-custom-dark-bg/40 focus:outline-none focus:border-custom-light-accent/40 dark:focus:border-custom-dark-accent-text/40 focus:ring-0"
                             />
                           </div>
                           <div className="space-y-1.5 md:space-y-2">
@@ -269,7 +261,7 @@ export const ModalContact = ({
                               required
                               onChange={(e) => handleInputChange(e)}
                               placeholder="Escriba su mensaje aquí"
-                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-light-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-light-text/10 focus:border-custom-light-text/10 dark:border-custom-dark-secondary/40 dark:bg-gray-900/50 focus:outline-none focus:shadow-lg dark:focus:shadow-custom-dark-secondary/50 focus:ring-0"
+                              className="block w-full px-4 py-2 text-sm border rounded-lg placeholder:text-custom-light-text/70 dark:placeholder:text-custom-dark-text/50 border-custom-light-text/10 focus:border-custom-light-text/10 dark:border-custom-dark-text/10 dark:bg-custom-dark-bg/40 focus:outline-none focus:border-custom-light-accent/40 dark:focus:border-custom-dark-accent-text/40 focus:ring-0"
                             ></textarea>
                           </div>
                           <div className="w-full">
@@ -297,7 +289,7 @@ export const ModalContact = ({
                               <button
                                 type="submit"
                                 disabled={checkedReCaptcha ? false : true}
-                                className="w-24 text-sm font-medium text-custom-dark-text bg-custom-light-primary dark:bg-custom-dark-primary shadow-lg md:w-28 h-9 disabled:opacity-50 disabled:hover:bg-custom-light-primary dark:disabled:hover:bg-custom-dark-primary md:text-base shadow-custom-light-primary/50 rounded-xl hover:bg-custom-light-primary/90 dark:hover:bg-custom-dark-primary/90 focus:outline-none"
+                                className="w-24 text-sm font-medium text-custom-dark-text bg-custom-light-accent dark:bg-custom-dark-accent md:w-28 h-9 disabled:opacity-50 md:text-base rounded-lg hover:opacity-90 focus:outline-none transition-opacity duration-200"
                               >
                                 Enviar
                               </button>
@@ -319,7 +311,7 @@ export const ModalContact = ({
                 </button>
               </div>
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
     </Transition>

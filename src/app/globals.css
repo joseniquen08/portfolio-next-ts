@@ -1,6 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+@config "../../tailwind.config.ts";
+@source "../../node_modules/flowbite-react/dist";
+
+.font-sans {
+  font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+.font-display {
+  font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+}
+.font-mono {
+  font-family: "JetBrains Mono", ui-monospace, "Courier New", monospace;
+}
 
 ::-webkit-scrollbar {
   width: 14px;
@@ -8,7 +19,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2563eb;
+  background: #7f5ce0;
   border-radius: 10px;
   border: 3px solid #000;
 }
@@ -30,9 +41,9 @@
 .progress-bar-audio {
   --bar-bg: #1ed760;
   --seek-before-width: 0;
-  --seek-before-color: #2563eb;
-  --knobby: #2563eb;
-  --selectedKnobby: #1853d1;
+  --seek-before-color: #7f5ce0;
+  --knobby: #7f5ce0;
+  --selectedKnobby: #421fa3;
 
   appearance: none;
   background: var(--bar-bg);
@@ -153,7 +164,7 @@
 }
 
 .fc-scroller::-webkit-scrollbar-thumb {
-  background: #2563eb;
+  background: #7f5ce0;
   border-radius: 10px;
   border: 3px solid rgba(192, 192, 192, 1);
 }

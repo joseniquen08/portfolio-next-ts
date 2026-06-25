@@ -1,26 +1,14 @@
-import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 
 interface Props {
   href: string;
-  children: JSX.Element;
+  children: ReactNode;
 }
 
 export const LinkSocialNetwork = ({ href, children }: Props) => {
   return (
-    <motion.div whileHover="hover" className="relative w-14 h-14 group">
-      <motion.div
-        className="w-14 h-14 bg-custom-light-text bg-opacity-5 dark:bg-custom-dark-text dark:bg-opacity-5 rounded-xl group-hover:bg-opacity-10"
-        transition={{
-          ease: "easeInOut",
-          duration: 0.65,
-        }}
-        variants={{
-          hover: {
-            rotate: 180,
-            scale: 1.15,
-          },
-        }}
-      ></motion.div>
+    <div className="relative w-14 h-14 group">
+      <div className="w-14 h-14 bg-custom-light-text/5 dark:bg-custom-dark-text/5 rounded-xl group-hover:bg-custom-light-text/10 dark:group-hover:bg-custom-dark-text/10 transition-colors duration-200"></div>
       <a
         href={href}
         target="_blank"
@@ -29,6 +17,6 @@ export const LinkSocialNetwork = ({ href, children }: Props) => {
       >
         {children}
       </a>
-    </motion.div>
+    </div>
   );
 };

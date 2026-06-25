@@ -17,6 +17,7 @@ export type ProjectType = {
     name: string;
     color: string;
   }[];
+  period: string;
   slug: string;
   title: string;
   github: string;
@@ -32,9 +33,12 @@ export type ProjectType = {
   }[];
 };
 
+
+
 export type SkillType = {
   name: string;
   icon: ReactNode;
+  category: "lenguajes" | "frontend" | "backend" | "cloud";
   experience: {
     en: string;
     es: string;

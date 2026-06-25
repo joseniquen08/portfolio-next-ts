@@ -16,7 +16,7 @@ export const NowPlaying = () => {
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressBarRef = useRef<HTMLInputElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(undefined);
 
   const onLoadedMetadata = () => {
     const seconds = Math.round(audioRef.current?.duration || 0);
@@ -87,7 +87,7 @@ export const NowPlaying = () => {
   return (
     <div className="w-full mb-2 overflow-hidden">
       {!data?.songUrl ? (
-        <div className="flex items-center justify-center w-full px-3 py-4 space-x-2 cursor-default rounded-xl dark:bg-custom-dark-text dark:bg-opacity-10 bg-custom-light-text bg-opacity-5">
+        <div className="flex items-center justify-center w-full px-3 py-4 space-x-2 cursor-default rounded-xl dark:bg-custom-dark-text/10 bg-custom-light-text/5">
           <FaSpotify className="text-[#1ED760] h-7 w-7" />
           <p className="text-lg font-medium text-custom-light-text dark:text-custom-dark-text">
             Sin reproducir música
@@ -95,7 +95,7 @@ export const NowPlaying = () => {
         </div>
       ) : (
         <div>
-          <div className="flex flex-col w-full py-3.5 px-4 space-y-3 rounded-xl dark:bg-white dark:bg-opacity-5 bg-slate-400 bg-opacity-5 hover:bg-opacity-10 dark:hover:bg-opacity-10 border dark:border-custom-dark-text/20">
+          <div className="flex flex-col w-full py-3.5 px-4 space-y-3 rounded-xl dark:bg-white/5 bg-slate-400/5 hover:bg-slate-400/10 dark:hover:bg-white/10 border dark:border-custom-dark-text/20">
             <div className="flex items-start w-full space-x-2.5">
               <div className="relative flex-none w-16 h-16 overflow-hidden rounded-xl">
                 <Image
@@ -194,15 +194,13 @@ export const NowPlaying = () => {
                 transition: {
                   repeat: 1,
                   repeatType: "mirror",
-                  from: 0,
-                  to: 360,
                   ease: "easeInOut",
                   duration: 0.65,
                 },
               });
               mutate();
             }}
-            className="absolute bg-slate-500 bg-opacity-10 dark:bg-opacity-30 rounded-full flex items-center justify-center w-6 h-6 lg:w-[1.8rem] lg:h-[1.8rem] -bottom-[0.5rem] -right-[0.5rem] cursor-pointer"
+            className="absolute bg-slate-500/10 dark:bg-slate-500/30 rounded-full flex items-center justify-center w-6 h-6 lg:w-[1.8rem] lg:h-[1.8rem] -bottom-[0.5rem] -right-[0.5rem] cursor-pointer"
           >
             <motion.span animate={control}>
               <FaRedoAlt className="text-custom-light-accent w-4 h-4 lg:w-[1rem] lg:h-[1rem]" />

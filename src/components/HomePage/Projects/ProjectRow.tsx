@@ -1,17 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 import { ProjectType } from "@/types";
-import {
-  CustomFlowbiteTheme,
-  Flowbite,
-  Timeline,
-  Tooltip,
-} from "flowbite-react";
-import Image from "next/image";
+import { Tooltip } from "flowbite-react";
 import Link from "next/link";
 import { HiOutlineEye, HiOutlineGlobeAlt } from "react-icons/hi";
 import { SiGithub } from "react-icons/si";
 
-const customTheme: CustomFlowbiteTheme["tooltip"] = {
+const tooltipTheme = {
   arrow: {
     style: {
       dark: "bg-gray-300 dark:bg-custom-dark-accent",
@@ -24,8 +18,8 @@ const customTheme: CustomFlowbiteTheme["tooltip"] = {
 
 export const ProjectRow = ({
   badges,
+  period,
   slug,
-  images,
   title,
   description,
   icons,
@@ -33,69 +27,73 @@ export const ProjectRow = ({
   github,
 }: ProjectType) => {
   return (
-    <Timeline.Item className="mb-8">
-      <Timeline.Point />
-      <Timeline.Content>
-        <Timeline.Time>
-          <div className="flex space-x-2 items-center py-0.5">
-            {badges.map(({ name }, i) => (
-              <Badge key={i} variant="role" className="rounded-full">
-                {name}
-              </Badge>
-            ))}
-          </div>
-        </Timeline.Time>
-        <Timeline.Title>{title}</Timeline.Title>
-        <Timeline.Body className="flex flex-col space-y-4">
-          <p>{description.es}</p>
-          <div className="flex gap-3.5 flex-wrap">
-            {icons.map(({ name, icon }, i) => (
-              <Tooltip
-                key={i}
-                content={name}
-                theme={customTheme}
-                placement="bottom"
-              >
+    <li className="relative pl-5">
+      {/* Punto del timeline */}
+      <span className="absolute -left-[5px] top-[6px] w-2.5 h-2.5 rounded-full border-2 border-custom-light-accent dark:border-custom-dark-accent-text bg-custom-light-accent dark:bg-custom-dark-accent-text" />
+
+      {/* Periodo + rol */}
+      <div className="flex flex-wrap items-center gap-2 mb-1">
+        <span className="font-mono text-xs text-custom-light-text/50 dark:text-custom-dark-text/50 tracking-wider">
+          {period}
+        </span>
+        {badges.map(({ name }, i) => (
+          <Badge key={i} variant="role" className="rounded-full text-[10px] py-0">
+            {name}
+          </Badge>
+        ))}
+      </div>
+
+      {/* Título */}
+      <p className="font-display font-semibold text-sm text-custom-light-accent dark:text-custom-dark-text leading-snug mb-1">
+        {title}
+      </p>
+
+      {/* Descripción */}
+      <p className="text-xs text-custom-light-text/60 dark:text-custom-dark-text/60 leading-relaxed mb-3">
+        {description.es}
+      </p>
+
+      {/* Iconos de tecnología + acciones */}
+      <div className="flex items-center justify-between gap-2 flex-wrap">
+        {/* Tech icons — monocromáticos */}
+        <div className="flex flex-wrap gap-2 [&_svg]:w-[20px] [&_svg]:h-[20px] text-custom-light-text/70 dark:text-custom-dark-text/70 [&_svg]:fill-current [&_path]:fill-current">
+          {icons.map(({ name, icon }, i) => (
+            <Tooltip key={i} content={name} theme={tooltipTheme} placement="bottom">
+              <span className="opacity-70 hover:opacity-100 transition-opacity">
                 {icon}
-              </Tooltip>
-            ))}
-          </div>
-          <div className="relative h-52 xs:h-60 sm:h-72 md:h-36 lg:h-56 rounded-xl overflow-hidden bg-black dark:bg-transparent">
-            <Image
-              src={images[0]}
-              alt="image_random"
-              fill={true}
-              priority
-              className="z-0 object-cover object-center w-full img opacity-40 dark:opacity-20"
-            />
-            <div className="absolute left-2 bottom-2 flex space-x-2">
-              <a
-                href={web}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 block text-custom-light-bg dark:text-custom-dark-text border-2 border-custom-light-bg dark:border-custom-dark-text hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-primary/30 rounded-xl"
-              >
-                <HiOutlineGlobeAlt className="w-5 h-5" />
-              </a>
-              {github !== "" && (
-                <a
-                  href={github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-2 block text-custom-light-bg dark:text-custom-dark-text border-2 border-custom-light-bg dark:border-custom-dark-text hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-primary/30 rounded-xl"
-                >
-                  <SiGithub className="w-5 h-5" />
-                </a>
-              )}
-              <Link href={`project/${slug}`} legacyBehavior>
-                <a className="p-2 block text-custom-light-bg dark:text-custom-dark-text border-2 border-custom-light-bg dark:border-custom-dark-text hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-primary/30 rounded-xl">
-                  <HiOutlineEye className="w-5 h-5" />
-                </a>
-              </Link>
-            </div>
-          </div>
-        </Timeline.Body>
-      </Timeline.Content>
-    </Timeline.Item>
+              </span>
+            </Tooltip>
+          ))}
+        </div>
+
+        {/* Action buttons — planos */}
+        <div className="flex items-center gap-1.5 flex-shrink-0">
+          <a
+            href={web}
+            target="_blank"
+            rel="noreferrer"
+            className="p-1 text-custom-light-text/50 dark:text-custom-dark-text/50 hover:text-custom-light-accent dark:hover:text-custom-dark-accent-text transition-colors duration-200"
+          >
+            <HiOutlineGlobeAlt className="w-4 h-4" />
+          </a>
+          {github !== "" && (
+            <a
+              href={github}
+              target="_blank"
+              rel="noreferrer"
+              className="p-1 text-custom-light-text/50 dark:text-custom-dark-text/50 hover:text-custom-light-accent dark:hover:text-custom-dark-accent-text transition-colors duration-200"
+            >
+              <SiGithub className="w-4 h-4" />
+            </a>
+          )}
+          <Link
+            href={`/project/${slug}`}
+            className="p-1 text-custom-light-text/50 dark:text-custom-dark-text/50 hover:text-custom-light-accent dark:hover:text-custom-dark-accent-text transition-colors duration-200"
+          >
+            <HiOutlineEye className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </li>
   );
 };

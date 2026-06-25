@@ -26,6 +26,7 @@ export function Navbar() {
 
   useEffect(() => {
     if (!("theme" in localStorage)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setThemeSelected(undefined);
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         document.getElementsByTagName("HTML")[0].setAttribute("class", "dark");
@@ -146,20 +147,6 @@ export function Navbar() {
           <div className="hidden md:block">
             <ul className="top-0 left-0 z-0 flex flex-row items-center justify-center w-full h-full font-medium md:space-x-2 lg:space-x-4 dark:font-normal">
               {pathname == "/" ? <ListHome /> : <ListOtherPages />}
-              <motion.li whileTap={{ scale: 0.9 }}>
-                <Link
-                  href="/classes"
-                  className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5 relative"
-                >
-                  Clases
-                  <Badge
-                    variant="destructive"
-                    className="absolute -top-[0.315rem] -right-4 text-2xs px-1.5 border-none"
-                  >
-                    Nuevo
-                  </Badge>
-                </Link>
-              </motion.li>
             </ul>
           </div>
           <div className="flex flex-row items-center space-x-1 sm:space-x-2 lg:space-x-3">
@@ -190,19 +177,6 @@ export function Navbar() {
               ) : (
                 <ListOtherPagesMobile toggleOpen={toggleOpen} />
               )}
-              <Link
-                onClick={() => toggleOpen()}
-                href="/classes"
-                className="block cursor-pointer rounded-xl focus:bg-custom-light-bg dark:focus:bg-custom-dark-bg tracking-wide text-sm px-3 py-1.5"
-              >
-                Clases
-                <Badge
-                  variant="destructive"
-                  className="ml-2 text-2xs px-1.5 border-none"
-                >
-                  Nuevo
-                </Badge>
-              </Link>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -224,7 +198,7 @@ function ListHome() {
           to="projects"
           smooth={true}
           duration={500}
-          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
+          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5"
         >
           Experiencia
         </LinkReactScroll>
@@ -234,7 +208,7 @@ function ListHome() {
           to="about"
           smooth={true}
           duration={500}
-          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
+          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5"
         >
           Sobre mí
         </LinkReactScroll>
@@ -244,7 +218,7 @@ function ListHome() {
           to="skills"
           smooth={true}
           duration={500}
-          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5"
+          className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5"
         >
           Habilidades
         </LinkReactScroll>
@@ -291,24 +265,18 @@ function ListOtherPages() {
   return (
     <>
       <motion.li whileTap={{ scale: 0.9 }}>
-        <Link href="/#projects" legacyBehavior>
-          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+        <Link href="/#projects" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5">
             Experiencia
-          </a>
         </Link>
       </motion.li>
       <motion.li whileTap={{ scale: 0.9 }}>
-        <Link href="/#about" legacyBehavior>
-          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+        <Link href="/#about" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5">
             Sobre mí
-          </a>
         </Link>
       </motion.li>
       <motion.li whileTap={{ scale: 0.9 }}>
-        <Link href="/#skills" legacyBehavior>
-          <a className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary dark:hover:bg-custom-dark-text hover:bg-opacity-5 dark:hover:bg-opacity-5">
+        <Link href="/#skills" className="px-3 py-2 text-base rounded-lg cursor-pointer hover:bg-custom-light-primary/5 dark:hover:bg-custom-dark-text/5">
             Habilidades
-          </a>
         </Link>
       </motion.li>
     </>

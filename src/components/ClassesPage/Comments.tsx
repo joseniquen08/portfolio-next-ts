@@ -2,7 +2,7 @@
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tables } from "@/types/database.types";
-import { Rating } from "flowbite-react";
+import { Rating, RatingStar } from "flowbite-react";
 import { HiOutlineUserCircle, HiUserCircle } from "react-icons/hi";
 
 interface Props {
@@ -29,9 +29,9 @@ export function Comments({ comments }: Props) {
                 <Rating>
                   {Array.from({ length: 5 }, (v, i) => i + 1).map((pos) =>
                     pos <= comment.rating ? (
-                      <Rating.Star key={pos} />
+                      <RatingStar key={pos} />
                     ) : (
-                      <Rating.Star key={pos} filled={false} />
+                      <RatingStar key={pos} filled={false} />
                     )
                   )}
                 </Rating>

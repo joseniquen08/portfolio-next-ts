@@ -19,6 +19,10 @@ const buttonVariants = cva(
           "bg-stone-100 text-stone-900 shadow-sm hover:bg-stone-100/80 dark:bg-stone-800 dark:text-stone-50 dark:hover:bg-stone-800/80",
         ghost: "hover:bg-stone-100 hover:text-stone-900 dark:hover:bg-stone-800 dark:hover:text-stone-50",
         link: "text-stone-900 underline-offset-4 hover:underline dark:text-stone-50",
+        brand:
+          "bg-custom-light-primary text-custom-light-text shadow hover:bg-custom-light-primary/85 dark:bg-custom-dark-primary dark:text-custom-dark-bg dark:hover:bg-custom-dark-primary/85",
+        brandOutline:
+          "border border-custom-light-accent text-custom-light-accent bg-transparent hover:bg-custom-light-accent/10 dark:border-custom-dark-accent-text dark:text-custom-dark-accent-text dark:hover:bg-custom-dark-accent-text/10",
       },
       size: {
         default: "h-9 px-4 py-2",
