@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { HiOutlineCreditCard } from "react-icons/hi";
+import { HiOutlineCreditCard, HiOutlineBriefcase } from "react-icons/hi";
 
 export interface AdminSubmodule {
   slug: string;
@@ -30,6 +30,19 @@ export const adminModules: AdminModule[] = [
         slug: "tarjetas",
         title: "Tarjetas de crédito",
         href: "/admin/financiero/tarjetas",
+      },
+    ],
+  },
+  {
+    slug: "laboral",
+    title: "Laboral",
+    icon: HiOutlineBriefcase,
+    href: "/admin/laboral",
+    submodules: [
+      {
+        slug: "tareas",
+        title: "Tareas",
+        href: "/admin/laboral/tareas",
       },
     ],
   },

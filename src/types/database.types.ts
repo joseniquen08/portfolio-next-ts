@@ -79,6 +79,85 @@ export type Database = {
           }
         ]
       }
+      jobs: {
+        Row: {
+          id: string
+          user_id: string
+          name: string
+          color: string | null
+          is_active: boolean
+          sort_order: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string
+          name: string
+          color?: string | null
+          is_active?: boolean
+          sort_order?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          name?: string
+          color?: string | null
+          is_active?: boolean
+          sort_order?: number
+          created_at?: string
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          id: string
+          user_id: string
+          job_id: string
+          title: string
+          description: string | null
+          status: string
+          priority: string
+          due_date: string | null
+          sort_order: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string
+          job_id: string
+          title: string
+          description?: string | null
+          status?: string
+          priority?: string
+          due_date?: string | null
+          sort_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          job_id?: string
+          title?: string
+          description?: string | null
+          status?: string
+          priority?: string
+          due_date?: string | null
+          sort_order?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_job_id_fkey"
+            columns: ["job_id"]
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       credit_cards: {
         Row: {
           id: string
