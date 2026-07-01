@@ -38,7 +38,7 @@ export function Header() {
               className="font-display text-2xl font-semibold tracking-tight break-words lg:text-3xl text-custom-light-text dark:text-custom-dark-text"
               {...anim(0.25)}
             >
-              Software Engineer & Instructor
+              Software Engineer
             </motion.p>
           </div>
           <motion.div
