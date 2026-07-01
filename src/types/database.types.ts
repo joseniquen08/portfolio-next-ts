@@ -9,30 +9,139 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      class_comments: {
+      admin_preferences: {
         Row: {
-          comment: string
-          created_at: string
-          id: number
-          rating: number
-          user_name: string
-          user_url_profile: string | null
+          user_id:    string
+          key:        string
+          value:      Json
+          updated_at: string
         }
         Insert: {
-          comment: string
-          created_at?: string
-          id?: number
-          rating: number
-          user_name: string
-          user_url_profile?: string | null
+          user_id:    string
+          key:        string
+          value:      Json
+          updated_at?: string
         }
         Update: {
-          comment?: string
+          user_id?:    string
+          key?:        string
+          value?:      Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      card_statements: {
+        Row: {
+          id: string
+          user_id: string
+          card_id: string
+          period: string
+          amounts: Json
+          due_date: string | null
+          cycle_start: string | null
+          cycle_end: string | null
+          is_estimated: boolean
+          is_paid: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string
+          card_id: string
+          period: string
+          amounts: Json
+          due_date?: string | null
+          cycle_start?: string | null
+          cycle_end?: string | null
+          is_estimated?: boolean
+          is_paid?: boolean
           created_at?: string
-          id?: number
-          rating?: number
-          user_name?: string
-          user_url_profile?: string | null
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          card_id?: string
+          period?: string
+          amounts?: Json
+          due_date?: string | null
+          cycle_start?: string | null
+          cycle_end?: string | null
+          is_estimated?: boolean
+          is_paid?: boolean
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "card_statements_card_id_fkey"
+            columns: ["card_id"]
+            referencedRelation: "credit_cards"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      credit_cards: {
+        Row: {
+          id: string
+          user_id: string
+          name: string
+          color: string | null
+          default_payment_day: number
+          default_cycle_start_day: number
+          default_cycle_end_day: number
+          currencies: string[]
+          sort_order: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string
+          name: string
+          color?: string | null
+          default_payment_day?: number
+          default_cycle_start_day?: number
+          default_cycle_end_day?: number
+          currencies?: string[]
+          sort_order?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          name?: string
+          color?: string | null
+          default_payment_day?: number
+          default_cycle_start_day?: number
+          default_cycle_end_day?: number
+          currencies?: string[]
+          sort_order?: number
+          created_at?: string
+        }
+        Relationships: []
+      }
+      period_adjustments: {
+        Row: {
+          id: string
+          user_id: string
+          period: string
+          amount: number
+          note: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string
+          period: string
+          amount: number
+          note?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          period?: string
+          amount?: number
+          note?: string | null
+          created_at?: string
         }
         Relationships: []
       }
