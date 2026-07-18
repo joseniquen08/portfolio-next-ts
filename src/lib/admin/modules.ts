@@ -31,6 +31,11 @@ export const adminModules: AdminModule[] = [
         title: "Tarjetas de crédito",
         href: "/admin/financiero/tarjetas",
       },
+      {
+        slug: "ingresos",
+        title: "Ingresos",
+        href: "/admin/financiero/ingresos",
+      },
     ],
   },
   {

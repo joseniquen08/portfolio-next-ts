@@ -197,6 +197,64 @@ export type Database = {
         }
         Relationships: []
       }
+      income_entries: {
+        Row: {
+          id: string
+          user_id: string
+          job_id: string
+          income_type: string
+          description: string | null
+          amount: number
+          currency: string
+          period: string | null
+          entry_date: string | null
+          expected_date: string | null
+          paid_date: string | null
+          is_paid: boolean
+          sort_order: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string
+          job_id: string
+          income_type: string
+          description?: string | null
+          amount?: number
+          currency?: string
+          period?: string | null
+          entry_date?: string | null
+          expected_date?: string | null
+          paid_date?: string | null
+          is_paid?: boolean
+          sort_order?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          job_id?: string
+          income_type?: string
+          description?: string | null
+          amount?: number
+          currency?: string
+          period?: string | null
+          entry_date?: string | null
+          expected_date?: string | null
+          paid_date?: string | null
+          is_paid?: boolean
+          sort_order?: number
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "income_entries_job_id_fkey"
+            columns: ["job_id"]
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       period_adjustments: {
         Row: {
           id: string
