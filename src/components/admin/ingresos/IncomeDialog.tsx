@@ -108,6 +108,66 @@ function DatePickerField({
   );
 }
 
+// ─── Month/year picker (for `mes_esperado`) ─────────────────────────────────────
+
+const MONTHS = [
+  "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
+];
+
+const CURRENT_YEAR = new Date().getFullYear();
+const YEAR_OPTIONS = [CURRENT_YEAR - 2, CURRENT_YEAR - 1, CURRENT_YEAR, CURRENT_YEAR + 1, CURRENT_YEAR + 2];
+
+function MonthYearField({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [year, month] = value ? value.split("-") : ["", ""];
+
+  function setYear(y: string) {
+    onChange(`${y}-${month || "01"}`);
+  }
+
+  function setMonth(m: string) {
+    onChange(`${year || String(CURRENT_YEAR)}-${m}`);
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <Select value={month} onValueChange={setMonth}>
+        <SelectTrigger className="flex-1 bg-zinc-800 border-zinc-700 text-white">
+          <SelectValue placeholder="Mes" />
+        </SelectTrigger>
+        <SelectContent className="bg-zinc-900 border-zinc-800 text-white">
+          {MONTHS.map((label, i) => {
+            const m = String(i + 1).padStart(2, "0");
+            return (
+              <SelectItem key={m} value={m}>
+                {label}
+              </SelectItem>
+            );
+          })}
+        </SelectContent>
+      </Select>
+      <Select value={year} onValueChange={setYear}>
+        <SelectTrigger className="w-28 shrink-0 bg-zinc-800 border-zinc-700 text-white">
+          <SelectValue placeholder="Año" />
+        </SelectTrigger>
+        <SelectContent className="bg-zinc-900 border-zinc-800 text-white">
+          {YEAR_OPTIONS.map((y) => (
+            <SelectItem key={y} value={String(y)}>
+              {y}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}
+
 // ─── Schema ────────────────────────────────────────────────────────────────────
 
 const schema = z.object({
@@ -115,7 +175,7 @@ const schema = z.object({
   description:   z.string().optional(),
   amount:        z.number().min(0.01, "Debe ser mayor a 0"),
   currency:      z.string().min(1, "Requerido"),
-  entry_date:    z.string().min(1, "Requerido"),
+  mes_esperado:  z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, "Selecciona mes y año"),
   expected_date: z.string().optional(),
 });
 
@@ -129,12 +189,17 @@ interface Props {
   onClose: () => void;
 }
 
+function currentMesEsperado(): string {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+}
+
 const DEFAULT_VALUES: FormValues = {
   job_id: "",
   description: "",
   amount: 0,
   currency: "PEN",
-  entry_date: "",
+  mes_esperado: currentMesEsperado(),
   expected_date: undefined,
 };
 
@@ -158,7 +223,7 @@ export function IncomeDialog({ open, entry, jobs, nextSortOrder, onClose }: Prop
             description: entry.description ?? "",
             amount: entry.amount,
             currency: entry.currency,
-            entry_date: entry.entry_date,
+            mes_esperado: entry.mes_esperado,
             expected_date: entry.expected_date ?? undefined,
           }
         : { ...DEFAULT_VALUES, job_id: firstActiveJobId }
@@ -188,7 +253,7 @@ export function IncomeDialog({ open, entry, jobs, nextSortOrder, onClose }: Prop
           description: values.description || null,
           amount: values.amount,
           currency: values.currency,
-          entry_date: values.entry_date,
+          mes_esperado: values.mes_esperado,
           expected_date: values.expected_date || null,
         };
         if (isEdit && entry) {
@@ -328,21 +393,17 @@ export function IncomeDialog({ open, entry, jobs, nextSortOrder, onClose }: Prop
 
               <FormField
                 control={form.control}
-                name="entry_date"
+                name="mes_esperado"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-zinc-300 text-sm">
-                      Fecha del ingreso <span className="text-red-400">*</span>
+                      Mes esperado <span className="text-red-400">*</span>
                     </FormLabel>
                     <FormControl>
-                      <DatePickerField
-                        value={field.value}
-                        onChange={field.onChange}
-                        placeholder="Seleccionar fecha"
-                      />
+                      <MonthYearField value={field.value} onChange={field.onChange} />
                     </FormControl>
                     <FormDescription className="text-zinc-600 text-[11px]">
-                      Fecha de la factura, hito o cobro de este ingreso.
+                      Mes al que pertenece este ingreso (agrupa la tabla).
                     </FormDescription>
                     <FormMessage className="text-red-400" />
                   </FormItem>

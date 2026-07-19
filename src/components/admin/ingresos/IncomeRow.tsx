@@ -1,14 +1,26 @@
 "use client";
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { toast } from "sonner";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, differenceInCalendarDays } from "date-fns";
 import { es } from "date-fns/locale";
 import { HiCheck, HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import { cn } from "@/utils/shadcn";
 import { toggleCollected, deleteIncomeEntry } from "@/app/(admin)/admin/(protected)/financiero/ingresos/actions";
 import { TableRow, TableCell } from "@/components/ui/table";
-import { Job, IncomeEntry, collectedBadge, currencySymbol, formatAmount } from "./status";
+import { Button } from "@/components/ui/button";
+import { Popover, PopoverAnchor, PopoverContent } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Job,
+  IncomeEntry,
+  collectedBadge,
+  currencySymbol,
+  formatAmount,
+  isOverdue,
+} from "./status";
+
+const DATE_LABEL_CLASS = "shrink-0 w-14 text-[10px] font-medium uppercase tracking-wider";
 
 interface Props {
   entry:   IncomeEntry;
@@ -18,17 +30,33 @@ interface Props {
 
 export function IncomeRow({ entry, job, onEdit }: Props) {
   const [isPending, startTransition] = useTransition();
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [pickedDate, setPickedDate] = useState<Date>(new Date());
   const badge = collectedBadge(entry);
 
-  function handleToggle() {
+  function commitToggle(is_paid: boolean, paid_date: string | null) {
     startTransition(async () => {
       try {
-        await toggleCollected(entry.id, !entry.is_paid);
-        toast.success(entry.is_paid ? "Marcado como pendiente" : "Marcado como cobrado");
+        await toggleCollected(entry.id, is_paid, paid_date);
+        toast.success(is_paid ? "Marcado como cobrado" : "Marcado como pendiente");
       } catch {
         toast.error("No se pudo actualizar. Intenta de nuevo.");
       }
     });
+  }
+
+  function handleToggle() {
+    if (entry.is_paid) {
+      commitToggle(false, null);
+      return;
+    }
+    setPickedDate(new Date());
+    setPickerOpen(true);
+  }
+
+  function handleConfirmPaidDate() {
+    setPickerOpen(false);
+    commitToggle(true, format(pickedDate, "yyyy-MM-dd"));
   }
 
   function handleDelete() {
@@ -45,27 +73,48 @@ export function IncomeRow({ entry, job, onEdit }: Props) {
 
   return (
     <TableRow className="border-zinc-800/50 hover:bg-zinc-900/40 transition-colors group">
-      <TableCell className="px-2 py-3">
-        <button
-          onClick={handleToggle}
-          disabled={isPending}
-          title={entry.is_paid ? "Marcar como pendiente" : "Marcar como cobrado"}
-          className={cn(
-            "shrink-0 w-5 h-5 rounded flex items-center justify-center transition-colors border cursor-pointer",
-            entry.is_paid
-              ? "bg-emerald-600/80 border-emerald-600 text-white"
-              : "border-zinc-700 text-zinc-700 hover:border-zinc-500 hover:text-zinc-400"
-          )}
-        >
-          <HiCheck className="w-3 h-3" />
-        </button>
+      <TableCell className="px-2 py-2.5">
+        <Popover open={pickerOpen} onOpenChange={setPickerOpen}>
+          <PopoverAnchor asChild>
+            <button
+              onClick={handleToggle}
+              disabled={isPending}
+              title={entry.is_paid ? "Marcar como pendiente" : "Marcar como cobrado"}
+              className={cn(
+                "shrink-0 w-5 h-5 rounded flex items-center justify-center transition-colors border cursor-pointer",
+                entry.is_paid
+                  ? "bg-emerald-600/80 border-emerald-600 text-white"
+                  : "border-zinc-700 text-zinc-700 hover:border-zinc-500 hover:text-zinc-400"
+              )}
+            >
+              <HiCheck className="w-3 h-3" />
+            </button>
+          </PopoverAnchor>
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={pickedDate}
+              onSelect={(date) => date && setPickedDate(date)}
+            />
+            <div className="border-t border-zinc-700 p-2">
+              <Button
+                type="button"
+                size="sm"
+                onClick={handleConfirmPaidDate}
+                className="w-full bg-white text-zinc-900 hover:bg-white/90 cursor-pointer"
+              >
+                Confirmar {format(pickedDate, "d 'de' MMMM yyyy", { locale: es })}
+              </Button>
+            </div>
+          </PopoverContent>
+        </Popover>
       </TableCell>
 
-      <TableCell className="px-3 py-3">
+      <TableCell className="px-3 py-2.5">
         <span className="text-sm text-white">{entry.description || "—"}</span>
       </TableCell>
 
-      <TableCell className="px-3 py-3">
+      <TableCell className="px-3 py-2.5">
         <div className="flex items-center gap-1.5">
           {job?.color && (
             <span
@@ -77,21 +126,63 @@ export function IncomeRow({ entry, job, onEdit }: Props) {
         </div>
       </TableCell>
 
-      <TableCell className="px-3 py-3 text-zinc-500 text-xs whitespace-nowrap">
-        {format(parseISO(entry.entry_date), "d MMM yyyy", { locale: es })}
+      <TableCell className="px-3 py-2.5 text-xs whitespace-nowrap">
+        <div className="flex flex-col justify-center gap-1 min-h-9">
+          {entry.expected_date && (
+            <span
+              title="Fecha esperada de cobro"
+              className={cn(
+                "flex items-baseline gap-1",
+                isOverdue(entry) ? "text-red-400" : "text-zinc-500"
+              )}
+            >
+              <span
+                className={cn(
+                  DATE_LABEL_CLASS,
+                  isOverdue(entry) ? "text-red-500/80" : "text-zinc-700"
+                )}
+              >
+                Esperado
+              </span>
+              {format(parseISO(entry.expected_date), "d MMM yyyy", { locale: es })}
+            </span>
+          )}
+          {entry.paid_date && (
+            <span className="flex items-baseline gap-1 text-zinc-500">
+              <span className={cn(DATE_LABEL_CLASS, "text-zinc-700")}>Cobrado</span>
+              {format(parseISO(entry.paid_date), "d MMM yyyy", { locale: es })}
+              {entry.expected_date && (() => {
+                const diff = differenceInCalendarDays(
+                  parseISO(entry.paid_date),
+                  parseISO(entry.expected_date)
+                );
+                if (diff === 0) return null;
+                return (
+                  <span className={cn("ml-0.5", diff < 0 ? "text-emerald-400" : "text-amber-400")}>
+                    ({diff > 0 ? "+" : ""}
+                    {diff} {Math.abs(diff) === 1 ? "día" : "días"})
+                  </span>
+                );
+              })()}
+            </span>
+          )}
+          {!entry.expected_date && !entry.paid_date && (
+            <span className="text-zinc-700">—</span>
+          )}
+        </div>
       </TableCell>
 
-      <TableCell className="px-3 py-3 text-right">
+      <TableCell className="px-3 py-2.5 text-right">
         <span className="font-sans text-sm tabular-nums text-white">
           {currencySymbol(entry.currency)}&nbsp;{formatAmount(entry.amount)}
         </span>
       </TableCell>
 
-      <TableCell className="px-3 py-3">
+      <TableCell className="px-3 py-2.5">
         <span className={cn("text-xs font-medium", badge.className)}>{badge.label}</span>
       </TableCell>
 
-      <TableCell className="px-2 py-3">
+      <TableCell className="px-2 py-2.5">
         <div className="flex items-center gap-1 opacity-40 group-hover:opacity-100 transition-opacity">
           <button
             onClick={() => onEdit(entry)}
