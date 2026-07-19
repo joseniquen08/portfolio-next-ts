@@ -55,11 +55,13 @@ export function totalsByCurrency(entries: IncomeEntry[]): [string, number][] {
   return Object.entries(totals).sort(([a], [b]) => a.localeCompare(b));
 }
 
-/** Most recent income date first; `created_at` breaks ties (e.g. several
- * entries sharing the same entry_date). */
+/** Sorts by `expected_date` descending (most recent first); entries without
+ * an `expected_date` interleave using `created_at` instead of being pushed
+ * to the end. */
 export function sortEntries(entries: IncomeEntry[]): IncomeEntry[] {
+  const key = (e: IncomeEntry) => e.expected_date ?? e.created_at.slice(0, 10);
   return [...entries].sort((a, b) => {
-    const dateDiff = b.entry_date.localeCompare(a.entry_date);
+    const dateDiff = key(b).localeCompare(key(a));
     if (dateDiff !== 0) return dateDiff;
     return b.created_at.localeCompare(a.created_at);
   });
@@ -73,15 +75,18 @@ export function monthLabel(yyyymm: string): string {
   return label.charAt(0).toUpperCase() + label.slice(1);
 }
 
-/** Groups already-sorted entries into consecutive month buckets, preserving
- * the incoming order (Map iteration order = first-insertion order). */
+/** Groups already-sorted entries into month buckets keyed by `mes_esperado`,
+ * preserving each bucket's incoming (ascending) order, but with the buckets
+ * themselves ordered most-recent-month-first. */
 export function groupByMonth(entries: IncomeEntry[]): { key: string; entries: IncomeEntry[] }[] {
   const groups = new Map<string, IncomeEntry[]>();
   for (const e of entries) {
-    const key = e.entry_date.slice(0, 7);
+    const key = e.mes_esperado;
     const bucket = groups.get(key);
     if (bucket) bucket.push(e);
     else groups.set(key, [e]);
   }
-  return Array.from(groups, ([key, entries]) => ({ key, entries }));
+  return Array.from(groups, ([key, entries]) => ({ key, entries })).sort((a, b) =>
+    b.key.localeCompare(a.key)
+  );
 }

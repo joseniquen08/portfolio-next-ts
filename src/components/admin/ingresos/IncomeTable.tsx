@@ -50,23 +50,23 @@ export function IncomeTable({ jobs, entries, onEdit }: Props) {
         <Table>
           <TableHeader>
             <TableRow className="border-zinc-800 hover:bg-transparent">
-              <TableHead className="w-9 px-2" />
-              <TableHead className="px-3 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">
+              <TableHead className="w-9 px-2 py-2.5" />
+              <TableHead className="px-3 py-2.5 text-xs font-medium text-zinc-500 uppercase tracking-wider">
                 Descripción
               </TableHead>
-              <TableHead className="px-3 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">
+              <TableHead className="w-[130px] px-3 py-2.5 text-xs font-medium text-zinc-500 uppercase tracking-wider">
                 Trabajo
               </TableHead>
-              <TableHead className="px-3 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">
+              <TableHead className="w-[190px] px-3 py-2.5 text-xs font-medium text-zinc-500 uppercase tracking-wider">
                 Fecha
               </TableHead>
-              <TableHead className="px-3 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider text-right">
+              <TableHead className="w-[110px] px-3 py-2.5 text-xs font-medium text-zinc-500 uppercase tracking-wider text-right">
                 Monto
               </TableHead>
-              <TableHead className="px-3 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">
+              <TableHead className="w-[90px] px-3 py-2.5 text-xs font-medium text-zinc-500 uppercase tracking-wider">
                 Estado
               </TableHead>
-              <TableHead className="w-16" />
+              <TableHead className="w-16 py-2.5" />
             </TableRow>
           </TableHeader>
 
@@ -99,12 +99,12 @@ export function IncomeTable({ jobs, entries, onEdit }: Props) {
             </TableRow>
 
             <TableRow className="bg-zinc-900/40 border-0 hover:bg-zinc-900/40">
-              <TableCell colSpan={4} className="px-3 py-3">
+              <TableCell colSpan={4} className="px-3 py-2.5">
                 <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
                   Total
                 </span>
               </TableCell>
-              <TableCell colSpan={3} className="px-3 py-3">
+              <TableCell colSpan={3} className="px-3 py-2.5">
                 <div className="flex flex-col gap-1 items-end">
                   {collectedTotals.map(([cur, amt]) => (
                     <span key={`c-${cur}`} className="text-xs tabular-nums text-emerald-400">
