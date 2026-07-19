@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -108,10 +108,11 @@ function DatePickerField({
   periodMonth?: Date;
   placeholder?: string;
 }) {
+  const [open, setOpen] = useState(false);
   const selected = value ? parseISO(value) : undefined;
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           type="button"
@@ -133,9 +134,10 @@ function DatePickerField({
           mode="single"
           selected={selected}
           defaultMonth={selected ?? periodMonth}
-          onSelect={(date) =>
-            onChange(date ? format(date, "yyyy-MM-dd") : undefined)
-          }
+          onSelect={(date) => {
+            onChange(date ? format(date, "yyyy-MM-dd") : undefined);
+            setOpen(false);
+          }}
         />
         {value && (
           <div className="border-t border-zinc-700 p-2">
@@ -143,7 +145,10 @@ function DatePickerField({
               type="button"
               variant="ghost"
               size="sm"
-              onClick={() => onChange(undefined)}
+              onClick={() => {
+                onChange(undefined);
+                setOpen(false);
+              }}
               className="w-full text-zinc-400 hover:text-white text-xs"
             >
               Quitar fecha

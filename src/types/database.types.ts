@@ -202,12 +202,10 @@ export type Database = {
           id: string
           user_id: string
           job_id: string
-          income_type: string
           description: string | null
           amount: number
           currency: string
-          period: string | null
-          entry_date: string | null
+          entry_date: string
           expected_date: string | null
           paid_date: string | null
           is_paid: boolean
@@ -218,12 +216,10 @@ export type Database = {
           id?: string
           user_id?: string
           job_id: string
-          income_type: string
           description?: string | null
           amount?: number
           currency?: string
-          period?: string | null
-          entry_date?: string | null
+          entry_date: string
           expected_date?: string | null
           paid_date?: string | null
           is_paid?: boolean
@@ -234,12 +230,10 @@ export type Database = {
           id?: string
           user_id?: string
           job_id?: string
-          income_type?: string
           description?: string | null
           amount?: number
           currency?: string
-          period?: string | null
-          entry_date?: string | null
+          entry_date?: string
           expected_date?: string | null
           paid_date?: string | null
           is_paid?: boolean
