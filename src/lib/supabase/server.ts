@@ -27,3 +27,21 @@ export async function createClient() {
     }
   );
 }
+
+/**
+ * Server Actions are directly invocable via their action ID regardless of
+ * which page rendered them, so route/layout-level auth checks don't cover
+ * them. Every admin Server Action must call this before touching the DB.
+ */
+export async function requireAdmin() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user || user.email !== process.env.ADMIN_EMAIL) {
+    throw new Error("Unauthorized");
+  }
+
+  return supabase;
+}

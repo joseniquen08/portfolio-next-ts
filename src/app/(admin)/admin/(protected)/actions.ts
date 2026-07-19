@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/supabase/server";
 import type { Json } from "@/types/database.types";
 
 /**
@@ -9,7 +9,7 @@ import type { Json } from "@/types/database.types";
  * The `value` must be JSON-serializable.
  */
 export async function savePreference(key: string, value: Json, path?: string): Promise<void> {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return;
 

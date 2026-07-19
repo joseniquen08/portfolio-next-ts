@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/supabase/server";
 
 const PATH = "/admin/financiero/ingresos";
 
@@ -34,7 +34,7 @@ export async function createIncomeEntry(data: {
   sort_order: number;
 }) {
   assertTypeDates(data.income_type, data.period, data.entry_date);
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase.from("income_entries").insert(data);
   if (error) throw new Error(error.message);
   revalidatePath(PATH);
@@ -54,7 +54,7 @@ export async function updateIncomeEntry(
     sort_order?: number;
   }
 ) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const patch: typeof data = { ...data };
 
   // A partial payload can omit period/entry_date. Resolve against the stored
@@ -89,7 +89,7 @@ export async function updateIncomeEntry(
 }
 
 export async function deleteIncomeEntry(id: string) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase
     .from("income_entries")
     .delete()
@@ -99,7 +99,7 @@ export async function deleteIncomeEntry(id: string) {
 }
 
 export async function toggleCollected(id: string, is_paid: boolean) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase
     .from("income_entries")
     .update({
