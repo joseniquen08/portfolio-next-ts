@@ -41,6 +41,27 @@ The database schema is tracked in `supabase/migrations/` (baseline captured
 - After hand-applying anything urgent, run `supabase migration repair --status applied <version> --linked`
   so the remote migration history matches the committed migration file.
 
+## UI components: shadcn only (MANDATORY, no exceptions)
+
+Every UI primitive (select, input, button, dialog, checkbox, etc.) MUST be a
+shadcn/ui component under `src/components/ui/`. Never reach for a raw native
+HTML element (`<select>`, `<input>` without the shadcn wrapper, etc.) as a
+shortcut, even to match another component's custom sizing or to avoid
+mounting overhead inside a loop (`useFieldArray`, `.map()`, etc.).
+
+- If the primitive you need isn't installed yet, install it via the shadcn
+  CLI (`pnpm dlx shadcn@latest add <component>`) — do not hand-roll it.
+- Only components that shadcn actually publishes are allowed. If shadcn has
+  no equivalent for what you need, ask before improvising a custom one.
+- Sizing/layout constraints (e.g. matching a neighboring custom control's
+  height) are solved with `className` overrides on the shadcn component, not
+  by dropping down to plain HTML.
+- `src/components/admin/tarjetas/StatementDialog.tsx` currently uses a native
+  `<select>` for the per-row currency picker — this predates the rule and is
+  a known violation, not a pattern to copy. Fix it (and any other native
+  element found elsewhere) opportunistically when touching that file, or
+  proactively if asked.
+
 ## Env vars
 
 See `.env.example`. `ADMIN_EMAIL` is the single-admin allowlist checked by both the
