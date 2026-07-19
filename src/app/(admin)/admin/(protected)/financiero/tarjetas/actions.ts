@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/supabase/server";
 
 const PATH = "/admin/financiero/tarjetas";
 
@@ -16,7 +16,7 @@ export async function createCard(data: {
   currencies: string[];
   sort_order: number;
 }) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase.from("credit_cards").insert(data);
   if (error) throw new Error(error.message);
   revalidatePath(PATH);
@@ -34,7 +34,7 @@ export async function updateCard(
     sort_order?: number;
   }
 ) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase
     .from("credit_cards")
     .update(data)
@@ -44,7 +44,7 @@ export async function updateCard(
 }
 
 export async function reorderCards(orderedIds: string[]) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   await Promise.all(
     orderedIds.map((id, index) =>
       supabase.from("credit_cards").update({ sort_order: index }).eq("id", id)
@@ -54,7 +54,7 @@ export async function reorderCards(orderedIds: string[]) {
 }
 
 export async function deleteCard(id: string) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase.from("credit_cards").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath(PATH);
@@ -72,7 +72,7 @@ export async function upsertStatement(data: {
   is_estimated: boolean;
   is_paid:      boolean;
 }) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase
     .from("card_statements")
     .upsert(data, { onConflict: "card_id,period" });
@@ -85,7 +85,7 @@ export async function togglePaid(
   period: string,
   is_paid: boolean
 ) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   // Marcar como pagado también limpia el flag estimado
   const update: { is_paid: boolean; is_estimated?: boolean } = { is_paid };
   if (is_paid) update.is_estimated = false;
@@ -103,7 +103,7 @@ export async function toggleEstimated(
   period: string,
   is_estimated: boolean
 ) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase
     .from("card_statements")
     .update({ is_estimated })
@@ -114,7 +114,7 @@ export async function toggleEstimated(
 }
 
 export async function deleteStatement(card_id: string, period: string) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase
     .from("card_statements")
     .delete()
@@ -132,7 +132,7 @@ export async function upsertAdjustment(data: {
   amount: number;
   note: string | null;
 }) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase
     .from("period_adjustments")
     .upsert(data, { onConflict: "id" });
@@ -141,7 +141,7 @@ export async function upsertAdjustment(data: {
 }
 
 export async function deleteAdjustment(id: string) {
-  const supabase = await createClient();
+  const supabase = await requireAdmin();
   const { error } = await supabase
     .from("period_adjustments")
     .delete()
