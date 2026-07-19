@@ -205,7 +205,7 @@ export type Database = {
           description: string | null
           amount: number
           currency: string
-          entry_date: string
+          mes_esperado: string
           expected_date: string | null
           paid_date: string | null
           is_paid: boolean
@@ -219,7 +219,7 @@ export type Database = {
           description?: string | null
           amount?: number
           currency?: string
-          entry_date: string
+          mes_esperado: string
           expected_date?: string | null
           paid_date?: string | null
           is_paid?: boolean
@@ -233,7 +233,7 @@ export type Database = {
           description?: string | null
           amount?: number
           currency?: string
-          entry_date?: string
+          mes_esperado?: string
           expected_date?: string | null
           paid_date?: string | null
           is_paid?: boolean
