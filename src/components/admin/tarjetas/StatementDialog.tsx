@@ -38,6 +38,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 
 type CreditCard = Tables<"credit_cards">;
 type Statement  = Tables<"card_statements">;
@@ -260,9 +261,14 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
     });
   }
 
+  // Currencies enabled for this card (fallback to all supported if unset)
+  const cardCurrencies = (card?.currencies?.length
+    ? card.currencies.filter((c) => (SUPPORTED_CURRENCIES as readonly string[]).includes(c))
+    : SUPPORTED_CURRENCIES) as readonly string[];
+
   // Which currencies haven't been added yet
   const usedCurrencies = form.watch("amountRows").map((r) => r.currency);
-  const availableCurrencies = SUPPORTED_CURRENCIES.filter((c) => !usedCurrencies.includes(c));
+  const availableCurrencies = cardCurrencies.filter((c) => !usedCurrencies.includes(c));
 
   const title = card && period
     ? `${card.name} — ${periodTitle(period)}`
@@ -292,24 +298,31 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
                   return (
                     <div key={field.id} className="flex items-center gap-2">
                       {/* Currency select — compact, matches input height */}
-                      <div className="relative shrink-0">
-                        <select
-                          value={rowCurrency}
-                          onChange={(e) => form.setValue(`amountRows.${index}.currency`, e.target.value)}
+                      <Select
+                        value={rowCurrency}
+                        onValueChange={(v) => form.setValue(`amountRows.${index}.currency`, v)}
+                      >
+                        <SelectTrigger
                           className={cn(
-                            "h-16 rounded-md border border-zinc-700 bg-zinc-800 pl-3 pr-7 text-sm font-semibold text-white appearance-none",
+                            "h-16 w-auto shrink-0 rounded-md border border-zinc-700 bg-zinc-800 px-3 text-sm font-semibold text-white",
                             "focus:outline-none focus:ring-1 focus:ring-zinc-500 cursor-pointer"
                           )}
                         >
-                          <option value={rowCurrency}>{rowCurrency}</option>
-                          {SUPPORTED_CURRENCIES.filter(
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className="bg-zinc-800 border-zinc-700 text-white">
+                          <SelectItem value={rowCurrency} className="focus:bg-zinc-700 focus:text-white">
+                            {rowCurrency}
+                          </SelectItem>
+                          {cardCurrencies.filter(
                             (c) => c !== rowCurrency && !usedCurrencies.includes(c)
                           ).map((c) => (
-                            <option key={c} value={c}>{c}</option>
+                            <SelectItem key={c} value={c} className="focus:bg-zinc-700 focus:text-white">
+                              {c}
+                            </SelectItem>
                           ))}
-                        </select>
-                        <span className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-zinc-500 text-xs">▾</span>
-                      </div>
+                        </SelectContent>
+                      </Select>
 
                       <FormField
                         control={form.control}
