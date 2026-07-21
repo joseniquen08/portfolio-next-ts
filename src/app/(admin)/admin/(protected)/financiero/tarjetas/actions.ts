@@ -18,9 +18,14 @@ export async function createCard(data: {
   sort_order: number;
 }) {
   const supabase = await requireAdmin();
-  const { error } = await supabase.from("credit_cards").insert(data);
+  const { data: card, error } = await supabase
+    .from("credit_cards")
+    .insert(data)
+    .select()
+    .single();
   if (error) throw new Error(error.message);
   revalidatePath(PATH);
+  return card;
 }
 
 export async function updateCard(

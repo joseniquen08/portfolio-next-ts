@@ -10,6 +10,7 @@ import {
   createCard,
   updateCard,
   deleteCard,
+  createLimitChange,
 } from "@/app/(admin)/admin/(protected)/financiero/tarjetas/actions";
 import { cn } from "@/utils/shadcn";
 import { CreditLimitHistory } from "./CreditLimitHistory";
@@ -117,6 +118,7 @@ const schema = z.object({
   default_payment_day:     z.number().int().min(1, "Requerido (1–31)").max(31, "Requerido (1–31)"),
   default_cycle_start_day: z.number().int().min(1, "Requerido (1–31)").max(31, "Requerido (1–31)"),
   default_cycle_end_day:   z.number().int().min(1, "Requerido (1–31)").max(31, "Requerido (1–31)"),
+  initial_credit_limit:    z.number().min(0).optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -142,6 +144,7 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
       default_payment_day:     undefined,
       default_cycle_start_day: undefined,
       default_cycle_end_day:   undefined,
+      initial_credit_limit:    undefined,
     },
   });
 
@@ -158,6 +161,7 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
             default_payment_day:     card.default_payment_day ?? undefined,
             default_cycle_start_day: card.default_cycle_start_day ?? undefined,
             default_cycle_end_day:   card.default_cycle_end_day ?? undefined,
+            initial_credit_limit:    undefined,
           }
         : {
             name:                    "",
@@ -166,19 +170,37 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
             default_payment_day:     undefined,
             default_cycle_start_day: undefined,
             default_cycle_end_day:   undefined,
+            initial_credit_limit:    undefined,
           }
     );
   }, [open, card, form]);
 
   function onSubmit(values: FormValues) {
+    const { initial_credit_limit, ...payload } = values;
     startTransition(async () => {
       try {
-        const payload = { ...values, color: values.color ?? undefined };
         if (isEdit && card) {
-          await updateCard(card.id, { ...payload, sort_order: card.sort_order } as Parameters<typeof updateCard>[1]);
+          await updateCard(card.id, {
+            ...payload,
+            color: payload.color ?? undefined,
+            sort_order: card.sort_order,
+          } as Parameters<typeof updateCard>[1]);
           toast.success("Tarjeta actualizada");
         } else {
-          await createCard({ ...payload, sort_order: nextSortOrder });
+          const newCard = await createCard({
+            ...payload,
+            color: payload.color ?? undefined,
+            sort_order: nextSortOrder,
+          });
+          if (initial_credit_limit && initial_credit_limit > 0) {
+            await createLimitChange({
+              card_id: newCard.id,
+              amount: initial_credit_limit,
+              currency: payload.currencies[0],
+              effective_date: new Date().toISOString().split("T")[0],
+              note: "Límite inicial",
+            });
+          }
           toast.success("Tarjeta creada");
         }
         onClose();
@@ -425,13 +447,47 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
               </div>
             </div>
 
-            {isEdit && card && (
+            {isEdit && card ? (
               <>
                 <Separator className="bg-zinc-800" />
                 <CreditLimitHistory
                   cardId={card.id}
                   currencies={card.currencies?.length ? card.currencies : ["PEN"]}
                   changes={creditLimitChanges.filter((c) => c.card_id === card.id)}
+                />
+              </>
+            ) : (
+              <>
+                <Separator className="bg-zinc-800" />
+                <FormField
+                  control={form.control}
+                  name="initial_credit_limit"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-300 text-sm">
+                        Línea de crédito inicial <span className="text-zinc-600 font-normal">(opcional)</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          min={0}
+                          step="0.01"
+                          placeholder="Ej. 5000"
+                          {...field}
+                          value={field.value ?? ""}
+                          onChange={(e) => {
+                            const v = parseFloat(e.target.value);
+                            field.onChange(isNaN(v) ? undefined : v);
+                          }}
+                          className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-600 focus-visible:ring-zinc-500"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-zinc-600 text-[11px]">
+                        En {SUPPORTED_CURRENCIES.find((c) => c.code === (form.watch("currencies")?.[0] ?? "PEN"))?.label ?? "S/ Soles"}. Podés ajustarla después desde el historial de la tarjeta.
+                      </FormDescription>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
                 />
               </>
             )}
