@@ -163,7 +163,7 @@ export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
         />
         {isFirstEver && (
           <p className="text-[10px] text-zinc-600">
-            Dejalo vacío si no sabés desde cuándo aplica — se marca como &quot;Inicial&quot; y cubre todo el historial hasta que agregues un cambio con fecha.
+            Déjalo vacío si no sabes desde cuándo aplica — se marca como &quot;Inicial&quot; y cubre todo el historial hasta que agregues un cambio con fecha.
           </p>
         )}
         <Input
