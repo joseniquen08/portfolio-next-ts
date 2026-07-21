@@ -260,29 +260,43 @@ export function selectSummaryPeriod(
 
 export type CreditLimitChange = Tables<"credit_limit_changes">;
 
+/** "YYYY-MM-01" → "YYYY-MM-DD" of the last day of that month. */
+function monthEnd(period: string): string {
+  const [y, m] = period.split("-");
+  const maxDay = new Date(parseInt(y), parseInt(m), 0).getDate();
+  return `${y}-${m}-${String(maxDay).padStart(2, "0")}`;
+}
+
 /**
- * Derive the "current" credit limit from the latest row by `effective_date`.
- * Returns null when there's no history yet. Pure/derived — never stored.
+ * Derive the credit limit in effect as of `asOf` (the latest row with
+ * `effective_date <= asOf`), or the latest row overall when `asOf` is
+ * omitted. Returns null when there's no eligible history. Pure/derived —
+ * never stored. Point-in-time, so a period backfilled after a later limit
+ * change still resolves to the limit that was actually in effect then.
  */
 export function currentCreditLimit(
-  changes: Pick<CreditLimitChange, "amount" | "currency" | "effective_date">[]
+  changes: Pick<CreditLimitChange, "amount" | "currency" | "effective_date">[],
+  asOf?: string
 ): { amount: number; currency: string } | null {
-  if (changes.length === 0) return null;
-  const latest = [...changes].sort((a, b) => b.effective_date.localeCompare(a.effective_date))[0];
+  const eligible = asOf ? changes.filter((c) => c.effective_date <= asOf) : changes;
+  if (eligible.length === 0) return null;
+  const latest = [...eligible].sort((a, b) => b.effective_date.localeCompare(a.effective_date))[0];
   return { amount: Number(latest.amount), currency: latest.currency };
 }
 
 /**
- * "Línea disponible" (available credit) for a card in the current period:
- * latest credit_limit − (current-period statement total − advances covering it),
- * evaluated in the limit's own currency per the auto-settlement rule.
- * Returns null when there's no credit-limit history for the card.
+ * "Línea disponible" (available credit) for a card in a given period:
+ * the credit limit in effect as of that period's month-end −
+ * (that period's statement total − advances covering it), evaluated in
+ * the limit's own currency per the auto-settlement rule.
+ * Returns null when there's no eligible credit-limit history for the card.
  */
 export function computeAvailableCredit(
   creditLimitChanges: Pick<CreditLimitChange, "amount" | "currency" | "effective_date">[],
-  statement: StatementWithAdvances | undefined
+  statement: StatementWithAdvances | undefined,
+  period?: string
 ): { amount: number; currency: string } | null {
-  const limit = currentCreditLimit(creditLimitChanges);
+  const limit = currentCreditLimit(creditLimitChanges, period ? monthEnd(period) : undefined);
   if (!limit) return null;
   if (!statement) return limit;
 

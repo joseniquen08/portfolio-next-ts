@@ -229,10 +229,12 @@ function SortableCardRow({
     transform, transition, isDragging,
   } = useSortable({ id: card.id });
 
-  // "Línea disponible" for the current period only — derived, not stored.
+  // "Línea disponible" for the current period, using whatever credit limit
+  // was actually in effect as of that period (point-in-time) — derived, not stored.
   const availableCredit = computeAvailableCredit(
     creditLimitChanges.filter((c) => c.card_id === card.id),
-    getStatement(card.id, currentPeriod)
+    getStatement(card.id, currentPeriod),
+    currentPeriod
   );
 
   return (
