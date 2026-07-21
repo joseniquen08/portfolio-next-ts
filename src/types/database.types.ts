@@ -7,274 +7,320 @@ export type Json =
   | Json[]
 
 export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "14.5"
+  }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       admin_preferences: {
         Row: {
-          user_id:    string
-          key:        string
-          value:      Json
+          key: string
           updated_at: string
+          user_id: string
+          value: Json
         }
         Insert: {
-          user_id:    string
-          key:        string
-          value:      Json
+          key: string
           updated_at?: string
+          user_id: string
+          value?: Json
         }
         Update: {
-          user_id?:    string
-          key?:        string
-          value?:      Json
+          key?: string
           updated_at?: string
+          user_id?: string
+          value?: Json
         }
         Relationships: []
       }
       card_statements: {
         Row: {
-          id: string
-          user_id: string
-          card_id: string
-          period: string
           amounts: Json
-          due_date: string | null
-          cycle_start: string | null
+          card_id: string
+          created_at: string
           cycle_end: string | null
+          cycle_start: string | null
+          due_date: string | null
+          id: string
           is_estimated: boolean
           is_paid: boolean
-          created_at: string
+          period: string
+          user_id: string
         }
         Insert: {
-          id?: string
-          user_id?: string
+          amounts?: Json
           card_id: string
-          period: string
-          amounts: Json
-          due_date?: string | null
-          cycle_start?: string | null
+          created_at?: string
           cycle_end?: string | null
+          cycle_start?: string | null
+          due_date?: string | null
+          id?: string
           is_estimated?: boolean
           is_paid?: boolean
-          created_at?: string
+          period: string
+          user_id?: string
         }
         Update: {
-          id?: string
-          user_id?: string
-          card_id?: string
-          period?: string
           amounts?: Json
-          due_date?: string | null
-          cycle_start?: string | null
+          card_id?: string
+          created_at?: string
           cycle_end?: string | null
+          cycle_start?: string | null
+          due_date?: string | null
+          id?: string
           is_estimated?: boolean
           is_paid?: boolean
-          created_at?: string
+          period?: string
+          user_id?: string
         }
         Relationships: [
           {
             foreignKeyName: "card_statements_card_id_fkey"
             columns: ["card_id"]
+            isOneToOne: false
             referencedRelation: "credit_cards"
             referencedColumns: ["id"]
-          }
-        ]
-      }
-      jobs: {
-        Row: {
-          id: string
-          user_id: string
-          name: string
-          color: string | null
-          is_active: boolean
-          sort_order: number
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          user_id?: string
-          name: string
-          color?: string | null
-          is_active?: boolean
-          sort_order?: number
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          user_id?: string
-          name?: string
-          color?: string | null
-          is_active?: boolean
-          sort_order?: number
-          created_at?: string
-        }
-        Relationships: []
-      }
-      tasks: {
-        Row: {
-          id: string
-          user_id: string
-          job_id: string
-          title: string
-          description: string | null
-          status: string
-          priority: string
-          due_date: string | null
-          sort_order: number
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          user_id?: string
-          job_id: string
-          title: string
-          description?: string | null
-          status?: string
-          priority?: string
-          due_date?: string | null
-          sort_order?: number
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          user_id?: string
-          job_id?: string
-          title?: string
-          description?: string | null
-          status?: string
-          priority?: string
-          due_date?: string | null
-          sort_order?: number
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "tasks_job_id_fkey"
-            columns: ["job_id"]
-            referencedRelation: "jobs"
-            referencedColumns: ["id"]
-          }
+          },
         ]
       }
       credit_cards: {
         Row: {
-          id: string
-          user_id: string
-          name: string
           color: string | null
-          default_payment_day: number
-          default_cycle_start_day: number
-          default_cycle_end_day: number
-          currencies: string[]
-          sort_order: number
           created_at: string
+          currencies: string[]
+          default_cycle_end_day: number | null
+          default_cycle_start_day: number | null
+          default_payment_day: number | null
+          id: string
+          name: string
+          sort_order: number
+          user_id: string
         }
         Insert: {
-          id?: string
-          user_id?: string
-          name: string
           color?: string | null
-          default_payment_day?: number
-          default_cycle_start_day?: number
-          default_cycle_end_day?: number
-          currencies?: string[]
-          sort_order?: number
           created_at?: string
+          currencies?: string[]
+          default_cycle_end_day?: number | null
+          default_cycle_start_day?: number | null
+          default_payment_day?: number | null
+          id?: string
+          name: string
+          sort_order?: number
+          user_id?: string
         }
         Update: {
-          id?: string
-          user_id?: string
-          name?: string
           color?: string | null
-          default_payment_day?: number
-          default_cycle_start_day?: number
-          default_cycle_end_day?: number
-          currencies?: string[]
-          sort_order?: number
           created_at?: string
+          currencies?: string[]
+          default_cycle_end_day?: number | null
+          default_cycle_start_day?: number | null
+          default_payment_day?: number | null
+          id?: string
+          name?: string
+          sort_order?: number
+          user_id?: string
         }
         Relationships: []
       }
       income_entries: {
         Row: {
-          id: string
-          user_id: string
-          job_id: string
-          description: string | null
           amount: number
-          currency: string
-          mes_esperado: string
-          expected_date: string | null
-          paid_date: string | null
-          is_paid: boolean
-          sort_order: number
           created_at: string
+          currency: string
+          description: string | null
+          expected_date: string | null
+          id: string
+          is_paid: boolean
+          job_id: string
+          linked_final_id: string | null
+          mes_esperado: string
+          paid_date: string | null
+          payment_type: string
+          sort_order: number
+          user_id: string
         }
         Insert: {
-          id?: string
-          user_id?: string
-          job_id: string
-          description?: string | null
           amount?: number
-          currency?: string
-          mes_esperado: string
-          expected_date?: string | null
-          paid_date?: string | null
-          is_paid?: boolean
-          sort_order?: number
           created_at?: string
+          currency?: string
+          description?: string | null
+          expected_date?: string | null
+          id?: string
+          is_paid?: boolean
+          job_id: string
+          linked_final_id?: string | null
+          mes_esperado: string
+          paid_date?: string | null
+          payment_type: string
+          sort_order?: number
+          user_id?: string
         }
         Update: {
-          id?: string
-          user_id?: string
-          job_id?: string
-          description?: string | null
           amount?: number
-          currency?: string
-          mes_esperado?: string
-          expected_date?: string | null
-          paid_date?: string | null
-          is_paid?: boolean
-          sort_order?: number
           created_at?: string
+          currency?: string
+          description?: string | null
+          expected_date?: string | null
+          id?: string
+          is_paid?: boolean
+          job_id?: string
+          linked_final_id?: string | null
+          mes_esperado?: string
+          paid_date?: string | null
+          payment_type?: string
+          sort_order?: number
+          user_id?: string
         }
         Relationships: [
           {
             foreignKeyName: "income_entries_job_id_fkey"
             columns: ["job_id"]
+            isOneToOne: false
             referencedRelation: "jobs"
             referencedColumns: ["id"]
-          }
+          },
+          {
+            foreignKeyName: "income_entries_linked_final_id_fkey"
+            columns: ["linked_final_id"]
+            isOneToOne: false
+            referencedRelation: "income_entries"
+            referencedColumns: ["id"]
+          },
         ]
+      }
+      jobs: {
+        Row: {
+          color: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          sort_order: number
+          user_id: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          sort_order?: number
+          user_id?: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          sort_order?: number
+          user_id?: string
+        }
+        Relationships: []
       }
       period_adjustments: {
         Row: {
-          id: string
-          user_id: string
-          period: string
           amount: number
-          note: string | null
           created_at: string
+          id: string
+          note: string | null
+          period: string
+          user_id: string
         }
         Insert: {
-          id?: string
-          user_id?: string
-          period: string
           amount: number
-          note?: string | null
           created_at?: string
+          id?: string
+          note?: string | null
+          period: string
+          user_id?: string
         }
         Update: {
-          id?: string
-          user_id?: string
-          period?: string
           amount?: number
-          note?: string | null
           created_at?: string
+          id?: string
+          note?: string | null
+          period?: string
+          user_id?: string
         }
         Relationships: []
+      }
+      tasks: {
+        Row: {
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          job_id: string
+          priority: string
+          sort_order: number
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          job_id: string
+          priority?: string
+          sort_order?: number
+          status?: string
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          job_id?: string
+          priority?: string
+          sort_order?: number
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
@@ -292,82 +338,128 @@ export type Database = {
   }
 }
 
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+
 export type Tables<
-  PublicTableNameOrOptions extends
-    | keyof (Database["public"]["Tables"] & Database["public"]["Views"])
-    | { schema: keyof Database },
-  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-        Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never = never
-> = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-      Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+  DefaultSchemaTableNameOrOptions extends
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
       Row: infer R
     }
     ? R
     : never
-  : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] &
-      Database["public"]["Views"])
-  ? (Database["public"]["Tables"] &
-      Database["public"]["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
-    }
-    ? R
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
     : never
-  : never
 
 export type TablesInsert<
-  PublicTableNameOrOptions extends
-    | keyof Database["public"]["Tables"]
-    | { schema: keyof Database },
-  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
-> = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Insert: infer I
     }
     ? I
     : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Insert: infer I
-    }
-    ? I
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
     : never
-  : never
 
 export type TablesUpdate<
-  PublicTableNameOrOptions extends
-    | keyof Database["public"]["Tables"]
-    | { schema: keyof Database },
-  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
-> = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Update: infer U
     }
     ? U
     : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Update: infer U
-    }
-    ? U
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
     : never
-  : never
 
 export type Enums<
-  PublicEnumNameOrOptions extends
-    | keyof Database["public"]["Enums"]
-    | { schema: keyof Database },
-  EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
-    : never = never
-> = PublicEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
-  ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-  : never
+  DefaultSchemaEnumNameOrOptions extends
+    | keyof DefaultSchema["Enums"]
+    | { schema: keyof DatabaseWithoutInternals },
+  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
+    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof DefaultSchema["CompositeTypes"]
+    | { schema: keyof DatabaseWithoutInternals },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never
+
+export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
+  public: {
+    Enums: {},
+  },
+} as const

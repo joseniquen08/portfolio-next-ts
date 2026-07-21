@@ -7,6 +7,8 @@ const PATH = "/admin/financiero/ingresos";
 
 export async function createIncomeEntry(data: {
   job_id: string;
+  payment_type: string;
+  linked_final_id?: string | null;
   description?: string | null;
   amount: number;
   currency: string;
@@ -24,6 +26,8 @@ export async function updateIncomeEntry(
   id: string,
   data: {
     job_id?: string;
+    payment_type?: string;
+    linked_final_id?: string | null;
     description?: string | null;
     amount?: number;
     currency?: string;

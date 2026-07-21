@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { format, parseISO, differenceInCalendarDays } from "date-fns";
 import { es } from "date-fns/locale";
-import { HiCheck, HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
+import { HiCheck, HiOutlineLink, HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import { cn } from "@/utils/shadcn";
 import { toggleCollected, deleteIncomeEntry } from "@/app/(admin)/admin/(protected)/financiero/ingresos/actions";
 import { TableRow, TableCell } from "@/components/ui/table";
@@ -18,21 +18,29 @@ import {
   currencySymbol,
   formatAmount,
   isOverdue,
+  advancesLinkedTo,
 } from "./status";
 
 const DATE_LABEL_CLASS = "shrink-0 w-14 text-[10px] font-medium uppercase tracking-wider";
 
 interface Props {
-  entry:   IncomeEntry;
-  job?:    Job;
-  onEdit:  (entry: IncomeEntry) => void;
+  entry:      IncomeEntry;
+  job?:       Job;
+  allEntries: IncomeEntry[];
+  onEdit:     (entry: IncomeEntry) => void;
 }
 
-export function IncomeRow({ entry, job, onEdit }: Props) {
+export function IncomeRow({ entry, job, allEntries, onEdit }: Props) {
   const [isPending, startTransition] = useTransition();
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickedDate, setPickedDate] = useState<Date>(new Date());
   const badge = collectedBadge(entry);
+
+  const isAdvance = entry.payment_type === "avance";
+  const linkedFinal = isAdvance && entry.linked_final_id
+    ? allEntries.find((e) => e.id === entry.linked_final_id)
+    : undefined;
+  const linkedAdvances = !isAdvance ? advancesLinkedTo(allEntries, entry.id) : [];
 
   function commitToggle(is_paid: boolean, paid_date: string | null) {
     startTransition(async () => {
@@ -111,7 +119,33 @@ export function IncomeRow({ entry, job, onEdit }: Props) {
       </TableCell>
 
       <TableCell className="px-3 py-2.5">
-        <span className="text-sm text-white">{entry.description || "—"}</span>
+        <div className="flex flex-col gap-1.5">
+          <div className="flex items-center gap-2 leading-none">
+            {isAdvance && (
+              <span className="shrink-0 rounded border border-amber-800/60 bg-amber-950/30 px-1 py-0.5 text-[10px] font-medium leading-none uppercase tracking-wider text-amber-400">
+                Avance
+              </span>
+            )}
+            <span className="text-sm leading-none text-white">{entry.description || "—"}</span>
+          </div>
+          {linkedFinal && (
+            <span className="inline-flex w-fit items-center gap-1 rounded border border-zinc-700 bg-zinc-800/60 px-1 py-0.5 text-[10px] leading-none text-zinc-400">
+              <HiOutlineLink className="w-3 h-3 shrink-0 text-zinc-500" />
+              {linkedFinal.description || "Pago final"}
+            </span>
+          )}
+          {linkedAdvances.length > 0 && (
+            <span className="text-[11px] text-zinc-600">
+              Incluye {linkedAdvances.length} {linkedAdvances.length === 1 ? "avance" : "avances"}
+              {" • "}
+              {currencySymbol(entry.currency)}&nbsp;
+              {formatAmount(linkedAdvances.reduce((sum, a) => sum + a.amount, 0))}
+              {" / "}
+              {currencySymbol(entry.currency)}&nbsp;
+              {formatAmount(entry.amount)}
+            </span>
+          )}
+        </div>
       </TableCell>
 
       <TableCell className="px-3 py-2.5">
