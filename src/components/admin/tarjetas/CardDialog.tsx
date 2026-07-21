@@ -12,6 +12,8 @@ import {
   deleteCard,
 } from "@/app/(admin)/admin/(protected)/financiero/tarjetas/actions";
 import { cn } from "@/utils/shadcn";
+import { CreditLimitHistory } from "./CreditLimitHistory";
+import { CreditLimitChange } from "./status";
 
 import {
   Dialog,
@@ -120,13 +122,14 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 interface Props {
-  open:          boolean;
-  card?:         CreditCard;
-  nextSortOrder: number;
-  onClose:       () => void;
+  open:               boolean;
+  card?:              CreditCard;
+  nextSortOrder:      number;
+  creditLimitChanges: CreditLimitChange[];
+  onClose:            () => void;
 }
 
-export function CardDialog({ open, card, nextSortOrder, onClose }: Props) {
+export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onClose }: Props) {
   const [isPending, startTransition] = useTransition();
   const isEdit = !!card;
 
@@ -421,6 +424,17 @@ export function CardDialog({ open, card, nextSortOrder, onClose }: Props) {
                 />
               </div>
             </div>
+
+            {isEdit && card && (
+              <>
+                <Separator className="bg-zinc-800" />
+                <CreditLimitHistory
+                  cardId={card.id}
+                  currencies={card.currencies?.length ? card.currencies : ["PEN"]}
+                  changes={creditLimitChanges.filter((c) => c.card_id === card.id)}
+                />
+              </>
+            )}
 
             {/* ── Footer ─────────────────────────────────────────────── */}
             <DialogFooter className="gap-2 pt-1">
