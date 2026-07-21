@@ -4,18 +4,19 @@ import { useEffect, useState, useTransition } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { format, parseISO, subMonths } from "date-fns";
-import { es } from "date-fns/locale";
-import { HiOutlineCalendar, HiPlus, HiX } from "react-icons/hi";
+import { parseISO, subMonths } from "date-fns";
+import { HiPlus, HiX } from "react-icons/hi";
 import { toast } from "sonner";
 import { CurrencyInput } from "./CurrencyInput";
+import { DatePickerField } from "./DatePickerField";
+import { StatementAdvances } from "./StatementAdvances";
 import { Tables } from "@/types/database.types";
 import {
   upsertStatement,
   deleteStatement,
 } from "@/app/(admin)/admin/(protected)/financiero/tarjetas/actions";
 import { cn } from "@/utils/shadcn";
-import { periodTitle, currencySymbol, amountEntries } from "./status";
+import { periodTitle, currencySymbol, amountEntries, StatementWithAdvances } from "./status";
 
 import {
   Dialog,
@@ -36,8 +37,6 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 
 type CreditCard = Tables<"credit_cards">;
@@ -60,6 +59,7 @@ const schema = z.object({
   due_date:    z.string().optional(),
   cycle_start: z.string().optional(),
   cycle_end:   z.string().optional(),
+  insurance_amount: z.number().min(0, "Debe ser ≥ 0"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -96,78 +96,13 @@ function cycleDate(day: number | null | undefined, period: string, monthsBack: n
   return `${y}-${String(m).padStart(2, "0")}-${String(Math.min(day, maxDay)).padStart(2, "0")}`;
 }
 
-// ─── Date picker ───────────────────────────────────────────────────────────────
-
-function DatePickerField({
-  value,
-  onChange,
-  periodMonth,
-  placeholder = "Seleccionar fecha",
-}: {
-  value: string | undefined;
-  onChange: (v: string | undefined) => void;
-  periodMonth?: Date;
-  placeholder?: string;
-}) {
-  const [open, setOpen] = useState(false);
-  const selected = value ? parseISO(value) : undefined;
-
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          type="button"
-          variant="ghost"
-          className={cn(
-            "w-full justify-start text-left font-normal",
-            "bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 hover:border-zinc-600",
-            !value && "text-zinc-500"
-          )}
-        >
-          <HiOutlineCalendar className="mr-2 h-4 w-4 shrink-0 text-zinc-400" />
-          {selected
-            ? format(selected, "d 'de' MMMM yyyy", { locale: es })
-            : placeholder}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={selected}
-          defaultMonth={selected ?? periodMonth}
-          onSelect={(date) => {
-            onChange(date ? format(date, "yyyy-MM-dd") : undefined);
-            setOpen(false);
-          }}
-        />
-        {value && (
-          <div className="border-t border-zinc-700 p-2">
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                onChange(undefined);
-                setOpen(false);
-              }}
-              className="w-full text-zinc-400 hover:text-white text-xs"
-            >
-              Quitar fecha
-            </Button>
-          </div>
-        )}
-      </PopoverContent>
-    </Popover>
-  );
-}
-
 // ─── Props ─────────────────────────────────────────────────────────────────────
 
 interface Props {
   open:       boolean;
   card?:      CreditCard;
   period?:    string;
-  statement?: Statement;
+  statement?: StatementWithAdvances;
   onClose:    () => void;
 }
 
@@ -179,6 +114,11 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
   const periodMonthEnd   = period ? subMonths(parseISO(period), 1) : undefined;
   const periodMonthStart = period ? subMonths(parseISO(period), 2) : undefined;
 
+  // Desgravamen must be actively entered/confirmed. Pre-populated on edit
+  // (the value is already visible, which satisfies the "confirmation" intent);
+  // must be explicitly touched by the user when creating a new statement.
+  const [insuranceTouched, setInsuranceTouched] = useState(false);
+
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -187,6 +127,7 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
       due_date:    undefined,
       cycle_start: undefined,
       cycle_end:   undefined,
+      insurance_amount: 0,
     },
   });
 
@@ -210,7 +151,10 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
         due_date:    statement.due_date    ?? undefined,
         cycle_start: statement.cycle_start ?? undefined,
         cycle_end:   statement.cycle_end   ?? undefined,
+        insurance_amount: Number(statement.insurance_amount ?? 0),
       });
+      // Already visibly populated on edit — counts as confirmed.
+      setInsuranceTouched(true);
     } else {
       form.reset({
         amountRows: defaultRows,
@@ -218,12 +162,18 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
         due_date:    card && period ? defaultDueDate(card, period)        : undefined,
         cycle_start: card && period ? cycleDate(card.default_cycle_start_day, period, 2) : undefined,
         cycle_end:   card && period ? cycleDate(card.default_cycle_end_day,   period, 1) : undefined,
+        insurance_amount: 0,
       });
+      setInsuranceTouched(false);
     }
   }, [open, statement, card, period, form]);
 
   function onSubmit(values: FormValues) {
     if (!card || !period) return;
+    if (!insuranceTouched) {
+      form.setError("insurance_amount", { type: "manual", message: "Ingresa el desgravamen" });
+      return;
+    }
     // Convert rows to amounts record
     const amounts: Record<string, number> = {};
     for (const row of values.amountRows) {
@@ -238,6 +188,7 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
           due_date:    values.due_date    ?? null,
           cycle_start: values.cycle_start ?? null,
           cycle_end:   values.cycle_end   ?? null,
+          insurance_amount: values.insurance_amount,
           ...statusToFlags(values.status),
         });
         toast.success(isEdit ? "Estado de cuenta actualizado" : "Estado de cuenta guardado");
@@ -413,6 +364,31 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
               )}
             />
 
+            {/* ── Desgravamen ────────────────────────────────────────── */}
+            <FormField
+              control={form.control}
+              name="insurance_amount"
+              render={({ field }) => (
+                <FormItem>
+                  <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">
+                    Desgravamen <span className="text-red-400 normal-case">*</span>
+                  </p>
+                  <FormControl>
+                    <CurrencyInput
+                      value={field.value}
+                      onChange={(v) => {
+                        field.onChange(v);
+                        setInsuranceTouched(true);
+                        form.clearErrors("insurance_amount");
+                      }}
+                      symbol={currencySymbol(card?.currencies?.[0])}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-400 text-xs" />
+                </FormItem>
+              )}
+            />
+
             <Separator className="bg-zinc-800" />
 
             {/* ── Fechas ─────────────────────────────────────────────── */}
@@ -482,6 +458,11 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
                 </div>
               </div>
             </div>
+
+            <Separator className="bg-zinc-800" />
+
+            {/* ── Adelantos ──────────────────────────────────────────── */}
+            <StatementAdvances statement={statement} currencies={cardCurrencies} />
 
             {/* ── Footer ─────────────────────────────────────────────── */}
             <DialogFooter className="gap-2 pt-2">
