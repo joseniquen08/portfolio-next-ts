@@ -21,12 +21,13 @@ import {
 } from "./status";
 
 interface Props {
-  jobs:    Job[];
-  entries: IncomeEntry[];
-  onEdit:  (entry: IncomeEntry) => void;
+  jobs:       Job[];
+  entries:    IncomeEntry[];
+  allEntries: IncomeEntry[];
+  onEdit:     (entry: IncomeEntry) => void;
 }
 
-export function IncomeTable({ jobs, entries, onEdit }: Props) {
+export function IncomeTable({ jobs, entries, allEntries, onEdit }: Props) {
   const jobsById = new Map(jobs.map((j) => [j.id, j]));
 
   if (entries.length === 0) {
@@ -88,6 +89,7 @@ export function IncomeTable({ jobs, entries, onEdit }: Props) {
                     key={entry.id}
                     entry={entry}
                     job={jobsById.get(entry.job_id)}
+                    allEntries={allEntries}
                     onEdit={onEdit}
                   />
                 ))}

@@ -14,7 +14,14 @@ import {
   deleteIncomeEntry,
 } from "@/app/(admin)/admin/(protected)/financiero/ingresos/actions";
 import { cn } from "@/utils/shadcn";
-import { Job, IncomeEntry, CURRENCY_CODES, currencySymbol } from "./status";
+import {
+  Job,
+  IncomeEntry,
+  CURRENCY_CODES,
+  currencySymbol,
+  PAYMENT_TYPE_LABEL,
+  finalCandidatesForJob,
+} from "./status";
 import { CurrencyInput } from "@/components/admin/tarjetas/CurrencyInput";
 
 import {
@@ -171,12 +178,14 @@ function MonthYearField({
 // ─── Schema ────────────────────────────────────────────────────────────────────
 
 const schema = z.object({
-  job_id:        z.string().min(1, "Requerido"),
-  description:   z.string().optional(),
-  amount:        z.number().min(0.01, "Debe ser mayor a 0"),
-  currency:      z.string().min(1, "Requerido"),
-  mes_esperado:  z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, "Selecciona mes y año"),
-  expected_date: z.string().optional(),
+  job_id:          z.string().min(1, "Requerido"),
+  payment_type:    z.enum(["avance", "pago_final"]),
+  linked_final_id: z.string().optional(),
+  description:     z.string().optional(),
+  amount:          z.number().min(0.01, "Debe ser mayor a 0"),
+  currency:        z.string().min(1, "Requerido"),
+  mes_esperado:    z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, "Selecciona mes y año"),
+  expected_date:   z.string().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -185,6 +194,7 @@ interface Props {
   open:    boolean;
   entry?:  IncomeEntry;
   jobs:    Job[];
+  entries: IncomeEntry[];
   nextSortOrder: number;
   onClose: () => void;
 }
@@ -196,6 +206,8 @@ function currentMesEsperado(): string {
 
 const DEFAULT_VALUES: FormValues = {
   job_id: "",
+  payment_type: "pago_final",
+  linked_final_id: undefined,
   description: "",
   amount: 0,
   currency: "PEN",
@@ -203,7 +215,7 @@ const DEFAULT_VALUES: FormValues = {
   expected_date: undefined,
 };
 
-export function IncomeDialog({ open, entry, jobs, nextSortOrder, onClose }: Props) {
+export function IncomeDialog({ open, entry, jobs, entries, nextSortOrder, onClose }: Props) {
   const [isPending, startTransition] = useTransition();
   const isEdit = !!entry;
 
@@ -220,6 +232,8 @@ export function IncomeDialog({ open, entry, jobs, nextSortOrder, onClose }: Prop
       entry
         ? {
             job_id: entry.job_id,
+            payment_type: entry.payment_type as "avance" | "pago_final",
+            linked_final_id: entry.linked_final_id ?? undefined,
             description: entry.description ?? "",
             amount: entry.amount,
             currency: entry.currency,
@@ -231,6 +245,25 @@ export function IncomeDialog({ open, entry, jobs, nextSortOrder, onClose }: Prop
   }, [open, entry, jobs, form, firstActiveJobId]);
 
   const currency = form.watch("currency");
+  const paymentType = form.watch("payment_type");
+  const jobId = form.watch("job_id");
+
+  // Keep the currently-linked final selectable even if it got paid since —
+  // otherwise editing this advance would show a value with no matching
+  // option and silently lose the link on save.
+  const currentLinkedFinal =
+    entry?.payment_type === "avance" && entry.linked_final_id
+      ? entries.find((e) => e.id === entry.linked_final_id)
+      : undefined;
+  const finalCandidates = finalCandidatesForJob(entries, jobId, entry?.id);
+  const finalOptions =
+    currentLinkedFinal && !finalCandidates.some((f) => f.id === currentLinkedFinal.id)
+      ? [currentLinkedFinal, ...finalCandidates]
+      : finalCandidates;
+
+  useEffect(() => {
+    if (paymentType !== "avance") form.setValue("linked_final_id", undefined);
+  }, [paymentType, form]);
 
   function handleDelete() {
     if (!entry) return;
@@ -250,6 +283,8 @@ export function IncomeDialog({ open, entry, jobs, nextSortOrder, onClose }: Prop
       try {
         const payload = {
           job_id: values.job_id,
+          payment_type: values.payment_type,
+          linked_final_id: values.payment_type === "avance" ? values.linked_final_id || null : null,
           description: values.description || null,
           amount: values.amount,
           currency: values.currency,
@@ -319,6 +354,75 @@ export function IncomeDialog({ open, entry, jobs, nextSortOrder, onClose }: Prop
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="payment_type"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-zinc-300">
+                    Tipo <span className="text-red-400">*</span>
+                  </FormLabel>
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <FormControl>
+                      <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-zinc-900 border-zinc-800 text-white">
+                      <SelectItem value="pago_final">{PAYMENT_TYPE_LABEL.pago_final}</SelectItem>
+                      <SelectItem value="avance">{PAYMENT_TYPE_LABEL.avance}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-red-400" />
+                </FormItem>
+              )}
+            />
+
+            {paymentType === "avance" && (
+              <FormField
+                control={form.control}
+                name="linked_final_id"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-zinc-300">
+                      Pertenece a <span className="text-zinc-600 font-normal">(opcional)</span>
+                    </FormLabel>
+                    <Select
+                      value={field.value ?? "none"}
+                      onValueChange={(v) => field.onChange(v === "none" ? undefined : v)}
+                      disabled={finalOptions.length === 0}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white">
+                          <SelectValue
+                            placeholder={
+                              finalOptions.length === 0
+                                ? "No hay pagos finales pendientes para este trabajo"
+                                : "Sin vincular"
+                            }
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="bg-zinc-900 border-zinc-800 text-white">
+                        <SelectItem value="none">Sin vincular</SelectItem>
+                        {finalOptions.map((f) => (
+                          <SelectItem key={f.id} value={f.id}>
+                            {f.description || "Pago final"} · {f.mes_esperado} · {currencySymbol(f.currency)}
+                            {f.amount}
+                            {f.is_paid && " · ya cobrado"}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormDescription className="text-zinc-600 text-[11px]">
+                      El pago final al que consolida este avance.
+                    </FormDescription>
+                    <FormMessage className="text-red-400" />
+                  </FormItem>
+                )}
+              />
+            )}
 
             <FormField
               control={form.control}

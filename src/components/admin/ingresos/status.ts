@@ -19,6 +19,34 @@ export function collectedBadge(e: IncomeEntry): { label: string; className: stri
   return { label: "Pendiente", className: "text-zinc-400" };
 }
 
+export const PAYMENT_TYPE_LABEL: Record<string, string> = {
+  avance: "Avance",
+  pago_final: "Pago final",
+};
+
+/** Entries eligible to be picked as an advance's settlement target: same
+ * job, is itself an unpaid "pago_final" (a collected one is already closed
+ * out — nothing left to consolidate into it), and isn't the entry being
+ * edited. */
+export function finalCandidatesForJob(
+  entries: IncomeEntry[],
+  jobId: string,
+  excludeId?: string
+): IncomeEntry[] {
+  return entries.filter(
+    (e) =>
+      e.job_id === jobId &&
+      e.payment_type === "pago_final" &&
+      !e.is_paid &&
+      e.id !== excludeId
+  );
+}
+
+/** Advances linked to a given "pago_final" entry, for the summary shown on it. */
+export function advancesLinkedTo(entries: IncomeEntry[], finalId: string): IncomeEntry[] {
+  return entries.filter((e) => e.linked_final_id === finalId);
+}
+
 /** Format number as "1,200.00" — matches the tarjetas submodule convention. */
 export function formatAmount(n: number): string {
   return n.toLocaleString("es-PE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });

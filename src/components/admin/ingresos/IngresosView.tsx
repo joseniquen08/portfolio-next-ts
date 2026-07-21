@@ -64,6 +64,7 @@ export function IngresosView({ jobs, entries }: Props) {
       <IncomeTable
         jobs={jobs}
         entries={filteredEntries}
+        allEntries={entries}
         onEdit={(entry) => setDialog({ open: true, entry })}
       />
 
@@ -71,6 +72,7 @@ export function IngresosView({ jobs, entries }: Props) {
         open={dialog.open}
         entry={dialog.entry}
         jobs={jobs}
+        entries={entries}
         nextSortOrder={entries.length}
         onClose={() => setDialog({ open: false })}
       />
