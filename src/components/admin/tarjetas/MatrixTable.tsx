@@ -87,6 +87,10 @@ function MatrixCell({
     : undefined;
   const status    = cellStatus(statement, today, settlement);
   const hasExcess = !!settlement && Object.keys(settlement.excess).length > 0;
+  // Per-currency shortfall still owed when partially covered by advances.
+  const remaining = settlement
+    ? Object.entries(settlement.perCurrency).filter(([, cov]) => cov.required > 0 && !cov.isCovered)
+    : [];
   const isCurrent = period === currentPeriod;
   const isFocus   = period === focusPeriod && period !== currentPeriod;
 
@@ -178,6 +182,18 @@ function MatrixCell({
             <HiCheck className="w-3 h-3" />
           </button>
         </div>
+
+        {/* Remaining balance — shown when advances exist but don't fully cover a currency yet */}
+        {settlement?.hasAdvances && remaining.length > 0 && (
+          <span
+            title="Monto que aún falta cubrir con adelantos"
+            className="inline-flex items-center gap-1 rounded px-1 py-0.5 text-[9px] leading-none text-teal-400 border border-teal-800/60 bg-teal-950/30"
+          >
+            {remaining.map(([cur, cov]) => (
+              <span key={cur}>falta {currencySymbol(cur)}&nbsp;{formatAmount(cov.required - cov.covered)}</span>
+            ))}
+          </span>
+        )}
 
         {/* Sobrepago badge — shown when advances overshoot the owed amount in at least one currency */}
         {hasExcess && (
