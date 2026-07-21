@@ -258,6 +258,42 @@ export function selectSummaryPeriod(
   return currentPeriod;
 }
 
+export type CreditLimitChange = Tables<"credit_limit_changes">;
+
+/**
+ * Derive the "current" credit limit from the latest row by `effective_date`.
+ * Returns null when there's no history yet. Pure/derived — never stored.
+ */
+export function currentCreditLimit(
+  changes: Pick<CreditLimitChange, "amount" | "currency" | "effective_date">[]
+): { amount: number; currency: string } | null {
+  if (changes.length === 0) return null;
+  const latest = [...changes].sort((a, b) => b.effective_date.localeCompare(a.effective_date))[0];
+  return { amount: Number(latest.amount), currency: latest.currency };
+}
+
+/**
+ * "Línea disponible" (available credit) for a card in the current period:
+ * latest credit_limit − (current-period statement total − advances covering it),
+ * evaluated in the limit's own currency per the auto-settlement rule.
+ * Returns null when there's no credit-limit history for the card.
+ */
+export function computeAvailableCredit(
+  creditLimitChanges: Pick<CreditLimitChange, "amount" | "currency" | "effective_date">[],
+  statement: StatementWithAdvances | undefined
+): { amount: number; currency: string } | null {
+  const limit = currentCreditLimit(creditLimitChanges);
+  if (!limit) return null;
+  if (!statement) return limit;
+
+  const owed = amountEntries(statement.amounts).find(([cur]) => cur === limit.currency)?.[1] ?? 0;
+  const settlement = computeSettlement(statement.amounts, statement.advances ?? []);
+  const covered = settlement.perCurrency[limit.currency]?.covered ?? 0;
+  const outstanding = Math.max(0, owed - covered);
+
+  return { amount: limit.amount - outstanding, currency: limit.currency };
+}
+
 /** Tailwind text-color class for urgency */
 export function urgencyClass(days: number): string {
   if (days < 0)  return "text-red-400";    // vencido — rojo exclusivo

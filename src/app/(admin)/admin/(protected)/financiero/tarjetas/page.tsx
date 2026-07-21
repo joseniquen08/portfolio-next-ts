@@ -37,7 +37,7 @@ export default async function TarjetasPage() {
   const fetchStart = allMonths[0];
   const fetchEnd   = allMonths[allMonths.length - 1];
 
-  const [{ data: cards }, { data: statements }, { data: adjustments }] =
+  const [{ data: cards }, { data: statements }, { data: adjustments }, { data: creditLimitChanges }] =
     await Promise.all([
       supabase
         .from("credit_cards")
@@ -45,7 +45,7 @@ export default async function TarjetasPage() {
         .order("sort_order", { ascending: true }),
       supabase
         .from("card_statements")
-        .select("*")
+        .select("*, advances:statement_advances(*)")
         .gte("period", fetchStart)
         .lte("period", fetchEnd),
       supabase
@@ -53,6 +53,10 @@ export default async function TarjetasPage() {
         .select("*")
         .gte("period", fetchStart)
         .lte("period", fetchEnd),
+      supabase
+        .from("credit_limit_changes")
+        .select("*")
+        .order("effective_date", { ascending: false }),
     ]);
 
   return (
@@ -68,6 +72,7 @@ export default async function TarjetasPage() {
         cards={cards ?? []}
         statements={statements ?? []}
         adjustments={adjustments ?? []}
+        creditLimitChanges={creditLimitChanges ?? []}
         periods={periods}
         currentPeriod={currentReal}
         today={today}

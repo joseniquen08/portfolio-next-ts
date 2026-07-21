@@ -15,23 +15,24 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import {
-  CreditCard, Statement, StatementWithAdvances, Adjustment,
+  CreditCard, Statement, StatementWithAdvances, Adjustment, CreditLimitChange,
   periodLabel, formatAmount, currencySymbol,
-  amountEntries, mergeAmounts, cellStatus, statusTextClass, computeSettlement, MONTH_ABBR,
+  amountEntries, mergeAmounts, cellStatus, statusTextClass, computeSettlement, computeAvailableCredit, MONTH_ABBR,
 } from "./status";
 
 interface Props {
-  cards:           CreditCard[];
-  statements:      StatementWithAdvances[];
-  adjustments:     Adjustment[];
-  periods:         string[];
-  currentPeriod:   string;
-  focusPeriod:     string;  // #1: the period the summary card is highlighting
-  today:           string;
-  onEditStatement: (card: CreditCard, period: string, statement?: Statement) => void;
-  onEditCard:      (card: CreditCard) => void;
-  onAddAdjustment: (period: string) => void;
-  onEditAdjustment:(period: string, adjustment: Adjustment) => void;
+  cards:              CreditCard[];
+  statements:         StatementWithAdvances[];
+  adjustments:        Adjustment[];
+  creditLimitChanges: CreditLimitChange[];
+  periods:            string[];
+  currentPeriod:      string;
+  focusPeriod:        string;  // #1: the period the summary card is highlighting
+  today:              string;
+  onEditStatement:    (card: CreditCard, period: string, statement?: Statement) => void;
+  onEditCard:         (card: CreditCard) => void;
+  onAddAdjustment:    (period: string) => void;
+  onEditAdjustment:   (period: string, adjustment: Adjustment) => void;
 }
 
 // ─── Format a cycle date range compactly: "8 ENE – 6 FEB" ────────────────────
@@ -210,22 +211,29 @@ function MatrixCell({
 // ─── Sortable card row ────────────────────────────────────────────────────────
 
 function SortableCardRow({
-  card, periods, currentPeriod, focusPeriod, today,
+  card, periods, currentPeriod, focusPeriod, today, creditLimitChanges,
   getStatement, onEditStatement, onEditCard,
 }: {
-  card:           CreditCard;
-  periods:        string[];
-  currentPeriod:  string;
-  focusPeriod:    string;
-  today:          string;
-  getStatement:   (cardId: string, period: string) => StatementWithAdvances | undefined;
-  onEditStatement:(card: CreditCard, period: string, statement?: Statement) => void;
-  onEditCard:     (card: CreditCard) => void;
+  card:               CreditCard;
+  periods:            string[];
+  currentPeriod:      string;
+  focusPeriod:        string;
+  today:              string;
+  creditLimitChanges: CreditLimitChange[];
+  getStatement:       (cardId: string, period: string) => StatementWithAdvances | undefined;
+  onEditStatement:    (card: CreditCard, period: string, statement?: Statement) => void;
+  onEditCard:         (card: CreditCard) => void;
 }) {
   const {
     attributes, listeners, setNodeRef,
     transform, transition, isDragging,
   } = useSortable({ id: card.id });
+
+  // "Línea disponible" for the current period only — derived, not stored.
+  const availableCredit = computeAvailableCredit(
+    creditLimitChanges.filter((c) => c.card_id === card.id),
+    getStatement(card.id, currentPeriod)
+  );
 
   return (
     <TableRow
@@ -283,6 +291,11 @@ function SortableCardRow({
             {card.name}
           </span>
         </div>
+        {availableCredit && (
+          <p className="text-[10px] text-zinc-500 whitespace-nowrap mt-0.5">
+            Línea disponible: {currencySymbol(availableCredit.currency)}&nbsp;{formatAmount(availableCredit.amount)}
+          </p>
+        )}
       </TableCell>
 
       {periods.map((p) => (
@@ -320,7 +333,7 @@ function SortableCardRow({
 // ─── Main table ────────────────────────────────────────────────────────────────
 
 export function MatrixTable({
-  cards, statements, adjustments, periods, currentPeriod, focusPeriod, today,
+  cards, statements, adjustments, creditLimitChanges, periods, currentPeriod, focusPeriod, today,
   onEditStatement, onEditCard, onAddAdjustment, onEditAdjustment,
 }: Props) {
   function getStatement(cardId: string, period: string) {
@@ -424,6 +437,7 @@ export function MatrixTable({
                   currentPeriod={currentPeriod}
                   focusPeriod={focusPeriod}
                   today={today}
+                  creditLimitChanges={creditLimitChanges}
                   getStatement={getStatement}
                   onEditStatement={onEditStatement}
                   onEditCard={onEditCard}
