@@ -299,14 +299,16 @@ function SortableCardRow({
           </span>
         </div>
         {creditLimit && (
-          <p className="text-[9px] text-zinc-600 whitespace-nowrap mt-0.5">
-            Línea {currencySymbol(creditLimit.currency)}&nbsp;{formatAmount(creditLimit.amount)}
+          <div className="mt-0.5 space-y-0.5">
+            <p className="text-[11px] text-zinc-500 whitespace-nowrap">
+              Línea {currencySymbol(creditLimit.currency)}&nbsp;{formatAmount(creditLimit.amount)}
+            </p>
             {availableCredit && (
-              <span className="text-zinc-700">
-                {" "}· disp. aprox. {currencySymbol(availableCredit.currency)}&nbsp;{formatAmount(availableCredit.amount)}
-              </span>
+              <p className="text-[11px] text-zinc-600 whitespace-nowrap">
+                Disp. aprox. {currencySymbol(availableCredit.currency)}&nbsp;{formatAmount(availableCredit.amount)}
+              </p>
             )}
-          </p>
+          </div>
         )}
       </TableCell>
 
