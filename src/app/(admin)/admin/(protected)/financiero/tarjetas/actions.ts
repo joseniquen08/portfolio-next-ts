@@ -214,21 +214,27 @@ export async function createLimitChange(data: {
   card_id: string;
   amount: number;
   currency: string;
-  effective_date: string;
+  /** null = "Inicial" — only accepted when the card has no history yet. */
+  start_date: string | null;
   note?: string | null;
 }) {
   const supabase = await requireAdmin();
-  const { error } = await supabase.from("credit_limit_changes").insert(data);
+  const { error } = await supabase.rpc("add_credit_limit_change", {
+    p_card_id: data.card_id,
+    p_amount: data.amount,
+    p_currency: data.currency,
+    // The generated RPC arg types don't know start_date/note are nullable at
+    // the DB level (Postgres function params carry no NOT NULL signal to codegen).
+    p_start_date: data.start_date as string,
+    p_note: (data.note ?? null) as string,
+  });
   if (error) throw new Error(error.message);
   revalidatePath(PATH);
 }
 
 export async function deleteLimitChange(id: string) {
   const supabase = await requireAdmin();
-  const { error } = await supabase
-    .from("credit_limit_changes")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.rpc("delete_credit_limit_change", { p_id: id });
   if (error) throw new Error(error.message);
   revalidatePath(PATH);
 }

@@ -23,9 +23,11 @@ interface Props {
 }
 
 /**
- * Credit-limit change history, embedded in CardDialog edit mode.
- * Add/delete call the server actions directly — append-only audit log
- * with a delete escape hatch, no update (matches actions.ts design).
+ * Credit-limit change history, embedded in CardDialog edit mode. Each row is
+ * a validity range: NULL start = "Inicial" (unknown/unbounded start), NULL
+ * end = "Actual" (currently in effect). Adding a new record automatically
+ * splits/closes the range it falls into — see add_credit_limit_change().
+ * Add/delete call the server actions directly, no update (matches design).
  */
 export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
   const [isPending, startTransition] = useTransition();
@@ -34,8 +36,10 @@ export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
   const [date, setDate]         = useState<string | undefined>(undefined);
   const [note, setNote]         = useState("");
 
-  const sorted  = [...changes].sort((a, b) => b.effective_date.localeCompare(a.effective_date));
+  // NULL start_date ("Inicial") sorts as the oldest entry.
+  const sorted  = [...changes].sort((a, b) => (b.start_date ?? "").localeCompare(a.start_date ?? ""));
   const current = currentCreditLimit(changes);
+  const isFirstEver = changes.length === 0;
 
   function resetForm() {
     setAmount(0);
@@ -44,8 +48,12 @@ export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
   }
 
   function handleAdd() {
-    if (amount <= 0 || !date) {
-      toast.error("Completa monto y fecha");
+    if (amount <= 0) {
+      toast.error("Ingresa un monto");
+      return;
+    }
+    if (!isFirstEver && !date) {
+      toast.error("Ingresa la fecha de inicio");
       return;
     }
     startTransition(async () => {
@@ -54,7 +62,7 @@ export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
           card_id: cardId,
           amount,
           currency,
-          effective_date: date!,
+          start_date: date ?? null,
           note: note.trim() || null,
         });
         toast.success("Cambio de línea registrado");
@@ -106,7 +114,7 @@ export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
                 {currencySymbol(c.currency)}&nbsp;{formatAmount(Number(c.amount))}
               </p>
               <p className="text-[10px] text-zinc-600 truncate">
-                {c.effective_date}{c.note ? ` · ${c.note}` : ""}
+                {c.start_date ?? "Inicial"} → {c.end_date ?? "Actual"}{c.note ? ` · ${c.note}` : ""}
               </p>
             </div>
             <button
@@ -148,7 +156,16 @@ export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
             />
           </div>
         </div>
-        <DatePickerField value={date} onChange={setDate} placeholder="Fecha efectiva" />
+        <DatePickerField
+          value={date}
+          onChange={setDate}
+          placeholder={isFirstEver ? "Fecha de inicio (opcional)" : "Fecha de inicio"}
+        />
+        {isFirstEver && (
+          <p className="text-[10px] text-zinc-600">
+            Dejalo vacío si no sabés desde cuándo aplica — se marca como &quot;Inicial&quot; y cubre todo el historial hasta que agregues un cambio con fecha.
+          </p>
+        )}
         <Input
           placeholder="Nota (opcional)"
           value={note}

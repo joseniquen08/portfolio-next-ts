@@ -135,7 +135,6 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
   const [isPending, startTransition] = useTransition();
   const isEdit = !!card;
   const cardLimitChanges = card ? creditLimitChanges.filter((c) => c.card_id === card.id) : [];
-  const hasLimitHistory = isEdit && cardLimitChanges.length > 0;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -187,15 +186,6 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
             color: payload.color ?? undefined,
             sort_order: card.sort_order,
           } as Parameters<typeof updateCard>[1]);
-          if (!hasLimitHistory && initial_credit_limit && initial_credit_limit > 0) {
-            await createLimitChange({
-              card_id: card.id,
-              amount: initial_credit_limit,
-              currency: payload.currencies[0],
-              effective_date: new Date().toISOString().split("T")[0],
-              note: "Límite inicial",
-            });
-          }
           toast.success("Tarjeta actualizada");
         } else {
           const newCard = await createCard({
@@ -204,11 +194,14 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
             sort_order: nextSortOrder,
           });
           if (initial_credit_limit && initial_credit_limit > 0) {
+            // First-ever record for this card: no known start date, so it's
+            // marked "Inicial" (null) — applies retroactively until a real
+            // dated entry narrows it down via the history section later.
             await createLimitChange({
               card_id: newCard.id,
               amount: initial_credit_limit,
               currency: payload.currencies[0],
-              effective_date: new Date().toISOString().split("T")[0],
+              start_date: null,
               note: "Límite inicial",
             });
           }
@@ -458,7 +451,7 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
               </div>
             </div>
 
-            {hasLimitHistory && card ? (
+            {isEdit && card ? (
               <>
                 <Separator className="bg-zinc-800" />
                 <CreditLimitHistory

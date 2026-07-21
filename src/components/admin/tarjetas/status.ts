@@ -268,20 +268,23 @@ function monthEnd(period: string): string {
 }
 
 /**
- * Derive the credit limit in effect as of `asOf` (the latest row with
- * `effective_date <= asOf`), or the latest row overall when `asOf` is
- * omitted. Returns null when there's no eligible history. Pure/derived —
- * never stored. Point-in-time, so a period backfilled after a later limit
- * change still resolves to the limit that was actually in effect then.
+ * Derive the credit limit in effect as of `asOf`: the row whose validity
+ * range covers that date (`start_date` NULL or <= asOf, AND `end_date`
+ * NULL or > asOf). Without `asOf`, returns the currently-open row
+ * (`end_date IS NULL`). Returns null when no row's range covers the date —
+ * a genuinely unknown period, never guessed. Pure/derived — never stored.
  */
 export function currentCreditLimit(
-  changes: Pick<CreditLimitChange, "amount" | "currency" | "effective_date">[],
+  changes: Pick<CreditLimitChange, "amount" | "currency" | "start_date" | "end_date">[],
   asOf?: string
 ): { amount: number; currency: string } | null {
-  const eligible = asOf ? changes.filter((c) => c.effective_date <= asOf) : changes;
-  if (eligible.length === 0) return null;
-  const latest = [...eligible].sort((a, b) => b.effective_date.localeCompare(a.effective_date))[0];
-  return { amount: Number(latest.amount), currency: latest.currency };
+  const match = asOf
+    ? changes.find((c) =>
+        (c.start_date === null || c.start_date <= asOf) &&
+        (c.end_date === null || c.end_date > asOf)
+      )
+    : changes.find((c) => c.end_date === null);
+  return match ? { amount: Number(match.amount), currency: match.currency } : null;
 }
 
 /**
@@ -289,10 +292,10 @@ export function currentCreditLimit(
  * the credit limit in effect as of that period's month-end −
  * (that period's statement total − advances covering it), evaluated in
  * the limit's own currency per the auto-settlement rule.
- * Returns null when there's no eligible credit-limit history for the card.
+ * Returns null when there's no credit-limit range covering that period.
  */
 export function computeAvailableCredit(
-  creditLimitChanges: Pick<CreditLimitChange, "amount" | "currency" | "effective_date">[],
+  creditLimitChanges: Pick<CreditLimitChange, "amount" | "currency" | "start_date" | "end_date">[],
   statement: StatementWithAdvances | undefined,
   period?: string
 ): { amount: number; currency: string } | null {
