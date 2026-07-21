@@ -45,11 +45,10 @@ export async function updateCard(
 
 export async function reorderCards(orderedIds: string[]) {
   const supabase = await requireAdmin();
-  await Promise.all(
-    orderedIds.map((id, index) =>
-      supabase.from("credit_cards").update({ sort_order: index }).eq("id", id)
-    )
-  );
+  const { error } = await supabase.rpc("reorder_credit_cards", {
+    ordered_ids: orderedIds,
+  });
+  if (error) throw new Error(error.message);
   revalidatePath(PATH);
 }
 
