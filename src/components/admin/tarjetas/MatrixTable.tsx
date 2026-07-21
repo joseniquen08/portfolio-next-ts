@@ -15,14 +15,14 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import {
-  CreditCard, Statement, Adjustment,
+  CreditCard, Statement, StatementWithAdvances, Adjustment,
   periodLabel, formatAmount, currencySymbol,
-  amountEntries, mergeAmounts, cellStatus, statusTextClass, MONTH_ABBR,
+  amountEntries, mergeAmounts, cellStatus, statusTextClass, computeSettlement, MONTH_ABBR,
 } from "./status";
 
 interface Props {
   cards:           CreditCard[];
-  statements:      Statement[];
+  statements:      StatementWithAdvances[];
   adjustments:     Adjustment[];
   periods:         string[];
   currentPeriod:   string;
@@ -73,14 +73,18 @@ function MatrixCell({
 }: {
   card:          CreditCard;
   period:        string;
-  statement:     Statement | undefined;
+  statement:     StatementWithAdvances | undefined;
   currentPeriod: string;
   focusPeriod:   string;
   today:         string;
   onEdit:        () => void;
 }) {
   const [, startTransition] = useTransition();
-  const status    = cellStatus(statement, today);
+  const settlement = statement
+    ? computeSettlement(statement.amounts, statement.advances ?? [])
+    : undefined;
+  const status    = cellStatus(statement, today, settlement);
+  const hasExcess = !!settlement && Object.keys(settlement.excess).length > 0;
   const isCurrent = period === currentPeriod;
   const isFocus   = period === focusPeriod && period !== currentPeriod;
 
@@ -173,6 +177,16 @@ function MatrixCell({
           </button>
         </div>
 
+        {/* Sobrepago badge — shown when advances overshoot the owed amount in at least one currency */}
+        {hasExcess && (
+          <span
+            title="Adelanto supera el monto adeudado en al menos una moneda"
+            className="inline-flex items-center rounded px-1 py-0.5 text-[9px] leading-none text-teal-400 border border-teal-800/60 bg-teal-950/30"
+          >
+            sobrepago
+          </span>
+        )}
+
         {/* Metadata — centered on the same axis as the amount+checkbox row */}
         {(dueDayStr || (statement.cycle_start && statement.cycle_end)) && (
           <div className={cn(
@@ -204,7 +218,7 @@ function SortableCardRow({
   currentPeriod:  string;
   focusPeriod:    string;
   today:          string;
-  getStatement:   (cardId: string, period: string) => Statement | undefined;
+  getStatement:   (cardId: string, period: string) => StatementWithAdvances | undefined;
   onEditStatement:(card: CreditCard, period: string, statement?: Statement) => void;
   onEditCard:     (card: CreditCard) => void;
 }) {

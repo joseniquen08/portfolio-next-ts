@@ -22,12 +22,12 @@ import { MatrixTable }      from "./MatrixTable";
 import { MonthChecklist }   from "./MonthChecklist";
 import { MonthControls }    from "./MonthControls";
 import { Button }           from "@/components/ui/button";
-import { CreditCard, Statement, Adjustment, selectSummaryPeriod } from "./status";
+import { CreditCard, Statement, StatementWithAdvances, Adjustment, selectSummaryPeriod } from "./status";
 import { ViewState } from "./periods";
 
 interface Props {
   cards:         CreditCard[];
-  statements:    Statement[];
+  statements:    StatementWithAdvances[];
   adjustments:   Adjustment[];
   periods:       string[]; // "YYYY-MM-01"[] — the full navigated window
   currentPeriod: string;   // real current month, always fixed regardless of navigation
@@ -138,16 +138,20 @@ export function TarjetasMatrix({ cards, statements, adjustments, periods, curren
                   pagado
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500 inline-block" />
-                  por pagar
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-600 inline-block" />
+                  vencido
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal-500 inline-block" />
+                  parcial
                 </span>
                 <span className="flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block" />
                   estimado
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-600 inline-block" />
-                  vencido
+                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500 inline-block" />
+                  por pagar
                 </span>
               </div>
             </div>
