@@ -261,7 +261,7 @@ export function selectSummaryPeriod(
 export type CreditLimitChange = Tables<"credit_limit_changes">;
 
 /** "YYYY-MM-01" → "YYYY-MM-DD" of the last day of that month. */
-function monthEnd(period: string): string {
+export function monthEnd(period: string): string {
   const [y, m] = period.split("-");
   const maxDay = new Date(parseInt(y), parseInt(m), 0).getDate();
   return `${y}-${m}-${String(maxDay).padStart(2, "0")}`;

@@ -17,7 +17,8 @@ import {
 import {
   CreditCard, Statement, StatementWithAdvances, Adjustment, CreditLimitChange,
   periodLabel, formatAmount, currencySymbol,
-  amountEntries, mergeAmounts, cellStatus, statusTextClass, computeSettlement, computeAvailableCredit, MONTH_ABBR,
+  amountEntries, mergeAmounts, cellStatus, statusTextClass, computeSettlement,
+  currentCreditLimit, computeAvailableCredit, monthEnd, MONTH_ABBR,
 } from "./status";
 
 interface Props {
@@ -229,10 +230,14 @@ function SortableCardRow({
     transform, transition, isDragging,
   } = useSortable({ id: card.id });
 
-  // "Línea disponible" for the current period, using whatever credit limit
-  // was actually in effect as of that period (point-in-time) — derived, not stored.
+  // Credit limit in effect for the current period (point-in-time) — the
+  // reliable figure, since it comes from what the user explicitly registered.
+  const cardLimitChanges = creditLimitChanges.filter((c) => c.card_id === card.id);
+  const creditLimit = currentCreditLimit(cardLimitChanges, monthEnd(currentPeriod));
+  // "Línea disponible" is only ever an approximation — it can't reflect same-day
+  // spending the user hasn't registered in a statement yet.
   const availableCredit = computeAvailableCredit(
-    creditLimitChanges.filter((c) => c.card_id === card.id),
+    cardLimitChanges,
     getStatement(card.id, currentPeriod),
     currentPeriod
   );
@@ -293,9 +298,14 @@ function SortableCardRow({
             {card.name}
           </span>
         </div>
-        {availableCredit && (
-          <p className="text-[10px] text-zinc-500 whitespace-nowrap mt-0.5">
-            Línea disponible: {currencySymbol(availableCredit.currency)}&nbsp;{formatAmount(availableCredit.amount)}
+        {creditLimit && (
+          <p className="text-[9px] text-zinc-600 whitespace-nowrap mt-0.5">
+            Línea {currencySymbol(creditLimit.currency)}&nbsp;{formatAmount(creditLimit.amount)}
+            {availableCredit && (
+              <span className="text-zinc-700">
+                {" "}· disp. aprox. {currencySymbol(availableCredit.currency)}&nbsp;{formatAmount(availableCredit.amount)}
+              </span>
+            )}
           </p>
         )}
       </TableCell>
