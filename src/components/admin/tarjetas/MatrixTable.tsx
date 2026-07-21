@@ -187,7 +187,7 @@ function MatrixCell({
         {settlement?.hasAdvances && remaining.length > 0 && (
           <span
             title="Monto que aún falta cubrir con adelantos"
-            className="inline-flex items-center gap-1 rounded px-1 py-0.5 text-[9px] leading-none text-teal-400 border border-teal-800/60 bg-teal-950/30"
+            className="inline-flex items-center gap-1 rounded px-1.5 py-1 text-[11px] leading-none text-teal-400 border border-teal-800/60 bg-teal-950/30"
           >
             {remaining.map(([cur, cov]) => (
               <span key={cur}>falta {currencySymbol(cur)}&nbsp;{formatAmount(cov.required - cov.covered)}</span>
@@ -199,7 +199,7 @@ function MatrixCell({
         {hasExcess && (
           <span
             title="Adelanto supera el monto adeudado en al menos una moneda"
-            className="inline-flex items-center rounded px-1 py-0.5 text-[9px] leading-none text-teal-400 border border-teal-800/60 bg-teal-950/30"
+            className="inline-flex items-center rounded px-1.5 py-1 text-[11px] leading-none text-teal-400 border border-teal-800/60 bg-teal-950/30"
           >
             sobrepago
           </span>
