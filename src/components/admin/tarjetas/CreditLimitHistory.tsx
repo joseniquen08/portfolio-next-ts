@@ -129,7 +129,7 @@ export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
       <div className="space-y-2 pt-1">
         <div className="flex items-center gap-2">
           <Select value={currency} onValueChange={setCurrency}>
-            <SelectTrigger className="h-10 w-auto shrink-0 rounded-md border border-zinc-700 bg-zinc-800 px-2.5 text-xs font-semibold text-white cursor-pointer">
+            <SelectTrigger className="h-16 w-auto shrink-0 rounded-md border border-zinc-700 bg-zinc-800 px-2.5 text-xs font-semibold text-white cursor-pointer">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="bg-zinc-800 border-zinc-700 text-white">
@@ -145,7 +145,6 @@ export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
               value={amount}
               onChange={setAmount}
               symbol={currencySymbol(currency)}
-              className="h-10"
             />
           </div>
         </div>
