@@ -134,6 +134,8 @@ interface Props {
 export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onClose }: Props) {
   const [isPending, startTransition] = useTransition();
   const isEdit = !!card;
+  const cardLimitChanges = card ? creditLimitChanges.filter((c) => c.card_id === card.id) : [];
+  const hasLimitHistory = isEdit && cardLimitChanges.length > 0;
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -185,6 +187,15 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
             color: payload.color ?? undefined,
             sort_order: card.sort_order,
           } as Parameters<typeof updateCard>[1]);
+          if (!hasLimitHistory && initial_credit_limit && initial_credit_limit > 0) {
+            await createLimitChange({
+              card_id: card.id,
+              amount: initial_credit_limit,
+              currency: payload.currencies[0],
+              effective_date: new Date().toISOString().split("T")[0],
+              note: "Límite inicial",
+            });
+          }
           toast.success("Tarjeta actualizada");
         } else {
           const newCard = await createCard({
@@ -447,13 +458,13 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
               </div>
             </div>
 
-            {isEdit && card ? (
+            {hasLimitHistory && card ? (
               <>
                 <Separator className="bg-zinc-800" />
                 <CreditLimitHistory
                   cardId={card.id}
                   currencies={card.currencies?.length ? card.currencies : ["PEN"]}
-                  changes={creditLimitChanges.filter((c) => c.card_id === card.id)}
+                  changes={cardLimitChanges}
                 />
               </>
             ) : (
