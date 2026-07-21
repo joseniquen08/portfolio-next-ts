@@ -56,7 +56,7 @@ export default async function TarjetasPage() {
       supabase
         .from("credit_limit_changes")
         .select("*")
-        .order("effective_date", { ascending: false }),
+        .order("start_date", { ascending: false, nullsFirst: true }),
     ]);
 
   return (
