@@ -200,11 +200,47 @@ export async function createAdvance(data: {
 
 export async function deleteAdvance(id: string) {
   const supabase = await requireAdmin();
-  const { error } = await supabase
+
+  const { data: advance, error: advanceError } = await supabase
+    .from("statement_advances")
+    .select("statement_id")
+    .eq("id", id)
+    .single();
+  if (advanceError) throw new Error(advanceError.message);
+
+  const { data: statement, error: statementError } = await supabase
+    .from("card_statements")
+    .select("id, amounts, is_paid")
+    .eq("id", advance.statement_id)
+    .single();
+  if (statementError) throw new Error(statementError.message);
+
+  const { data: advancesBefore, error: advancesError } = await supabase
+    .from("statement_advances")
+    .select("id, amount, currency")
+    .eq("statement_id", advance.statement_id);
+  if (advancesError) throw new Error(advancesError.message);
+
+  const { error: deleteError } = await supabase
     .from("statement_advances")
     .delete()
     .eq("id", id);
-  if (error) throw new Error(error.message);
+  if (deleteError) throw new Error(deleteError.message);
+
+  // If this delete broke the coverage that was backing "pagado", un-flip it.
+  // A "pagado" that was never actually backed by full advance coverage
+  // (a genuine manual override) is left untouched.
+  const advancesAfter = advancesBefore.filter((a) => a.id !== id);
+  const wasCovered = computeSettlement(statement.amounts, advancesBefore).fullyCovered;
+  const stillCovered = computeSettlement(statement.amounts, advancesAfter).fullyCovered;
+  if (statement.is_paid && wasCovered && !stillCovered) {
+    const { error: updateError } = await supabase
+      .from("card_statements")
+      .update({ is_paid: false })
+      .eq("id", advance.statement_id);
+    if (updateError) throw new Error(updateError.message);
+  }
+
   revalidatePath(PATH);
 }
 

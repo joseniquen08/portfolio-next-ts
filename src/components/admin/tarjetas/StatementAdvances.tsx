@@ -48,6 +48,12 @@ export function StatementAdvances({ statement, currencies }: Props) {
 
   const advances   = statement.advances ?? [];
   const settlement = computeSettlement(statement.amounts, advances);
+  // Paid with zero advances means it was settled some other way (e.g. bank
+  // transfer outside this app) — adding an advance to it doesn't make sense.
+  // A statement paid *because* advances cover it can still take more
+  // (intentional overpayment), so we only block the fully-external case.
+  const blockAdd = statement.is_paid && advances.length === 0;
+  const currencyNotOwed = currencies.includes(currency) && !(currency in settlement.perCurrency);
 
   function resetForm() {
     setAmount(0);
@@ -149,46 +155,57 @@ export function StatementAdvances({ statement, currencies }: Props) {
       </div>
 
       {/* Add form */}
-      <div className="space-y-2 pt-1">
-        <div className="flex items-center gap-2">
-          <Select value={currency} onValueChange={setCurrency}>
-            <SelectTrigger className="h-16 w-auto shrink-0 rounded-md border border-zinc-700 bg-zinc-800 px-2.5 text-xs font-semibold text-white cursor-pointer">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent className="bg-zinc-800 border-zinc-700 text-white">
-              {currencies.map((c) => (
-                <SelectItem key={c} value={c} className="focus:bg-zinc-700 focus:text-white">
-                  {c}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <div className="flex-1 min-w-0">
-            <CurrencyInput
-              value={amount}
-              onChange={setAmount}
-              symbol={currencySymbol(currency)}
-            />
+      {blockAdd ? (
+        <p className="text-xs text-zinc-600 border border-zinc-800 rounded-md px-2.5 py-2">
+          Este estado de cuenta está marcado como pagado y no tiene adelantos asociados — probablemente se pagó por otro medio. Desmarca &quot;Pagado&quot; primero si necesitas registrar un adelanto.
+        </p>
+      ) : (
+        <div className="space-y-2 pt-1">
+          <div className="flex items-center gap-2">
+            <Select value={currency} onValueChange={setCurrency}>
+              <SelectTrigger className="h-16 w-auto shrink-0 rounded-md border border-zinc-700 bg-zinc-800 px-2.5 text-xs font-semibold text-white cursor-pointer">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-zinc-800 border-zinc-700 text-white">
+                {currencies.map((c) => (
+                  <SelectItem key={c} value={c} className="focus:bg-zinc-700 focus:text-white">
+                    {c}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <div className="flex-1 min-w-0">
+              <CurrencyInput
+                value={amount}
+                onChange={setAmount}
+                symbol={currencySymbol(currency)}
+              />
+            </div>
           </div>
+          {currencyNotOwed && (
+            <p className="text-[10px] text-amber-500/80">
+              Este período no tiene monto en {currency} — se registrará como excedente/sobrepago.
+            </p>
+          )}
+          <DatePickerField value={date} onChange={setDate} placeholder="Fecha del adelanto" />
+          <Input
+            placeholder="Nota (opcional)"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-600 text-xs h-9"
+          />
+          <Button
+            type="button"
+            onClick={handleAdd}
+            disabled={isPending}
+            size="sm"
+            className="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-0 gap-1.5 cursor-pointer"
+          >
+            <HiPlus className="w-3.5 h-3.5" />
+            Registrar adelanto
+          </Button>
         </div>
-        <DatePickerField value={date} onChange={setDate} placeholder="Fecha del adelanto" />
-        <Input
-          placeholder="Nota (opcional)"
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-600 text-xs h-9"
-        />
-        <Button
-          type="button"
-          onClick={handleAdd}
-          disabled={isPending}
-          size="sm"
-          className="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border-0 gap-1.5 cursor-pointer"
-        >
-          <HiPlus className="w-3.5 h-3.5" />
-          Registrar adelanto
-        </Button>
-      </div>
+      )}
     </div>
   );
 }

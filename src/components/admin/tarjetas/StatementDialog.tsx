@@ -16,7 +16,7 @@ import {
   deleteStatement,
 } from "@/app/(admin)/admin/(protected)/financiero/tarjetas/actions";
 import { cn } from "@/utils/shadcn";
-import { periodTitle, currencySymbol, amountEntries, StatementWithAdvances } from "./status";
+import { periodTitle, currencySymbol, amountEntries, computeSettlement, StatementWithAdvances } from "./status";
 
 import {
   Dialog,
@@ -114,6 +114,13 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
   const periodMonthEnd   = period ? subMonths(parseISO(period), 1) : undefined;
   const periodMonthStart = period ? subMonths(parseISO(period), 2) : undefined;
 
+  // When advances already fully cover the statement, "pagado" is the only
+  // consistent status — deleting/reducing advances is what should change
+  // it, not a manual override that the next advance edit would silently undo.
+  const fullyCoveredByAdvances = statement
+    ? computeSettlement(statement.amounts, statement.advances ?? []).fullyCovered
+    : false;
+
   // Desgravamen must be actively entered/confirmed. Pre-populated on edit
   // (the value is already visible, which satisfies the "confirmation" intent);
   // must be explicitly touched by the user when creating a new statement.
@@ -201,6 +208,13 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
 
   function handleDelete() {
     if (!card || !period) return;
+    const advanceCount = statement?.advances?.length ?? 0;
+    if (advanceCount > 0) {
+      const plural = advanceCount === 1 ? "adelanto registrado" : "adelantos registrados";
+      if (!window.confirm(`Este estado de cuenta tiene ${advanceCount} ${plural}. Eliminarlo también elimina esos adelantos. ¿Continuar?`)) {
+        return;
+      }
+    }
     startTransition(async () => {
       try {
         await deleteStatement(card.id, period);
@@ -341,24 +355,37 @@ export function StatementDialog({ open, card, period, statement, onClose }: Prop
                           { value: "por_pagar", label: "Por pagar", dot: "bg-sky-500"     },
                           { value: "pagado",    label: "Pagado",    dot: "bg-emerald-500" },
                         ] as const
-                      ).map((opt) => (
-                        <button
-                          key={opt.value}
-                          type="button"
-                          onClick={() => field.onChange(opt.value)}
-                          className={cn(
-                            "flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium transition-colors cursor-pointer",
-                            field.value === opt.value
-                              ? "bg-zinc-800 text-white"
-                              : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/40"
-                          )}
-                        >
-                          <span className={cn("w-2 h-2 rounded-full shrink-0", opt.dot)} />
-                          <span>{opt.label}</span>
-                        </button>
-                      ))}
+                      ).map((opt) => {
+                        const locked = fullyCoveredByAdvances && opt.value !== "pagado";
+                        return (
+                          <button
+                            key={opt.value}
+                            type="button"
+                            disabled={locked}
+                            onClick={() => field.onChange(opt.value)}
+                            title={locked ? "Los adelantos ya cubren el total. Elimina o reduce los adelantos para cambiar este estado." : undefined}
+                            className={cn(
+                              "flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium transition-colors",
+                              locked
+                                ? "text-zinc-700 cursor-not-allowed"
+                                : "cursor-pointer",
+                              !locked && field.value === opt.value
+                                ? "bg-zinc-800 text-white"
+                                : !locked && "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/40"
+                            )}
+                          >
+                            <span className={cn("w-2 h-2 rounded-full shrink-0", locked ? "bg-zinc-700" : opt.dot)} />
+                            <span>{opt.label}</span>
+                          </button>
+                        );
+                      })}
                     </div>
                   </FormControl>
+                  {fullyCoveredByAdvances && (
+                    <p className="text-[11px] text-zinc-600">
+                      Los adelantos cubren el total de este período — el estado queda fijo en &quot;Pagado&quot;.
+                    </p>
+                  )}
                   <FormMessage className="text-red-400" />
                 </FormItem>
               )}
