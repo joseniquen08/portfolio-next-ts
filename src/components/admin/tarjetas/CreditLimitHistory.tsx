@@ -56,6 +56,10 @@ export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
       toast.error("Ingresa la fecha de inicio");
       return;
     }
+    if (date && changes.some((c) => c.start_date === date)) {
+      toast.error("Ya existe un cambio registrado con esa fecha de inicio.");
+      return;
+    }
     startTransition(async () => {
       try {
         await createLimitChange({
@@ -67,8 +71,8 @@ export function CreditLimitHistory({ cardId, currencies, changes }: Props) {
         });
         toast.success("Cambio de línea registrado");
         resetForm();
-      } catch {
-        toast.error("No se pudo guardar. Intenta de nuevo.");
+      } catch (err) {
+        toast.error(err instanceof Error ? err.message : "No se pudo guardar. Intenta de nuevo.");
       }
     });
   }

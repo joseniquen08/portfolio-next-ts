@@ -216,6 +216,13 @@ export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onCl
 
   function handleDelete() {
     if (!card) return;
+    const limitCount = cardLimitChanges.length;
+    const limitNote = limitCount > 0
+      ? ` y ${limitCount} ${limitCount === 1 ? "registro" : "registros"} de línea de crédito`
+      : "";
+    if (!window.confirm(`Eliminar "${card.name}" también elimina todos sus estados de cuenta, adelantos${limitNote}. ¿Continuar?`)) {
+      return;
+    }
     startTransition(async () => {
       try {
         await deleteCard(card.id);
