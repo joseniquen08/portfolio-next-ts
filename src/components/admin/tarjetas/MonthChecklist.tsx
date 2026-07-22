@@ -5,14 +5,14 @@ import { HiCheck, HiPlus } from "react-icons/hi";
 import { cn } from "@/utils/shadcn";
 import { togglePaid } from "@/app/(admin)/admin/(protected)/financiero/tarjetas/actions";
 import {
-  CreditCard, Statement,
-  formatAmount, currencySymbol, amountEntries, cellStatus, statusTextClass,
+  CreditCard, Statement, StatementWithAdvances,
+  formatAmount, currencySymbol, amountEntries, cellStatus, statusTextClass, computeSettlement,
   resolveDueDate, daysUntil, daysLabel, urgencyClass,
 } from "./status";
 
 interface Props {
   cards:           CreditCard[];
-  statements:      Statement[];
+  statements:      StatementWithAdvances[];
   currentPeriod:   string;
   today:           string;
   onEditStatement: (card: CreditCard, period: string, statement?: Statement) => void;
@@ -36,7 +36,10 @@ export function MonthChecklist({
     <div className="space-y-2">
       {cards.map((card) => {
         const stmt   = getStatement(card.id);
-        const status = cellStatus(stmt, today);
+        const settlement = stmt
+          ? computeSettlement(stmt.amounts, stmt.advances ?? [])
+          : undefined;
+        const status = cellStatus(stmt, today, settlement);
 
         const due  = stmt ? resolveDueDate(stmt, card, currentPeriod) : null;
         const days = due ? daysUntil(due, today) : null;
@@ -48,6 +51,7 @@ export function MonthChecklist({
               "flex items-center gap-3 rounded-lg border px-4 py-3.5 transition-colors",
               status === "pagado"   ? "border-emerald-900/40 bg-emerald-950/20" :
               status === "vencido"  ? "border-red-900/30 bg-red-950/10" :
+              status === "parcial"  ? "border-teal-900/40 bg-teal-950/15" :
               status === "estimado" ? "border-amber-900/40 bg-amber-950/15" :
               status === "por_pagar" ? "border-sky-900/40 bg-sky-950/15" :
               "border-zinc-800 bg-zinc-900/40"
@@ -68,6 +72,8 @@ export function MonthChecklist({
               {/* Subtext: due date or paid status */}
               {status === "pagado" ? (
                 <p className="text-xs text-emerald-600 mt-0.5">Pagado</p>
+              ) : status === "parcial" ? (
+                <p className="text-xs text-teal-500 mt-0.5">Adelanto parcial</p>
               ) : due && days !== null ? (
                 <p className={cn("text-xs mt-0.5", urgencyClass(days))}>
                   {daysLabel(days)}

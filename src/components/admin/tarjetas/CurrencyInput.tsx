@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/utils/shadcn";
+import { Input } from "@/components/ui/input";
 
 interface Props {
   value:          number;
@@ -91,7 +92,7 @@ export function CurrencyInput({
       )}
 
       {/* Hidden-but-focusable input */}
-      <input
+      <Input
         id={id}
         type="text"
         inputMode="numeric"

@@ -69,6 +69,7 @@ export type Database = {
           cycle_start: string | null
           due_date: string | null
           id: string
+          insurance_amount: number
           is_estimated: boolean
           is_paid: boolean
           period: string
@@ -82,6 +83,7 @@ export type Database = {
           cycle_start?: string | null
           due_date?: string | null
           id?: string
+          insurance_amount?: number
           is_estimated?: boolean
           is_paid?: boolean
           period: string
@@ -95,6 +97,7 @@ export type Database = {
           cycle_start?: string | null
           due_date?: string | null
           id?: string
+          insurance_amount?: number
           is_estimated?: boolean
           is_paid?: boolean
           period?: string
@@ -148,6 +151,50 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      credit_limit_changes: {
+        Row: {
+          amount: number
+          card_id: string
+          created_at: string
+          currency: string
+          end_date: string | null
+          id: string
+          note: string | null
+          start_date: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          card_id: string
+          created_at?: string
+          currency: string
+          end_date?: string | null
+          id?: string
+          note?: string | null
+          start_date?: string | null
+          user_id?: string
+        }
+        Update: {
+          amount?: number
+          card_id?: string
+          created_at?: string
+          currency?: string
+          end_date?: string | null
+          id?: string
+          note?: string | null
+          start_date?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "credit_limit_changes_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "credit_cards"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       income_entries: {
         Row: {
@@ -272,6 +319,47 @@ export type Database = {
         }
         Relationships: []
       }
+      statement_advances: {
+        Row: {
+          advance_date: string
+          amount: number
+          created_at: string
+          currency: string
+          id: string
+          note: string | null
+          statement_id: string
+          user_id: string
+        }
+        Insert: {
+          advance_date?: string
+          amount: number
+          created_at?: string
+          currency: string
+          id?: string
+          note?: string | null
+          statement_id: string
+          user_id?: string
+        }
+        Update: {
+          advance_date?: string
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          note?: string | null
+          statement_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "statement_advances_statement_id_fkey"
+            columns: ["statement_id"]
+            isOneToOne: false
+            referencedRelation: "card_statements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           created_at: string
@@ -327,7 +415,37 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      add_credit_limit_change: {
+        Args: {
+          p_amount: number
+          p_card_id: string
+          p_currency: string
+          p_note: string
+          p_start_date: string
+        }
+        Returns: {
+          amount: number
+          card_id: string
+          created_at: string
+          currency: string
+          end_date: string | null
+          id: string
+          note: string | null
+          start_date: string | null
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "credit_limit_changes"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      delete_credit_limit_change: { Args: { p_id: string }; Returns: undefined }
+      reorder_credit_cards: {
+        Args: { ordered_ids: string[] }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

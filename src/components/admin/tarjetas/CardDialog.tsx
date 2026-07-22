@@ -10,8 +10,11 @@ import {
   createCard,
   updateCard,
   deleteCard,
+  createLimitChange,
 } from "@/app/(admin)/admin/(protected)/financiero/tarjetas/actions";
 import { cn } from "@/utils/shadcn";
+import { CreditLimitHistory } from "./CreditLimitHistory";
+import { CreditLimitChange } from "./status";
 
 import {
   Dialog,
@@ -115,20 +118,23 @@ const schema = z.object({
   default_payment_day:     z.number().int().min(1, "Requerido (1–31)").max(31, "Requerido (1–31)"),
   default_cycle_start_day: z.number().int().min(1, "Requerido (1–31)").max(31, "Requerido (1–31)"),
   default_cycle_end_day:   z.number().int().min(1, "Requerido (1–31)").max(31, "Requerido (1–31)"),
+  initial_credit_limit:    z.number().min(0).optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
 
 interface Props {
-  open:          boolean;
-  card?:         CreditCard;
-  nextSortOrder: number;
-  onClose:       () => void;
+  open:               boolean;
+  card?:              CreditCard;
+  nextSortOrder:      number;
+  creditLimitChanges: CreditLimitChange[];
+  onClose:            () => void;
 }
 
-export function CardDialog({ open, card, nextSortOrder, onClose }: Props) {
+export function CardDialog({ open, card, nextSortOrder, creditLimitChanges, onClose }: Props) {
   const [isPending, startTransition] = useTransition();
   const isEdit = !!card;
+  const cardLimitChanges = card ? creditLimitChanges.filter((c) => c.card_id === card.id) : [];
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -139,6 +145,7 @@ export function CardDialog({ open, card, nextSortOrder, onClose }: Props) {
       default_payment_day:     undefined,
       default_cycle_start_day: undefined,
       default_cycle_end_day:   undefined,
+      initial_credit_limit:    undefined,
     },
   });
 
@@ -155,6 +162,7 @@ export function CardDialog({ open, card, nextSortOrder, onClose }: Props) {
             default_payment_day:     card.default_payment_day ?? undefined,
             default_cycle_start_day: card.default_cycle_start_day ?? undefined,
             default_cycle_end_day:   card.default_cycle_end_day ?? undefined,
+            initial_credit_limit:    undefined,
           }
         : {
             name:                    "",
@@ -163,19 +171,40 @@ export function CardDialog({ open, card, nextSortOrder, onClose }: Props) {
             default_payment_day:     undefined,
             default_cycle_start_day: undefined,
             default_cycle_end_day:   undefined,
+            initial_credit_limit:    undefined,
           }
     );
   }, [open, card, form]);
 
   function onSubmit(values: FormValues) {
+    const { initial_credit_limit, ...payload } = values;
     startTransition(async () => {
       try {
-        const payload = { ...values, color: values.color ?? undefined };
         if (isEdit && card) {
-          await updateCard(card.id, { ...payload, sort_order: card.sort_order } as Parameters<typeof updateCard>[1]);
+          await updateCard(card.id, {
+            ...payload,
+            color: payload.color ?? undefined,
+            sort_order: card.sort_order,
+          } as Parameters<typeof updateCard>[1]);
           toast.success("Tarjeta actualizada");
         } else {
-          await createCard({ ...payload, sort_order: nextSortOrder });
+          const newCard = await createCard({
+            ...payload,
+            color: payload.color ?? undefined,
+            sort_order: nextSortOrder,
+          });
+          if (initial_credit_limit && initial_credit_limit > 0) {
+            // First-ever record for this card: no known start date, so it's
+            // marked "Inicial" (null) — applies retroactively until a real
+            // dated entry narrows it down via the history section later.
+            await createLimitChange({
+              card_id: newCard.id,
+              amount: initial_credit_limit,
+              currency: payload.currencies[0],
+              start_date: null,
+              note: "Límite inicial",
+            });
+          }
           toast.success("Tarjeta creada");
         }
         onClose();
@@ -187,6 +216,13 @@ export function CardDialog({ open, card, nextSortOrder, onClose }: Props) {
 
   function handleDelete() {
     if (!card) return;
+    const limitCount = cardLimitChanges.length;
+    const limitNote = limitCount > 0
+      ? ` y ${limitCount} ${limitCount === 1 ? "registro" : "registros"} de línea de crédito`
+      : "";
+    if (!window.confirm(`Eliminar "${card.name}" también elimina todos sus estados de cuenta, adelantos${limitNote}. ¿Continuar?`)) {
+      return;
+    }
     startTransition(async () => {
       try {
         await deleteCard(card.id);
@@ -421,6 +457,51 @@ export function CardDialog({ open, card, nextSortOrder, onClose }: Props) {
                 />
               </div>
             </div>
+
+            {isEdit && card ? (
+              <>
+                <Separator className="bg-zinc-800" />
+                <CreditLimitHistory
+                  cardId={card.id}
+                  currencies={card.currencies?.length ? card.currencies : ["PEN"]}
+                  changes={cardLimitChanges}
+                />
+              </>
+            ) : (
+              <>
+                <Separator className="bg-zinc-800" />
+                <FormField
+                  control={form.control}
+                  name="initial_credit_limit"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-300 text-sm">
+                        Línea de crédito inicial <span className="text-zinc-600 font-normal">(opcional)</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          min={0}
+                          step="0.01"
+                          placeholder="Ej. 5000"
+                          {...field}
+                          value={field.value ?? ""}
+                          onChange={(e) => {
+                            const v = parseFloat(e.target.value);
+                            field.onChange(isNaN(v) ? undefined : v);
+                          }}
+                          className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-600 focus-visible:ring-zinc-500"
+                        />
+                      </FormControl>
+                      <FormDescription className="text-zinc-600 text-[11px]">
+                        En {SUPPORTED_CURRENCIES.find((c) => c.code === (form.watch("currencies")?.[0] ?? "PEN"))?.label ?? "S/ Soles"}. Podés ajustarla después desde el historial de la tarjeta.
+                      </FormDescription>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
 
             {/* ── Footer ─────────────────────────────────────────────── */}
             <DialogFooter className="gap-2 pt-1">
