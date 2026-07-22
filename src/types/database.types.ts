@@ -158,9 +158,10 @@ export type Database = {
           card_id: string
           created_at: string
           currency: string
-          effective_date: string
+          end_date: string | null
           id: string
           note: string | null
+          start_date: string | null
           user_id: string
         }
         Insert: {
@@ -168,9 +169,10 @@ export type Database = {
           card_id: string
           created_at?: string
           currency: string
-          effective_date?: string
+          end_date?: string | null
           id?: string
           note?: string | null
+          start_date?: string | null
           user_id?: string
         }
         Update: {
@@ -178,9 +180,10 @@ export type Database = {
           card_id?: string
           created_at?: string
           currency?: string
-          effective_date?: string
+          end_date?: string | null
           id?: string
           note?: string | null
+          start_date?: string | null
           user_id?: string
         }
         Relationships: [
@@ -412,6 +415,33 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_credit_limit_change: {
+        Args: {
+          p_amount: number
+          p_card_id: string
+          p_currency: string
+          p_note: string
+          p_start_date: string
+        }
+        Returns: {
+          amount: number
+          card_id: string
+          created_at: string
+          currency: string
+          end_date: string | null
+          id: string
+          note: string | null
+          start_date: string | null
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "credit_limit_changes"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      delete_credit_limit_change: { Args: { p_id: string }; Returns: undefined }
       reorder_credit_cards: {
         Args: { ordered_ids: string[] }
         Returns: undefined

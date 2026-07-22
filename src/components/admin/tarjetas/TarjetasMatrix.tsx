@@ -22,22 +22,23 @@ import { MatrixTable }      from "./MatrixTable";
 import { MonthChecklist }   from "./MonthChecklist";
 import { MonthControls }    from "./MonthControls";
 import { Button }           from "@/components/ui/button";
-import { CreditCard, Statement, StatementWithAdvances, Adjustment, selectSummaryPeriod } from "./status";
+import { CreditCard, Statement, StatementWithAdvances, Adjustment, CreditLimitChange, selectSummaryPeriod } from "./status";
 import { ViewState } from "./periods";
 
 interface Props {
-  cards:         CreditCard[];
-  statements:    StatementWithAdvances[];
-  adjustments:   Adjustment[];
-  periods:       string[]; // "YYYY-MM-01"[] — the full navigated window
-  currentPeriod: string;   // real current month, always fixed regardless of navigation
-  today:         string;   // "YYYY-MM-DD", computed server-side
-  view:          ViewState;
+  cards:              CreditCard[];
+  statements:         StatementWithAdvances[];
+  adjustments:        Adjustment[];
+  creditLimitChanges: CreditLimitChange[];
+  periods:            string[]; // "YYYY-MM-01"[] — the full navigated window
+  currentPeriod:      string;   // real current month, always fixed regardless of navigation
+  today:              string;   // "YYYY-MM-DD", computed server-side
+  view:               ViewState;
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
-export function TarjetasMatrix({ cards, statements, adjustments, periods, currentPeriod, today, view }: Props) {
+export function TarjetasMatrix({ cards, statements, adjustments, creditLimitChanges, periods, currentPeriod, today, view }: Props) {
   // Local ordered copy — updated optimistically on drag
   const [orderedCards, setOrderedCards] = useState(cards);
   const [, startTransition] = useTransition();
@@ -79,14 +80,14 @@ export function TarjetasMatrix({ cards, statements, adjustments, periods, curren
   }>({ open: false });
 
   const [statementDialog, setStatementDialog] = useState<{
-    open: boolean; card?: CreditCard; period?: string; statement?: Statement;
+    open: boolean; card?: CreditCard; period?: string; statement?: StatementWithAdvances;
   }>({ open: false });
 
   const [adjustmentDialog, setAdjustmentDialog] = useState<{
     open: boolean; period?: string; adjustment?: Adjustment;
   }>({ open: false });
 
-  function openEditStatement(card: CreditCard, period: string, statement?: Statement) {
+  function openEditStatement(card: CreditCard, period: string, statement?: StatementWithAdvances) {
     setStatementDialog({ open: true, card, period, statement });
   }
   function openEditCard(card: CreditCard) {
@@ -186,6 +187,7 @@ export function TarjetasMatrix({ cards, statements, adjustments, periods, curren
                     cards={orderedCards}
                     statements={statements}
                     adjustments={adjustments}
+                    creditLimitChanges={creditLimitChanges}
                     periods={visiblePeriods}
                     currentPeriod={currentPeriod}
                     focusPeriod={focusPeriod}
@@ -218,6 +220,7 @@ export function TarjetasMatrix({ cards, statements, adjustments, periods, curren
                       cards={orderedCards}
                       statements={statements}
                       adjustments={adjustments}
+                      creditLimitChanges={creditLimitChanges}
                       periods={visiblePeriods}
                       currentPeriod={currentPeriod}
                       focusPeriod={focusPeriod}
@@ -240,6 +243,7 @@ export function TarjetasMatrix({ cards, statements, adjustments, periods, curren
         open={cardDialog.open}
         card={cardDialog.card}
         nextSortOrder={cards.length}
+        creditLimitChanges={creditLimitChanges}
         onClose={() => setCardDialog({ open: false })}
       />
       <StatementDialog

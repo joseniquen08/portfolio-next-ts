@@ -15,23 +15,25 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import {
-  CreditCard, Statement, StatementWithAdvances, Adjustment,
+  CreditCard, Statement, StatementWithAdvances, Adjustment, CreditLimitChange,
   periodLabel, formatAmount, currencySymbol,
-  amountEntries, mergeAmounts, cellStatus, statusTextClass, computeSettlement, MONTH_ABBR,
+  amountEntries, mergeAmounts, cellStatus, statusTextClass, computeSettlement,
+  currentCreditLimit, computeAvailableCredit, monthEnd, MONTH_ABBR,
 } from "./status";
 
 interface Props {
-  cards:           CreditCard[];
-  statements:      StatementWithAdvances[];
-  adjustments:     Adjustment[];
-  periods:         string[];
-  currentPeriod:   string;
-  focusPeriod:     string;  // #1: the period the summary card is highlighting
-  today:           string;
-  onEditStatement: (card: CreditCard, period: string, statement?: Statement) => void;
-  onEditCard:      (card: CreditCard) => void;
-  onAddAdjustment: (period: string) => void;
-  onEditAdjustment:(period: string, adjustment: Adjustment) => void;
+  cards:              CreditCard[];
+  statements:         StatementWithAdvances[];
+  adjustments:        Adjustment[];
+  creditLimitChanges: CreditLimitChange[];
+  periods:            string[];
+  currentPeriod:      string;
+  focusPeriod:        string;  // #1: the period the summary card is highlighting
+  today:              string;
+  onEditStatement:    (card: CreditCard, period: string, statement?: Statement) => void;
+  onEditCard:         (card: CreditCard) => void;
+  onAddAdjustment:    (period: string) => void;
+  onEditAdjustment:   (period: string, adjustment: Adjustment) => void;
 }
 
 // ─── Format a cycle date range compactly: "8 ENE – 6 FEB" ────────────────────
@@ -85,6 +87,10 @@ function MatrixCell({
     : undefined;
   const status    = cellStatus(statement, today, settlement);
   const hasExcess = !!settlement && Object.keys(settlement.excess).length > 0;
+  // Per-currency shortfall still owed when partially covered by advances.
+  const remaining = settlement
+    ? Object.entries(settlement.perCurrency).filter(([, cov]) => cov.required > 0 && !cov.isCovered)
+    : [];
   const isCurrent = period === currentPeriod;
   const isFocus   = period === focusPeriod && period !== currentPeriod;
 
@@ -177,11 +183,23 @@ function MatrixCell({
           </button>
         </div>
 
+        {/* Remaining balance — shown when advances exist but don't fully cover a currency yet */}
+        {settlement?.hasAdvances && remaining.length > 0 && (
+          <span
+            title="Monto que aún falta cubrir con adelantos"
+            className="inline-flex items-center gap-1 rounded px-1.5 py-1 text-[11px] leading-none text-teal-400 border border-teal-800/60 bg-teal-950/30"
+          >
+            {remaining.map(([cur, cov]) => (
+              <span key={cur}>falta {currencySymbol(cur)}&nbsp;{formatAmount(cov.required - cov.covered)}</span>
+            ))}
+          </span>
+        )}
+
         {/* Sobrepago badge — shown when advances overshoot the owed amount in at least one currency */}
         {hasExcess && (
           <span
             title="Adelanto supera el monto adeudado en al menos una moneda"
-            className="inline-flex items-center rounded px-1 py-0.5 text-[9px] leading-none text-teal-400 border border-teal-800/60 bg-teal-950/30"
+            className="inline-flex items-center rounded px-1.5 py-1 text-[11px] leading-none text-teal-400 border border-teal-800/60 bg-teal-950/30"
           >
             sobrepago
           </span>
@@ -210,22 +228,35 @@ function MatrixCell({
 // ─── Sortable card row ────────────────────────────────────────────────────────
 
 function SortableCardRow({
-  card, periods, currentPeriod, focusPeriod, today,
+  card, periods, currentPeriod, focusPeriod, today, creditLimitChanges,
   getStatement, onEditStatement, onEditCard,
 }: {
-  card:           CreditCard;
-  periods:        string[];
-  currentPeriod:  string;
-  focusPeriod:    string;
-  today:          string;
-  getStatement:   (cardId: string, period: string) => StatementWithAdvances | undefined;
-  onEditStatement:(card: CreditCard, period: string, statement?: Statement) => void;
-  onEditCard:     (card: CreditCard) => void;
+  card:               CreditCard;
+  periods:            string[];
+  currentPeriod:      string;
+  focusPeriod:        string;
+  today:              string;
+  creditLimitChanges: CreditLimitChange[];
+  getStatement:       (cardId: string, period: string) => StatementWithAdvances | undefined;
+  onEditStatement:    (card: CreditCard, period: string, statement?: Statement) => void;
+  onEditCard:         (card: CreditCard) => void;
 }) {
   const {
     attributes, listeners, setNodeRef,
     transform, transition, isDragging,
   } = useSortable({ id: card.id });
+
+  // Credit limit in effect for the current period (point-in-time) — the
+  // reliable figure, since it comes from what the user explicitly registered.
+  const cardLimitChanges = creditLimitChanges.filter((c) => c.card_id === card.id);
+  const creditLimit = currentCreditLimit(cardLimitChanges, monthEnd(currentPeriod));
+  // "Línea disponible" is only ever an approximation — it can't reflect same-day
+  // spending the user hasn't registered in a statement yet.
+  const availableCredit = computeAvailableCredit(
+    cardLimitChanges,
+    getStatement(card.id, currentPeriod),
+    currentPeriod
+  );
 
   return (
     <TableRow
@@ -283,6 +314,18 @@ function SortableCardRow({
             {card.name}
           </span>
         </div>
+        {creditLimit && (
+          <div className="mt-0.5 space-y-0.5">
+            <p className="text-[11px] text-zinc-500 whitespace-nowrap">
+              Línea {currencySymbol(creditLimit.currency)}&nbsp;{formatAmount(creditLimit.amount)}
+            </p>
+            {availableCredit && (
+              <p className="text-[11px] text-zinc-600 whitespace-nowrap">
+                Disp. aprox. {currencySymbol(availableCredit.currency)}&nbsp;{formatAmount(availableCredit.amount)}
+              </p>
+            )}
+          </div>
+        )}
       </TableCell>
 
       {periods.map((p) => (
@@ -320,7 +363,7 @@ function SortableCardRow({
 // ─── Main table ────────────────────────────────────────────────────────────────
 
 export function MatrixTable({
-  cards, statements, adjustments, periods, currentPeriod, focusPeriod, today,
+  cards, statements, adjustments, creditLimitChanges, periods, currentPeriod, focusPeriod, today,
   onEditStatement, onEditCard, onAddAdjustment, onEditAdjustment,
 }: Props) {
   function getStatement(cardId: string, period: string) {
@@ -424,6 +467,7 @@ export function MatrixTable({
                   currentPeriod={currentPeriod}
                   focusPeriod={focusPeriod}
                   today={today}
+                  creditLimitChanges={creditLimitChanges}
                   getStatement={getStatement}
                   onEditStatement={onEditStatement}
                   onEditCard={onEditCard}

@@ -258,6 +258,59 @@ export function selectSummaryPeriod(
   return currentPeriod;
 }
 
+export type CreditLimitChange = Tables<"credit_limit_changes">;
+
+/** "YYYY-MM-01" → "YYYY-MM-DD" of the last day of that month. */
+export function monthEnd(period: string): string {
+  const [y, m] = period.split("-");
+  const maxDay = new Date(parseInt(y), parseInt(m), 0).getDate();
+  return `${y}-${m}-${String(maxDay).padStart(2, "0")}`;
+}
+
+/**
+ * Derive the credit limit in effect as of `asOf`: the row whose validity
+ * range covers that date (`start_date` NULL or <= asOf, AND `end_date`
+ * NULL or > asOf). Without `asOf`, returns the currently-open row
+ * (`end_date IS NULL`). Returns null when no row's range covers the date —
+ * a genuinely unknown period, never guessed. Pure/derived — never stored.
+ */
+export function currentCreditLimit(
+  changes: Pick<CreditLimitChange, "amount" | "currency" | "start_date" | "end_date">[],
+  asOf?: string
+): { amount: number; currency: string } | null {
+  const match = asOf
+    ? changes.find((c) =>
+        (c.start_date === null || c.start_date <= asOf) &&
+        (c.end_date === null || c.end_date > asOf)
+      )
+    : changes.find((c) => c.end_date === null);
+  return match ? { amount: Number(match.amount), currency: match.currency } : null;
+}
+
+/**
+ * "Línea disponible" (available credit) for a card in a given period:
+ * the credit limit in effect as of that period's month-end −
+ * (that period's statement total − advances covering it), evaluated in
+ * the limit's own currency per the auto-settlement rule.
+ * Returns null when there's no credit-limit range covering that period.
+ */
+export function computeAvailableCredit(
+  creditLimitChanges: Pick<CreditLimitChange, "amount" | "currency" | "start_date" | "end_date">[],
+  statement: StatementWithAdvances | undefined,
+  period?: string
+): { amount: number; currency: string } | null {
+  const limit = currentCreditLimit(creditLimitChanges, period ? monthEnd(period) : undefined);
+  if (!limit) return null;
+  if (!statement) return limit;
+
+  const owed = amountEntries(statement.amounts).find(([cur]) => cur === limit.currency)?.[1] ?? 0;
+  const settlement = computeSettlement(statement.amounts, statement.advances ?? []);
+  const covered = settlement.perCurrency[limit.currency]?.covered ?? 0;
+  const outstanding = Math.max(0, owed - covered);
+
+  return { amount: limit.amount - outstanding, currency: limit.currency };
+}
+
 /** Tailwind text-color class for urgency */
 export function urgencyClass(days: number): string {
   if (days < 0)  return "text-red-400";    // vencido — rojo exclusivo
