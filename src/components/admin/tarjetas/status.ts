@@ -74,6 +74,13 @@ export function mergeAmounts(list: unknown[]): Record<string, number> {
 export type Advance = Tables<"statement_advances">;
 
 /**
+ * `Statement` extended with its (optional) advances.
+ * Real data is populated by the PostgREST embed added in PR 3 (`page.tsx`);
+ * until then callers may omit it and settlement logic treats it as empty.
+ */
+export type StatementWithAdvances = Statement & { advances?: Advance[] };
+
+/**
  * Per-currency coverage of a statement's owed amount by its advances.
  * `required`/`covered` are only computed for currencies present in `owed` or `paid`.
  */
@@ -139,15 +146,22 @@ export function computeSettlement(
   return { perCurrency, fullyCovered: hasRequired && fully, hasAdvances, excess };
 }
 
-export type CellStatus = "pagado" | "vencido" | "estimado" | "por_pagar" | "sin_registrar";
+export type CellStatus = "pagado" | "vencido" | "parcial" | "estimado" | "por_pagar" | "sin_registrar";
 
 /** Primary status for coloring a matrix cell.
- *  Precedence: pagado › vencido › estimado › por_pagar
- *  Note: vencido wins over estimado (urgency takes priority). */
-export function cellStatus(statement: Statement | undefined, today: string): CellStatus {
+ *  Precedence: pagado › vencido › parcial › estimado › por_pagar
+ *  Note: vencido wins over parcial/estimado (urgency takes priority).
+ *  `settlement` is optional — callers that don't pass it never resolve "parcial"
+ *  and keep prior behavior (e.g. before advances data is wired through). */
+export function cellStatus(
+  statement: Statement | undefined,
+  today: string,
+  settlement?: SettlementResult
+): CellStatus {
   if (!statement)           return "sin_registrar";
   if (statement.is_paid)    return "pagado";
   if (statement.due_date && statement.due_date < today) return "vencido";
+  if (settlement?.hasAdvances && !settlement.fullyCovered) return "parcial";
   if (statement.is_estimated) return "estimado";
   return "por_pagar";
 }
@@ -161,6 +175,7 @@ export function statusTextClass(status: CellStatus, isCurrent = false): string {
   switch (status) {
     case "pagado":    return "text-emerald-400";
     case "vencido":   return "text-red-400";
+    case "parcial":   return "text-teal-400";
     case "estimado":  return "text-amber-400";
     case "por_pagar": return isCurrent ? "text-sky-300" : "text-sky-400";
     default:          return "text-zinc-300";
