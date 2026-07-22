@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/supabase/server";
+import { computeSettlement } from "@/components/admin/tarjetas/status";
 
 const PATH = "/admin/financiero/tarjetas";
 
@@ -70,6 +71,7 @@ export async function upsertStatement(data: {
   cycle_end:   string | null;
   is_estimated: boolean;
   is_paid:      boolean;
+  insurance_amount: number;
 }) {
   const supabase = await requireAdmin();
   const { error } = await supabase
@@ -143,6 +145,83 @@ export async function deleteAdjustment(id: string) {
   const supabase = await requireAdmin();
   const { error } = await supabase
     .from("period_adjustments")
+    .delete()
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidatePath(PATH);
+}
+
+// ─── Statement Advances ─────────────────────────────────────────────────────
+
+export async function createAdvance(data: {
+  statement_id: string;
+  amount: number;
+  currency: string;
+  advance_date: string;
+  note?: string | null;
+}) {
+  const supabase = await requireAdmin();
+  const { error: insertError } = await supabase
+    .from("statement_advances")
+    .insert(data);
+  if (insertError) throw new Error(insertError.message);
+
+  // Re-read the statement + all its advances to evaluate auto-settlement.
+  const { data: statement, error: statementError } = await supabase
+    .from("card_statements")
+    .select("id, amounts")
+    .eq("id", data.statement_id)
+    .single();
+  if (statementError) throw new Error(statementError.message);
+
+  const { data: advances, error: advancesError } = await supabase
+    .from("statement_advances")
+    .select("amount, currency")
+    .eq("statement_id", data.statement_id);
+  if (advancesError) throw new Error(advancesError.message);
+
+  const settlement = computeSettlement(statement.amounts, advances ?? []);
+  if (settlement.fullyCovered) {
+    // Auto-flip only — one-directional, never un-flip on delete.
+    const { error: updateError } = await supabase
+      .from("card_statements")
+      .update({ is_paid: true, is_estimated: false })
+      .eq("id", data.statement_id);
+    if (updateError) throw new Error(updateError.message);
+  }
+
+  revalidatePath(PATH);
+}
+
+export async function deleteAdvance(id: string) {
+  const supabase = await requireAdmin();
+  const { error } = await supabase
+    .from("statement_advances")
+    .delete()
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidatePath(PATH);
+}
+
+// ─── Credit Limit Changes ───────────────────────────────────────────────────
+
+export async function createLimitChange(data: {
+  card_id: string;
+  amount: number;
+  currency: string;
+  effective_date: string;
+  note?: string | null;
+}) {
+  const supabase = await requireAdmin();
+  const { error } = await supabase.from("credit_limit_changes").insert(data);
+  if (error) throw new Error(error.message);
+  revalidatePath(PATH);
+}
+
+export async function deleteLimitChange(id: string) {
+  const supabase = await requireAdmin();
+  const { error } = await supabase
+    .from("credit_limit_changes")
     .delete()
     .eq("id", id);
   if (error) throw new Error(error.message);

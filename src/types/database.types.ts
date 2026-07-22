@@ -69,6 +69,7 @@ export type Database = {
           cycle_start: string | null
           due_date: string | null
           id: string
+          insurance_amount: number
           is_estimated: boolean
           is_paid: boolean
           period: string
@@ -82,6 +83,7 @@ export type Database = {
           cycle_start?: string | null
           due_date?: string | null
           id?: string
+          insurance_amount?: number
           is_estimated?: boolean
           is_paid?: boolean
           period: string
@@ -95,6 +97,7 @@ export type Database = {
           cycle_start?: string | null
           due_date?: string | null
           id?: string
+          insurance_amount?: number
           is_estimated?: boolean
           is_paid?: boolean
           period?: string
@@ -148,6 +151,47 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      credit_limit_changes: {
+        Row: {
+          amount: number
+          card_id: string
+          created_at: string
+          currency: string
+          effective_date: string
+          id: string
+          note: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          card_id: string
+          created_at?: string
+          currency: string
+          effective_date?: string
+          id?: string
+          note?: string | null
+          user_id?: string
+        }
+        Update: {
+          amount?: number
+          card_id?: string
+          created_at?: string
+          currency?: string
+          effective_date?: string
+          id?: string
+          note?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "credit_limit_changes_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "credit_cards"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       income_entries: {
         Row: {
@@ -271,6 +315,47 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      statement_advances: {
+        Row: {
+          advance_date: string
+          amount: number
+          created_at: string
+          currency: string
+          id: string
+          note: string | null
+          statement_id: string
+          user_id: string
+        }
+        Insert: {
+          advance_date?: string
+          amount: number
+          created_at?: string
+          currency: string
+          id?: string
+          note?: string | null
+          statement_id: string
+          user_id?: string
+        }
+        Update: {
+          advance_date?: string
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          note?: string | null
+          statement_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "statement_advances_statement_id_fkey"
+            columns: ["statement_id"]
+            isOneToOne: false
+            referencedRelation: "card_statements"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       tasks: {
         Row: {

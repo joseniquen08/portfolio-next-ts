@@ -71,6 +71,74 @@ export function mergeAmounts(list: unknown[]): Record<string, number> {
   return result;
 }
 
+export type Advance = Tables<"statement_advances">;
+
+/**
+ * Per-currency coverage of a statement's owed amount by its advances.
+ * `required`/`covered` are only computed for currencies present in `owed` or `paid`.
+ */
+export interface CurrencyCoverage {
+  required: number;
+  covered: number;
+  isCovered: boolean;
+  excess: number;
+}
+
+export interface SettlementResult {
+  perCurrency: Record<string, CurrencyCoverage>;
+  /** True only when every currency with owed > 0 is individually covered. */
+  fullyCovered: boolean;
+  hasAdvances: boolean;
+  /** Per-currency sobrepago (excess > 0 only). */
+  excess: Record<string, number>;
+}
+
+/** Cent-integer conversion to avoid float drift when comparing amounts. */
+const cents = (n: number): number => Math.round(n * 100);
+
+/** Sum advance amounts grouped by currency. */
+export function sumAdvancesByCurrency(
+  advances: Pick<Advance, "amount" | "currency">[]
+): Record<string, number> {
+  const acc: Record<string, number> = {};
+  for (const a of advances) {
+    acc[a.currency] = (acc[a.currency] ?? 0) + Number(a.amount);
+  }
+  return acc;
+}
+
+/**
+ * Compute per-currency settlement coverage of a statement's `amounts` by its advances.
+ * Currencies are evaluated INDEPENDENTLY — never summed/blended together.
+ */
+export function computeSettlement(
+  amounts: unknown,
+  advances: Pick<Advance, "amount" | "currency">[]
+): SettlementResult {
+  const owed = Object.fromEntries(amountEntries(amounts).filter(([, v]) => v > 0));
+  const paid = sumAdvancesByCurrency(advances);
+  const currencies = new Set([...Object.keys(owed), ...Object.keys(paid)]);
+
+  const perCurrency: Record<string, CurrencyCoverage> = {};
+  const excess: Record<string, number> = {};
+  let fully = true;
+
+  for (const cur of currencies) {
+    const required = owed[cur] ?? 0;
+    const covered = paid[cur] ?? 0;
+    const isCovered = cents(covered) >= cents(required);
+    const exc = Math.max(0, covered - required);
+    perCurrency[cur] = { required, covered, isCovered, excess: exc };
+    if (exc > 0) excess[cur] = exc;
+    if (required > 0 && !isCovered) fully = false;
+  }
+
+  const hasRequired = Object.keys(owed).length > 0;
+  const hasAdvances = Object.values(paid).some((v) => v > 0);
+
+  return { perCurrency, fullyCovered: hasRequired && fully, hasAdvances, excess };
+}
+
 export type CellStatus = "pagado" | "vencido" | "estimado" | "por_pagar" | "sin_registrar";
 
 /** Primary status for coloring a matrix cell.
